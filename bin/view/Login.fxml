@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      <ImageView fx:id="imageLogo" fitHeight="149.0" fitWidth="185.0" layoutX="118.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/logo.png" />
+         </image></ImageView>
+      <Button fx:id="buttonLogin" layoutX="178.0" layoutY="273.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Entrar" />
+      <AnchorPane fx:id="nickFieldAndNickText" layoutX="134.0" layoutY="152.0" prefHeight="51.0" prefWidth="149.0">
+         <children>
+            <TextField fx:id="textField" layoutY="14.0" />
+            <Label fx:id="nickname" text="Apelido" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="passFieldAndTextField" layoutX="134.0" layoutY="213.0" prefHeight="51.0" prefWidth="150.0">
+         <children>
+            <PasswordField fx:id="passwordField" layoutY="14.0" />
+            <Label fx:id="password" text="Senha" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
