@@ -15,13 +15,65 @@
          <children>
             <VBox layoutX="-2.0" layoutY="104.0" prefHeight="376.0" prefWidth="115.0">
                <children>
-                  <Button fx:id="titleUser" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Usuário" textFill="#cb6ce6" />
-                  <Button fx:id="titleProvider" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Fornecedor" textFill="#cb6ce6" />
-                  <Button fx:id="titleProduct" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Produtos" textFill="#cb6ce6" />
-                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Menu" textFill="#cb6ce6" />
-                  <Button fx:id="titleClient" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Clientes" textFill="#cb6ce6" />
-                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Vendas" textFill="#cb6ce6" />
-                  <Button fx:id="titleReport" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Relatórios" textFill="#cb6ce6" />
+                  <Button fx:id="titleUser" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Usuário" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/pessoa-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="titleProvider" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Fornecedor" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/fornecedor-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="titleProduct" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Produtos" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/produto-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Menu" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="titleClient" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Clientes" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/clientes-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Vendas" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/vendas-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="titleReport" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Relatórios" textFill="#cb6ce6">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/relatorio-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </VBox>
             <HBox prefHeight="86.0" prefWidth="822.0">
@@ -33,7 +85,7 @@
                   </ImageView>
                   <HBox prefHeight="86.0" prefWidth="708.0">
                      <children>
-                        <Label fx:id="titlePage" alignment="CENTER" prefHeight="58.0" prefWidth="708.0" text="Gerenciamento..." textAlignment="CENTER" textFill="#008037">
+                        <Label fx:id="titlePage" alignment="CENTER" prefHeight="58.0" prefWidth="708.0" textAlignment="CENTER" textFill="#008037">
                            <font>
                               <Font name="Comic Sans MS Bold" size="24.0" />
                            </font>
@@ -42,7 +94,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="mainBox" layoutX="114.0" layoutY="65.0" prefHeight="408.0" prefWidth="707.0" />
+            <HBox fx:id="mainBox" layoutX="114.0" layoutY="65.0" prefHeight="416.0" prefWidth="707.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 25;" />
          </children>
       </AnchorPane>
    </children>
