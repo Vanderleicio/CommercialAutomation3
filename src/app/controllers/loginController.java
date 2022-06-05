@@ -1,5 +1,7 @@
 package app.controllers;
 
+import app.EnumSequence;
+import app.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +15,13 @@ public class loginController {
 
     @FXML
     private Button buttonLogin;
+    
+    @FXML
+    private Label alertLogin;
 
+    @FXML
+    private AnchorPane containerLogin;
+    
     @FXML
     private ImageView imageLogo;
 
@@ -40,12 +48,16 @@ public class loginController {
     	System.out.println(textField.getText());
     	if (checkAcess(textField.getText(), new String( passwordField.getText()))) {
     		System.out.println("Acesso Liberado");
+    		Main.changeScene("Acesso Liberado");
     	} else {
+    	    alertLogin.setText("Dados incorreto, tente novamente!");
     		System.out.println("Acesso não liberado!");
     	}
     }
     
-    public boolean checkAcess(String nick, String pass) {
+ 
+
+	public boolean checkAcess(String nick, String pass) {
 		return nick.equals("admin") && pass.equals("admin");
     	
     }

@@ -12,25 +12,46 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
+	
+	public static Stage stage;
+	public static Scene loginScene;
+	public static Scene mainScene;
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("/app/views/login.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage = primaryStage;
+			AnchorPane root1 = FXMLLoader.load(getClass().getResource("/app/views/login.fxml"));
+			loginScene = new Scene(root1);
+			
+			AnchorPane root2 = FXMLLoader.load(getClass().getResource("/app/views/main.fxml"));
+			mainScene = new Scene(root2);
+			mainScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 			//Image iconApp = new Image("file:logo.png"); COLOCAR ICONE NA BARRINHA QUE TEM FECHAR...
 			//primaryStage.getIcons().add(iconApp);
 			
-			primaryStage.setScene(scene);
+			primaryStage.setScene(loginScene);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public static void changeScene(String src) {
+		switch(src) {
+			case "screenLogin":
+				stage.setScene(loginScene);
+				break;
+			case "Acesso Liberado":
+				stage.setScene(mainScene);
+				break;
+		}
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }
 

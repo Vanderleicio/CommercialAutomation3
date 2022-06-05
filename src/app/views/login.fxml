@@ -7,25 +7,37 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.loginController">
+<AnchorPane fx:id="containerLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="418.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.loginController">
    <children>
       <ImageView fx:id="imageLogo" fitHeight="149.0" fitWidth="185.0" layoutX="118.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
          </image></ImageView>
-      <Button fx:id="buttonLogin" layoutX="178.0" layoutY="273.0" mnemonicParsing="false" onMouseClicked="#freeAcess" prefHeight="26.0" prefWidth="61.0" text="Entrar" />
-      <AnchorPane fx:id="nickFieldAndNickText" layoutX="134.0" layoutY="152.0" prefHeight="51.0" prefWidth="149.0">
+      <Button fx:id="buttonLogin" layoutX="160.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#freeAcess" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #008037;" text="Entrar" textFill="WHITE" />
+      <AnchorPane fx:id="nickFieldAndNickText" layoutX="112.0" layoutY="156.0" prefHeight="58.0" prefWidth="194.0">
          <children>
-            <TextField fx:id="textField" layoutY="14.0" />
-            <Label fx:id="nickname" text="Apelido" />
+            <TextField fx:id="textField" layoutY="16.0" prefHeight="26.0" prefWidth="194.0" />
+            <Label fx:id="nickname" text="Apelido">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="passFieldAndTextField" layoutX="134.0" layoutY="213.0" prefHeight="51.0" prefWidth="150.0">
+      <AnchorPane fx:id="passFieldAndTextField" layoutX="112.0" layoutY="219.0" prefHeight="52.0" prefWidth="194.0">
          <children>
-            <PasswordField fx:id="passwordField" layoutY="14.0" />
-            <Label fx:id="password" text="Senha" />
+            <PasswordField fx:id="passwordField" layoutY="14.0" prefHeight="26.0" prefWidth="194.0" />
+            <Label fx:id="password" text="Senha">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
          </children>
       </AnchorPane>
+      <Label fx:id="alertLogin" contentDisplay="CENTER" layoutX="99.0" layoutY="271.0" prefHeight="19.0" prefWidth="219.0" textAlignment="CENTER" textOverrun="CLIP">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
