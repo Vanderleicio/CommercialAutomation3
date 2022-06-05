@@ -6,9 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class LoginController {
+public class loginController {
 
     @FXML
     private Button buttonLogin;
@@ -35,8 +36,17 @@ public class LoginController {
     private TextField textField;
 
     @FXML
-    public void loginUsers() {
-    	
+    void freeAcess(MouseEvent event) {
+    	System.out.println(textField.getText());
+    	if (checkAcess(textField.getText(), new String( passwordField.getText()))) {
+    		System.out.println("Acesso Liberado");
+    	} else {
+    		System.out.println("Acesso não liberado!");
+    	}
+    }
+    
+    public boolean checkAcess(String nick, String pass) {
+		return nick.equals("admin") && pass.equals("admin");
     	
     }
 }
