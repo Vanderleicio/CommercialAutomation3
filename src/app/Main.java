@@ -26,7 +26,7 @@ public class Main extends Application {
 			
 			AnchorPane root2 = FXMLLoader.load(getClass().getResource("/app/views/main.fxml"));
 			mainScene = new Scene(root2);
-			mainScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			//mainScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 			//Image iconApp = new Image("file:logo.png"); COLOCAR ICONE NA BARRINHA QUE TEM FECHAR...
 			//primaryStage.getIcons().add(iconApp);

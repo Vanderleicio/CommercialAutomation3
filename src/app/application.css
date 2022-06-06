@@ -16,3 +16,6 @@
 	-fx-background-color: #d88eed;
 }
 
+.button:pressed {
+	-fx-background-color: #d2b3e3;
+}

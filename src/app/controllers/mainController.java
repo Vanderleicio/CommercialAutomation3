@@ -48,7 +48,7 @@ public class mainController {
 
     @FXML
     private void abrirManutencoes() {
-        abrir("/app/views/login.fxml");
+        abrir("/app/views/ManagementUsers.fxml");
     }
     
     @FXML
