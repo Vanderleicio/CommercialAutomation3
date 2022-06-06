@@ -32,6 +32,7 @@ public class Main extends Application {
 			//primaryStage.getIcons().add(iconApp);
 			
 			primaryStage.setScene(loginScene);
+			stage.centerOnScreen();
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

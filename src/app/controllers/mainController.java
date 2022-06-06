@@ -1,10 +1,17 @@
 package app.controllers;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 
 public class mainController {
 
@@ -12,7 +19,7 @@ public class mainController {
     private ImageView iconLogo;
 
     @FXML
-    private HBox mainBox;
+    private BorderPane containerMain;
 
     @FXML
     private Button titleClient;
@@ -35,9 +42,31 @@ public class mainController {
     @FXML
     private Button titleUser;
     
+    public void initialize(URL url, ResourceBundle rb) {
+       abrirManutencoes();
+    }
+
     @FXML
-    private void title() {
-    	
+    private void abrirManutencoes() {
+        abrir("/app/views/login.fxml");
+    }
+    
+    @FXML
+    private void abrir(String url) {
+    	Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(url));
+        } catch (IOException ex) {
+
+        }
+        this.containerMain.setCenter(root);
+    }
+    
+    @FXML
+    void abrirUser(MouseEvent event) {
+    	titlePage.setText("Gerenciamento de Usuários");
+    	System.out.print("foi caralho");
+    	abrirManutencoes();
     }
 
 }

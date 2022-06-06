@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +16,7 @@
          <children>
             <VBox layoutX="-2.0" layoutY="104.0" prefHeight="376.0" prefWidth="115.0">
                <children>
-                  <Button fx:id="titleUser" mnemonicParsing="false" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Usuário" textFill="#cb6ce6">
+                  <Button fx:id="titleUser" mnemonicParsing="false" onMouseClicked="#abrirUser" prefHeight="55.0" prefWidth="115.0" styleClass="buttonsOptions" text="Usuário" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -94,7 +95,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="mainBox" layoutX="114.0" layoutY="65.0" prefHeight="416.0" prefWidth="707.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 25;" />
+            <BorderPane fx:id="containerMain" layoutX="114.0" layoutY="62.0" prefHeight="418.0" prefWidth="708.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 25px;" />
          </children>
       </AnchorPane>
    </children>

@@ -45,7 +45,6 @@ public class loginController {
 
     @FXML
     void freeAcess(MouseEvent event) {
-    	System.out.println(textField.getText());
     	if (checkAcess(textField.getText(), new String( passwordField.getText()))) {
     		System.out.println("Acesso Liberado");
     		Main.changeScene("Acesso Liberado");
