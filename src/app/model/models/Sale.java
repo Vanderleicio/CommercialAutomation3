@@ -9,7 +9,7 @@ de outra autoria que n�o a minha est� destacado com uma cita��o para o a
 do c�digo, e estou ciente que estes trechos n�o ser�o considerados para fins de avalia��o.
 ******************************/
 
-package app.models;
+package app.model.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,11 +23,11 @@ import java.util.ArrayList;
  */
 public class Sale extends Entity {
 	/**
-	 * Dia de realiza��o da venda
+	 * Dia de realização da venda
 	 */
 	private LocalDate day;
 	/**
-	 * Hora da realiza��o da venda
+	 * Hora da realização da venda
 	 */
 	private LocalTime hour;
 	/**
@@ -46,7 +46,7 @@ public class Sale extends Entity {
 	/**
 	 * @param day: LocalDate representando o dia da venda
 	 * @param hour: LocalTime representando a hora da venda
-	 * @param paymentMethod: String representando o m�todo de pagamento da venda
+	 * @param paymentMethod: String representando o método de pagamento da venda
 	 * @param itemsPurchased: ArrayList de Items representando os itens comprados
 	 */
 	public Sale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemsPurchased) {

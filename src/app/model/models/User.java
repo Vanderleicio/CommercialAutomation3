@@ -1,6 +1,10 @@
-package app.models;
+package app.model.models;
+
+import java.util.ArrayList;
 
 public class User extends Entity{
+	
+	static private ArrayList<User> users = new ArrayList<User>();
 	/**
 	 * Nickname para login no sistema
 	 */
@@ -33,6 +37,16 @@ public class User extends Entity{
 		generatorCode("U");
 	}
 	
+	
+	static public User searchNick(String nick) {
+		for (int i = 0; i < users.size(); i++) {
+			String currentNick = users.get(i).getNickname();
+			if (nick.equals(currentNick)) {
+				return users.get(i);
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * @return nome
@@ -83,5 +97,11 @@ public class User extends Entity{
 		this.password = password;
 	}
 	
+	static public void addUser(User user) {
+		users.add(user);
+	}
 	
+	static public void removeUser(User user) {
+		users.remove(user);
+	}
 }
