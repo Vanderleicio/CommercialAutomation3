@@ -104,4 +104,8 @@ public class User extends Entity{
 	static public void removeUser(User user) {
 		users.remove(user);
 	}
+	
+	static public ArrayList<User> getUsers() {
+		return users;
+	}
 }

@@ -1,5 +1,7 @@
 package app.model.facades;
 
+import java.util.ArrayList;
+
 import app.model.exceptions.ExistentNicknameException;
 import app.model.models.*;
 
@@ -14,6 +16,10 @@ public class UserFacade {
 		} else if (userRegister != null) {
 			throw new ExistentNicknameException();
 		}
+	}
+	
+	public ArrayList<User> list(){
+		return User.getUsers();
 	}
 	
 }
