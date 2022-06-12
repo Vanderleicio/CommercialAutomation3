@@ -11,63 +11,22 @@ do c�digo, e estou ciente que estes trechos n�o ser�o considerados para fi
 
 package app.model.models;
 
-import java.util.ArrayList;
-
-import app.model.daos.AbstractDAO;
-
 /**
  * Classe das entidades presentes no sistema.
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  */
-public abstract class Entity {
+public class Entity {
 	
-	private AbstractDAO daoList;
+	private static int lastIdAdded = 0;
 	/**
 	 * Codigo inico para identificacao de cada entidade criada.
 	 */
 	private String id;
 	
-	public Entity(AbstractDAO daoList) {
-		this.daoList = daoList;
+	public Entity(String prefix) {
+		this.id = prefix + String.valueOf(lastIdAdded++);
 	}
-	/**
-	 * Converte o codigo hashcode do objeto numa string, adiciona o 
-	 * preFixo da classe, fornecido no construtor de cada uma delas, e retorna.
-	 * @param preFixo: Letra que sera usada para identificacao da classe da Entidade
-	 */
-	public void generatorCode(String prefix) {
-		String hash = String.valueOf(this.hashCode());
-		hash = prefix + "-" + hash;
-		this.id = validateCode(hash);
-	}
-
-	/**
-	 * Verifica se o ID passado ja existe e se sim, gera um novo a partir do primeiro.
-	 * @param cod: ID que sera verificado.
-	 * @return O proprio ID caso nao exista, um ID novo caso ele ja exista.
-	 */
-	public String validateCode(String cod) {
-		int cont = 0;
-		String newCod = cod;
-		while (this.idExist(newCod)){
-			cont++;
-			String[] codSeparate = cod.split("-");
-			newCod = codSeparate[0] + "-" + String.valueOf(cont) + codSeparate[1];
-		}
-		return newCod;
-	};
-	
-	public boolean idExist(String code) {
-		ArrayList<Entity> entities = daoList.getList();
-		for (Entity entity : entities) {
-			if (code.equals(entity.getId())){
-				return true;
-			}
-		}
-		return false;	
-	}
-	
 	/**
 	 * @return ID
 	 */

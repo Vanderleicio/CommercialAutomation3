@@ -2,24 +2,72 @@ package app.model.facades;
 
 import java.util.ArrayList;
 
-import app.model.exceptions.ExistentNicknameException;
+import app.model.daos.UserDAO;
+import app.model.exceptions.*;
 import app.model.models.*;
 
 public class UserFacade {
 	
-	public void create(String nickName, String password, String name, String category) throws ExistentNicknameException {
-		User userRegister = User.searchNick(nickName);
-		User newUser = new User(nickName, password, name, category);
-		
-		if (userRegister == null) {
-			User.addUser(newUser);
-		} else if (userRegister != null) {
+	private static UserDAO userData = new UserDAO();
+	
+	private static String idCurrentUser = "0";
+	
+	
+	public static void create(String nickName, String password, String name, String category) throws ExistentNicknameException, LoginDoesntMatch {
+		try {
+			userData.searchNick(nickName);
 			throw new ExistentNicknameException();
+		} catch(NickNonexistent eNick) {
+			User newUser = new User(nickName, password, name, category);
+			userData.add(newUser);
 		}
 	}
 	
-	public ArrayList<User> list(){
-		return User.getUsers();
+	public static void login(String nickname, String password) throws LoginDoesntMatch, NickNonexistent {
+		try {
+			User userAttempt = (User) userData.searchNick(nickname);
+			if (password.equals(userAttempt.getPassword())) {
+				String idUser = userData.searchNick(nickname).getId();
+				idCurrentUser = idUser;
+			} else {
+				throw new LoginDoesntMatch();
+			}
+		} catch(NickNonexistent eNick) {
+			throw new NickNonexistent();
+		}
+	}
+	
+	public static void delUser(String id) throws CurrentUserException, IdDoesntExist, EntitiesNotRegistred {
+		if (id.equals(idCurrentUser)) {
+			throw new CurrentUserException();
+		} else {
+			userData.delete(id);
+		}
+	}
+	
+	public static void editUser(String id, String newNick, String newPass, String newName, String newCategory) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException {
+		User userEdit = userData.getOneUser(id);
+		
+		try {
+			userData.searchNick(newNick);
+			throw new ExistentNicknameException();
+		} catch(NickNonexistent eNick) {
+			userEdit.setNickname(newNick);
+			userEdit.setName(newName);
+			userEdit.setPassword(newPass);
+			userEdit.setCategory(newCategory);
+		}
+	}
+	
+	public static ArrayList<User> listUser(){
+		return userData.getUsersList();
+	}
+
+	/**
+	 * @return the idCurrentUser
+	 */
+	public static String getIdCurrentUser() {
+		return idCurrentUser;
 	}
 	
 }

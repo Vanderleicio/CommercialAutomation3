@@ -17,11 +17,11 @@ package app.model.exceptions;
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  */
-public class LoginDoesntMatch extends Exception {
+public class NickNonexistent extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 
-	public LoginDoesntMatch() {
-		super("Login e/ou senha incorreto(s).");
+	public NickNonexistent() {
+		super("Esse nick não está cadastrado.");
 	}
 }

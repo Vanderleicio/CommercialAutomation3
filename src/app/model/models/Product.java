@@ -47,13 +47,13 @@ public class Product extends Entity{
 	 * @param validity: Validade do produto.
 	 * @param provider: Fornecedor do produto.
 	 */
-	public Product(String name, BigDecimal price, LocalDate validity,int quantity, Provider provider){
+	public Product(String name, BigDecimal price, LocalDate validity, int quantity, Provider provider){
+		super("P");
 		this.name = name;
 		this.price = price;
 		this.validity = validity;
 		this.quantity = quantity;
 		this.provider = provider;
-		generatorCode("P");
 	}
 	
 	/**

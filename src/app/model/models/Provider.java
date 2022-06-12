@@ -42,52 +42,15 @@ public class Provider extends Entity {
 	 * @param address: String representando o endereco do fornecedor
 	 */
 	public Provider(String name, String cnpj, String address) {
-		super();
+		super("F");
 		this.name = name;
 		this.cnpj = cnpj;
 		this.address = address;
-
 		this.productsProvided = new ArrayList<Product>();
-		generatorCode("F");
 	}
-	
+		
 	/**
-	 * Lista no terminal os produtos fornecidos por esse fornecedor.
-	 */
-	public void listProdProvided() {
-		if (getProductsProvided() != null) {
-		this.getProductsProvided().forEach(product -> {
-			System.out.println("\tID: " + product.getId() +
-							   "\tNome: " + product.getName());
-			System.out.println("\n");
-		});
-		}
-	}
-	
-	/**
-	 * Adiciona um produto na lista de produtos fornecidos.
-	 * @param prod: Produto a ser adicionado
-	 */
-	public void addProduct(Product prod) {
-		this.productsProvided.add(prod);	
-	}
-	
-	
-	/**
-	 * Remove um produto dos produtos fornecidos
-	 * @param idProd: Id do produto a ser removido
-	 */
-	public void removeProduct(String idProd) {
-		for (int i = 0; i < this.productsProvided.size(); i++) {
-			String currentProd = (this.productsProvided.get(i)).getId();
-			if (idProd.equals(currentProd)) {
-				this.productsProvided.remove(i);
-				}
-			}
-	}
-	
-	/**
-	 * @return o name
+	 * @return o nome
 	 */
 	public String getName() {
 		return name;

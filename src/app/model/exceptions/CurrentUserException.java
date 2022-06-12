@@ -11,17 +11,17 @@ do c�digo, e estou ciente que estes trechos n�o ser�o considerados para fi
 
 package app.model.exceptions;
 
-
 /**
- * Exception gerada quando as informa��es do login n�o confere
+ * Exception gerada quando o Nickname que est� tentando
+ * ser cadastrado j� existe
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  */
-public class LoginDoesntMatch extends Exception {
+public class CurrentUserException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 
-	public LoginDoesntMatch() {
-		super("Login e/ou senha incorreto(s).");
+	public CurrentUserException() {
+		super("Você não pode deletar o seu próprio usuário.");
 	}
 }
