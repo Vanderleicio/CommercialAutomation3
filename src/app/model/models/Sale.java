@@ -50,13 +50,12 @@ public class Sale extends Entity {
 	 * @param itemsPurchased: ArrayList de Items representando os itens comprados
 	 */
 	public Sale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemsPurchased) {
-		super();
+		super("v");
 		this.day = day;
 		this.hour = hour;
 		this.itemsPurchased = itemsPurchased;
 		this.paymentMethod = paymentMethod;
 		updatePrice();
-		generatorCode("V");
 	}
 
 	/**

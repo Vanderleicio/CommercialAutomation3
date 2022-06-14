@@ -54,13 +54,12 @@ public class Item extends Entity {
 	public Item(String name, String description, BigDecimal price, String categoryItems,
 			HashMap<String, Integer> composition) {
 
-		super();
+		super("i");
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.categoryItems = categoryItems;
 		this.composition = composition;
-		generatorCode("I");
 	}
 
 	/**
