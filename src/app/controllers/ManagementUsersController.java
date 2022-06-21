@@ -58,7 +58,7 @@ public class ManagementUsersController implements Initializable{
     	teste = teste + UserFacade.listUser().get(0).getCategory();
     	nomes.add(teste);
 
-    	obsUsers = FXCollections.observableArrayList(nomes);
+    	obsUsers = FXCollections.observableArrayList();
     	obsUsers.add(UserFacade.listUser().get(0).getName());
     	System.out.println(nomes);
     	listUsers.setItems(obsUsers);
