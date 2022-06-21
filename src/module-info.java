@@ -1,4 +1,5 @@
 module CommercialAutomation3 {
+	exports app.model.models;
 	requires javafx.controls;
 	requires javafx.graphics;
 	requires javafx.fxml;

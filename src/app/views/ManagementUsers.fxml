@@ -17,7 +17,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
          <children>
-            <Button fx:id="buttonAddUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+            <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -67,6 +67,13 @@
             </Button>
          </children>
       </HBox>
-      <ListView fx:id="listUsers" layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
+      <TableView id="usersTable" fx:id="usersTable" layoutX="1.0" layoutY="62.0" prefHeight="353.0" prefWidth="650.0">
+        <columns>
+            <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
+          <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
+          <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
+            <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

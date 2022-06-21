@@ -1,0 +1,8 @@
+.buttonGreen {
+	-fx-background-color: #008037;
+	-fx-text-fill: #ffffff;
+}
+
+.button:hover { //N sei oq ta assim
+	-fx-background-color: #85d4a7;
+}

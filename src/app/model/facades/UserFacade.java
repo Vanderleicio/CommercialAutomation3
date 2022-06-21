@@ -13,7 +13,7 @@ public class UserFacade {
 	private static String idCurrentUser = "0";
 	
 	
-	public static void create(String nickName, String password, String name, String category) throws ExistentNicknameException, LoginDoesntMatch {
+	public static void create(String nickName, String password, String name, String category) throws ExistentNicknameException{
 		try {
 			userData.searchNick(nickName);
 			throw new ExistentNicknameException();

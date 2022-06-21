@@ -19,7 +19,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		try {
-			UserFacade.create("admin", "admin", "nome", "cargo");
+			UserFacade.create("admin", "admin", "admin", "Gerente");
 			
 			
 			stage = primaryStage;
@@ -45,9 +45,11 @@ public class Main extends Application {
 		switch(src) {
 			case "screenLogin":
 				stage.setScene(loginScene);
+				stage.centerOnScreen();
 				break;
 			case "Acesso Liberado":
 				stage.setScene(mainScene);
+				stage.centerOnScreen();
 				break;
 		}
 	}
