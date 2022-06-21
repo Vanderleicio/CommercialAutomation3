@@ -12,17 +12,18 @@ public class SaleFacade {
 
 	private static SaleDAO saleData = new SaleDAO();
 	
-	public static void createSale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemPurchased) {
-		Sale newSale = new Sale(day, hour, paymentMethod, itemPurchased);
+	public static void createSale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemPurchased, String clientId) {
+		Sale newSale = new Sale(day, hour, paymentMethod, itemPurchased, clientId);
 		saleData.add(newSale);
 	}
 
-	public static void editSale(String id, LocalDate newDay, LocalTime newHour, String newPaymentMethod) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void editSale(String id, LocalDate newDay, LocalTime newHour, String newPaymentMethod, String newClientId) throws IdDoesntExist, EntitiesNotRegistred {
 		Sale saleEdit = saleData.getOneSale(id);
 		
 		saleEdit.setDay(newDay);
 		saleEdit.setHour(newHour);
 		saleEdit.setPaymentMethod(newPaymentMethod);
+		saleEdit.setClientId(newClientId);
 	}
 	
 	public static void addItem(String idPEdit, Item itemPAdd) throws IdDoesntExist, EntitiesNotRegistred {

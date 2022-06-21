@@ -43,18 +43,21 @@ public class Sale extends Entity {
 	 */
 	private String paymentMethod;
 	
+	private String clientId;
+	
 	/**
 	 * @param day: LocalDate representando o dia da venda
 	 * @param hour: LocalTime representando a hora da venda
 	 * @param paymentMethod: String representando o método de pagamento da venda
 	 * @param itemsPurchased: ArrayList de Items representando os itens comprados
 	 */
-	public Sale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemsPurchased) {
+	public Sale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemsPurchased, String clientId) {
 		super("v");
 		this.day = day;
 		this.hour = hour;
 		this.itemsPurchased = itemsPurchased;
 		this.paymentMethod = paymentMethod;
+		this.clientId = clientId;
 		updatePrice();
 	}
 
@@ -156,6 +159,20 @@ public class Sale extends Entity {
 	 */
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
+	}
+
+	/**
+	 * @return the clientId
+	 */
+	public String getClientId() {
+		return clientId;
+	}
+
+	/**
+	 * @param clientId the clientId to set
+	 */
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 	
 	
