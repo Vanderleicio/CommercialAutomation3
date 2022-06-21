@@ -1,7 +1,9 @@
 package app.controllers;
 
-import app.model.daos.UserDAO;
+import app.model.facades.UserFacade;
+import app.model.models.User;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -22,10 +24,14 @@ public class ManagementUsersController {
     private Button buttonRemoveUser;
     
     @FXML
-    private ListView<UserDAO> listUsers;
+    private ListView<User> listUsers;
+    
+    private ObservableList<User> obsUsers;
     
     public void listDataUsers() {
-    	listUsers = FXCollections.observableArrayList();
+    	obsUsers = FXCollections.observableArrayList(UserFacade.listUser());
+    	
+    	listUsers.setItems(obsUsers);
     }
 
 
