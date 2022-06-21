@@ -62,7 +62,7 @@ public class mainController {
         try {
             root = FXMLLoader.load(getClass().getResource(url));
         } catch (IOException ex) {
-
+        	ex.printStackTrace();
         }
         this.containerMain.setCenter(root);
     }

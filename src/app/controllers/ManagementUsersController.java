@@ -47,12 +47,20 @@ public class ManagementUsersController implements Initializable{
     public void listDataUsers() {
     	ArrayList<String> nomes = new ArrayList<String>();
     	
+    	String teste = " ";
     	
-    	nomes.add(UserFacade.listUser().get(0).getName());
+    	teste = teste + UserFacade.listUser().get(0).getName();
+    	teste = teste + "   ";
+    	teste = teste + UserFacade.listUser().get(0).getNickname();
+    	teste = teste + "   ";
+    	teste = teste + UserFacade.listUser().get(0).getPassword();
+    	teste = teste + "   ";
+    	teste = teste + UserFacade.listUser().get(0).getCategory();
+    	nomes.add(teste);
+
+    	obsUsers = FXCollections.observableArrayList(nomes);
     	obsUsers.add(UserFacade.listUser().get(0).getName());
     	System.out.println(nomes);
-    	
-    	obsUsers = FXCollections.observableArrayList(nomes);
     	listUsers.setItems(obsUsers);
     }
 
