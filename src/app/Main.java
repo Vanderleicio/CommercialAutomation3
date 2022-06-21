@@ -2,7 +2,7 @@ package app;
 	
 import java.io.IOException;
 import java.net.URL;
-
+import app.model.facades.UserFacade;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -19,6 +19,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		try {
+			UserFacade.create("admin", "admin", "nome", "cargo");
+			
+			
 			stage = primaryStage;
 			AnchorPane root1 = FXMLLoader.load(getClass().getResource("/app/views/login.fxml"));
 			loginScene = new Scene(root1);
