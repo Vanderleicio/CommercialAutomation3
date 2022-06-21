@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ManagementProvidersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../styles/applicationContainer.css" fx:controller="app.controllers.ManagementProvidersController">
    <children>
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
          <children>
@@ -62,6 +62,6 @@
             </Button>
          </children>
       </HBox>
-      <ListView fx:id="listUsers" layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
+      <ListView layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
    </children>
 </AnchorPane>

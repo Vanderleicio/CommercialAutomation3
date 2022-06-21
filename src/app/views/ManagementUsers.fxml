@@ -2,70 +2,66 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../applicationContainer.css" xmlns="http://javafx.com/javafx/18" fx:controller="app.controllers.ManagementUsersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ManagementProvidersController">
    <children>
-      <AnchorPane prefHeight="405.0" prefWidth="674.0">
+      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="674.0">
-               <children>
-                  <Button fx:id="buttonAddUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/adicionar-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="buttonEditUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/editar-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="buttonRemoveUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/excluir-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="buttonListUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Listar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/listar-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
-            <AnchorPane layoutY="47.0" prefHeight="359.0" prefWidth="674.0" />
+            <Button fx:id="buttonAddUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/adicionar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonEditUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/excluir-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonListUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Listar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/listar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
-      </AnchorPane>
+      </HBox>
+      <ListView fx:id="listUsers" layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
    </children>
 </AnchorPane>

@@ -43,16 +43,21 @@ public class mainController {
     private Button titleUser;
     
     public void initialize(URL url, ResourceBundle rb) {
-       abrirManutencoes();
+    	
     }
 
     @FXML
-    private void abrirManutencoes() {
-        abrir("/app/views/ManagementUsers.fxml");
+    private void openManagementUsers() {
+        open("/app/views/ManagementUsers.fxml");
     }
     
     @FXML
-    private void abrir(String url) {
+    private void openManagementProviders() {
+        open("/app/views/ManagementProviders.fxml");
+    }
+    
+    @FXML
+    private void open(String url) {
     	Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource(url));
@@ -63,10 +68,15 @@ public class mainController {
     }
     
     @FXML
-    void abrirUser(MouseEvent event) {
+    void openUser(MouseEvent event) {
     	titlePage.setText("Gerenciamento de Usuários");
-    	System.out.print("foi caralho");
-    	abrirManutencoes();
+    	openManagementUsers();
+    }
+    
+    @FXML
+    void openProviders(MouseEvent event) {
+    	titlePage.setText("Gerenciamento de Fornecedores");
+    	openManagementProviders();
     }
 
 }
