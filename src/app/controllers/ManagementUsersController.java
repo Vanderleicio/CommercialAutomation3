@@ -10,6 +10,7 @@ import app.model.models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ManagementUsersController implements Initializable{
 	
@@ -63,19 +65,10 @@ public class ManagementUsersController implements Initializable{
     private ListView<String> listUsers;
     
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {		
-		usersTable.setItems(listaDeClientes());
-		
-		idUCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		nameUCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-		nickCol.setCellValueFactory(new PropertyValueFactory<>("nickname"));
-		categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-		//listDataUsers();
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		initTableView();
 	}
 	
-    private ObservableList<User> listaDeClientes() {
-        return FXCollections.observableArrayList(UserFacade.listUser());
-    }
     
     @FXML
     public void addUser(ActionEvent event) {
@@ -87,11 +80,27 @@ public class ManagementUsersController implements Initializable{
 	        //addStage.initOwner(parentStage);
 	        addStage.initModality(Modality.APPLICATION_MODAL);
 	        addStage.setScene(addScene);
+	        
+	        addStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent close) {
+                	initTableView();
+                }
+            });
 	        addStage.show(); 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Teste");
     }
-
+    
+    public void initTableView() {
+		ObservableList<User> usersList = FXCollections.observableArrayList(UserFacade.listUser());
+		usersTable.setItems(usersList);
+		
+		idUCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameUCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+		nickCol.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+		categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+    }
 }

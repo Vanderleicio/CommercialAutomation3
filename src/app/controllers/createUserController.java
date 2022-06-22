@@ -12,7 +12,9 @@ import app.model.exceptions.NickNonexistent;
 import app.model.facades.UserFacade;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,6 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class createUserController implements Initializable{
 
@@ -61,25 +65,13 @@ public class createUserController implements Initializable{
     		String userCateg = (String) userCategory.getValue();
     		
     		UserFacade.create(userNick, userPass, userName, userCateg);
+    	    Stage stage = (Stage) buttonCreate.getScene().getWindow();
+    	    
+    	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+    	    
+    	    stage.close();
 		} catch(ExistentNicknameException loginExcept) {
     		System.out.println("Nick já existe!");
     	} 
 	}
-	
-	
-    //@FXML
-    //void createUser(MouseEvent event) {
-    	//try {
-    		//String userNick = userNickTextField.getText();
-    		//String userPass = new String(userPassField.getText());
-    		//String userName = userNameTextField.getText();
-    		
-    		//UserFacade.create(userNick, userPass, userName, null);
-    		//System.out.println("Acesso Liberado");
-    		//Main.changeScene("Acesso Liberado");
-    	//} catch(LoginDoesntMatch | NickNonexistent loginExcept) {
-    		//alertLogin.setText("Dados incorreto, tente novamente!");
-    		//System.out.println("Acesso não liberado!");
-    	//}
-    //}
 }
