@@ -49,8 +49,13 @@ public class UserFacade {
 		User userEdit = userData.getOneUser(id);
 		
 		try {
-			userData.searchNick(newNick);
-			throw new ExistentNicknameException();
+			if (!userEdit.getNickname().equals(newNick)) {
+				userData.searchNick(newNick);
+				throw new ExistentNicknameException();
+			}
+			userEdit.setName(newName);
+			userEdit.setPassword(newPass);
+			userEdit.setCategory(newCategory);
 		} catch(NickNonexistent eNick) {
 			userEdit.setNickname(newNick);
 			userEdit.setName(newName);
@@ -70,4 +75,18 @@ public class UserFacade {
 		return idCurrentUser;
 	}
 	
+	public static void chooseAUser(String id){
+		userData.setChosenEntityId(id);
+	}
+	
+	public static User chosenUser() {
+		try {
+			String id = userData.getChosenEntityId();
+			return userData.getOneUser(id);
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

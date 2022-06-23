@@ -38,5 +38,13 @@ public class SaleFacade {
 			saleData.delete(idPEditar);
 		}
 	}
+	
+	public static void chooseASale(String id){
+		saleData.setChosenEntityId(id);
+	}
+	
+	public static String chosenSale() {
+		return saleData.getChosenEntityId();
+	}
 
 }

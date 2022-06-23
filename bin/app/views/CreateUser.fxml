@@ -17,6 +17,7 @@
             <Label layoutX="16.0" layoutY="219.0" text="Qual o cargo do Usuário:" />
             <ComboBox fx:id="userCategory" layoutX="19.0" layoutY="236.0" prefHeight="25.0" prefWidth="230.0" />
             <Button fx:id="buttonCreate" layoutX="104.0" layoutY="294.0" mnemonicParsing="false" onAction="#createUser" text="Concluir" />
+            <Label fx:id="alertNick" layoutX="68.0" layoutY="271.0" prefHeight="17.0" prefWidth="135.0" />
          </children></AnchorPane>
   </content>
 </TitledPane>

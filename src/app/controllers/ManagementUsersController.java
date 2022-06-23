@@ -5,6 +5,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import app.model.exceptions.CurrentUserException;
+import app.model.exceptions.EntitiesNotRegistred;
+import app.model.exceptions.ExistentNicknameException;
+import app.model.exceptions.IdDoesntExist;
 import app.model.facades.UserFacade;
 import app.model.models.User;
 import javafx.collections.FXCollections;
@@ -21,6 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -67,11 +72,25 @@ public class ManagementUsersController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initTableView();
+		buttonEditUser.setDisable(true);
+		buttonRemoveUser.setDisable(true);
 	}
 	
     
     @FXML
     public void addUser(ActionEvent event) {
+    	UserFacade.chooseAUser(null);
+    	manageUserScreen();
+    }
+    
+    @FXML
+    public void editUser(ActionEvent event) throws ExistentNicknameException, CurrentUserException, IdDoesntExist, EntitiesNotRegistred {
+    	User selected = usersTable.getSelectionModel().getSelectedItem();
+    	UserFacade.chooseAUser(selected.getId());
+    	manageUserScreen();
+    }
+    
+    public void manageUserScreen() {
     	Stage addStage = new Stage();
         Parent root;
 		try {
@@ -91,11 +110,16 @@ public class ManagementUsersController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Teste");
+    }
+    
+    @FXML
+    public void userSelected(MouseEvent event) {
+    	buttonEditUser.setDisable(false);
+		buttonRemoveUser.setDisable(false);
     }
     
     public void initTableView() {
-		ObservableList<User> usersList = FXCollections.observableArrayList(UserFacade.listUser());
+    	ObservableList<User> usersList = FXCollections.observableArrayList(UserFacade.listUser());
 		usersTable.setItems(usersList);
 		
 		idUCol.setCellValueFactory(new PropertyValueFactory<>("id"));

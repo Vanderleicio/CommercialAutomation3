@@ -29,7 +29,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonEditUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+            <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -67,7 +67,7 @@
             </Button>
          </children>
       </HBox>
-      <TableView id="usersTable" fx:id="usersTable" layoutX="1.0" layoutY="62.0" prefHeight="353.0" prefWidth="650.0">
+      <TableView id="usersTable" fx:id="usersTable" layoutX="1.0" layoutY="62.0" onMouseClicked="#userSelected" prefHeight="353.0" prefWidth="650.0">
         <columns>
             <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
           <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />

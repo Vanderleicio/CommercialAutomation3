@@ -31,4 +31,12 @@ public class ProviderFacade {
 	public static ArrayList<Provider> listProvider(){
 		return provData.getProvidersList();
 	}
+	
+	public static void chooseAProvider(String id){
+		provData.setChosenEntityId(id);
+	}
+	
+	public static String chosenProvider() {
+		return provData.getChosenEntityId();
+	}
 }

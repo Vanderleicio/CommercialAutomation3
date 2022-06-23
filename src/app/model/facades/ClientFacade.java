@@ -31,4 +31,12 @@ public class ClientFacade {
 	public static ArrayList<Client> listClient(){
 		return clientData.getClientList();
 	}
+	
+	public static void chooseAClient(String id){
+		clientData.setChosenEntityId(id);
+	}
+	
+	public static String chosenClient() {
+		return clientData.getChosenEntityId();
+	}
 }
