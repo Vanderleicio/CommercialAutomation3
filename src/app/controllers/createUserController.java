@@ -70,7 +70,6 @@ public class createUserController implements Initializable{
 	
 	@FXML
 	void createUser(ActionEvent event){
-		
 		String userNick = userNickTextField.getText();
 		String userPass = new String(userPassField.getText());
 		String userName = userNameTextField.getText();
@@ -79,12 +78,10 @@ public class createUserController implements Initializable{
 		try {
 			
 			if (selected == null) {
-				System.out.println("criando");
 				UserFacade.create(userNick, userPass, userName, userCateg);
 			} else {
-				System.out.println(selected.getId());
 				UserFacade.editUser(selected.getId(), userNick, userPass, userName, userCateg);
-				System.out.println(UserFacade.listUser().get(1).getName());
+				//UserFacade.create("tes", "tan", "do", "Funcionário");
 			}
     		
     	    Stage stage = (Stage) buttonCreate.getScene().getWindow();
@@ -93,7 +90,6 @@ public class createUserController implements Initializable{
     	    
 		} catch(ExistentNicknameException loginExcept) {
 			alertNick.setText("O nick digitado já existe!");
-    		System.out.println("Nick já existe!");
     	} catch (IdDoesntExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
