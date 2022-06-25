@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ManagementUsersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.ManagementUsersController">
    <children>
       <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
          <children>

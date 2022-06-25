@@ -1,4 +1,4 @@
-package app.controllers;
+package app.controllers.userControllers;
 
 import java.net.URL;
 import java.util.ArrayList;

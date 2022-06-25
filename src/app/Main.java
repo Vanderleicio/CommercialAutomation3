@@ -1,8 +1,18 @@
 package app;
 	
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
-import app.model.facades.UserFacade;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import app.model.exceptions.ExistentNicknameException;
+import app.model.facades.*;
+import app.model.models.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -20,7 +30,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		try {
 			UserFacade.create("admin", "admin", "admin", "Gerente");
-			
+			testSituation();
 			
 			stage = primaryStage;
 			AnchorPane root1 = FXMLLoader.load(getClass().getResource("/app/views/login.fxml"));
@@ -40,7 +50,30 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static void testSituation() throws ExistentNicknameException {
+	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+	    		.withResolverStyle(ResolverStyle.STRICT);
+	    
+	    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+	    		.withResolverStyle(ResolverStyle.STRICT);
+	    
+	    LocalDate validity = LocalDate.parse("12/03/2022", dateTimeFormatter);
+	    LocalDate data = LocalDate.parse("25/07/2022", dateTimeFormatter);
+	    LocalTime hora = LocalTime.parse("12:30", timeFormatter);
+	    
+		UserFacade.create("Nick", "Pass", "Nome", "Funcionário");
+		ProviderFacade.createProvider("Nome", "11.222.333/4444-55", "Praça");
+		ProductFacade.createProduct("Maçã", new BigDecimal("1.25"), validity, 10, ProviderFacade.listProvider().get(0));
+		HashMap<String, Integer> ingredientes = new HashMap<String, Integer>();
+		ingredientes.put("Maçã", 5);
+		MenuFacade.createItem("Torta de maçã", "Torta feita de maçã", new BigDecimal("10"), "Sobremesa", ingredientes);
+		
+		ArrayList<Item> items = new ArrayList<Item>();
+		SaleFacade.createSale(data, hora, "Pix", items, "C1");
+		ClientFacade.createClient("Nome2", "11122233345", "nome2@yahoo.com.br", "(11)23344-5566");
+		
+	}
 	public static void changeScene(String src) {
 		switch(src) {
 			case "screenLogin":

@@ -1,4 +1,4 @@
-package app.controllers;
+package app.controllers.userControllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -128,14 +128,17 @@ public class ManagementUsersController implements Initializable{
     public void userSelected(MouseEvent event) {
     	
     	User selected = usersTable.getSelectionModel().getSelectedItem();
-    	if (!selected.getId().equals(UserFacade.getIdCurrentUser())) {
-    		currentUserLabel.setVisible(false);
-    		buttonRemoveUser.setDisable(false);
-    	} else {
-    		buttonRemoveUser.setDisable(true);
-    		currentUserLabel.setVisible(true);
+    	
+    	if (selected != null) {
+	    	if (!selected.getId().equals(UserFacade.getIdCurrentUser())) {
+	    		currentUserLabel.setVisible(false);
+	    		buttonRemoveUser.setDisable(false);
+	    	} else {
+	    		buttonRemoveUser.setDisable(true);
+	    		currentUserLabel.setVisible(true);
+	    	}
+	    	buttonEditUser.setDisable(false);
     	}
-    	buttonEditUser.setDisable(false);
     }
     
     public void initTableView() {
