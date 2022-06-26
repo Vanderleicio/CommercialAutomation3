@@ -133,5 +133,9 @@ public class Product extends Entity{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.getId() + " - " + this.getName();
+	}
 }

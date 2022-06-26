@@ -9,29 +9,19 @@ de outra autoria que n�o a minha est� destacado com uma cita��o para o a
 do c�digo, e estou ciente que estes trechos n�o ser�o considerados para fins de avalia��o.
 ******************************/
 
-package app.model.models;
+package app.model.exceptions;
 
 /**
- * Classe das entidades presentes no sistema.
+ * Exception gerada quando o Nickname que est� tentando
+ * ser cadastrado j� existe
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  */
-public class Entity {
+public class InvalidQuantityException extends Exception {
 	
-	private static int lastIdAdded = 0;
-	/**
-	 * Codigo inico para identificacao de cada entidade criada.
-	 */
-	private String id;
-	
-	public Entity(String prefix) {
-		this.id = prefix + String.valueOf(lastIdAdded++);
+	private static final long serialVersionUID = 1L;
+
+	public InvalidQuantityException() {
+		super("Quantidade não é válida.");
 	}
-	/**
-	 * @return ID
-	 */
-	public String getId() {
-		return id;
-	}
-	
 }

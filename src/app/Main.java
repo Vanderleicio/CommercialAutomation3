@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import app.model.exceptions.ExistentNicknameException;
+import app.model.exceptions.InvalidDateException;
+import app.model.exceptions.InvalidQuantityException;
 import app.model.facades.*;
 import app.model.models.*;
 import javafx.application.Application;
@@ -51,14 +53,14 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void testSituation() throws ExistentNicknameException {
+	public static void testSituation() throws ExistentNicknameException, InvalidDateException, InvalidQuantityException {
 	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
 	    		.withResolverStyle(ResolverStyle.STRICT);
 	    
 	    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 	    		.withResolverStyle(ResolverStyle.STRICT);
 	    
-	    LocalDate validity = LocalDate.parse("12/03/2022", dateTimeFormatter);
+	    LocalDate validity = LocalDate.parse("12/03/2025", dateTimeFormatter);
 	    LocalDate data = LocalDate.parse("25/07/2022", dateTimeFormatter);
 	    LocalTime hora = LocalTime.parse("12:30", timeFormatter);
 	    

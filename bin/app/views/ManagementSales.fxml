@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.productControllers.ManagementProductControllers">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.ManagementUsersController">
    <children>
       <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
          <children>
-            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#add" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+            <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -31,7 +26,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#edit" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+            <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -43,7 +38,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonRemove" mnemonicParsing="false" onAction="#remove" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
+            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" onAction="#removeUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -58,15 +53,14 @@
             <Label />
          </children>
       </HBox>
-      <TableView id="usersTable" fx:id="prodsTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#prodSelected" prefHeight="340.0" prefWidth="650.0">
+      <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
          <columns>
-            <TableColumn id="idCol" fx:id="idCol" prefWidth="48.0" text="ID" />
-            <TableColumn id="nameCol" fx:id="nameCol" prefWidth="113.0" text="Nome" />
-            <TableColumn id="priceCol" fx:id="priceCol" prefWidth="67.0" text="Preço" />
-            <TableColumn fx:id="quantityCol" prefWidth="99.0" text="Quantidade" />
-            <TableColumn id="validityCol" fx:id="validityCol" prefWidth="151.0" text="Validade" />
-            <TableColumn fx:id="providerCol" prefWidth="171.0" text="Fornecedor" />
+            <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
+            <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
+            <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
+            <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
          </columns>
       </TableView>
+      <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
    </children>
 </AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<TitledPane alignment="CENTER" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="219.0" text="CRIAR NOVO PRODUTO" textAlignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.productControllers.manageProductController">
+   <content>
+      <Pane prefHeight="374.0" prefWidth="302.0">
+         <children>
+            <Label layoutX="14.0" layoutY="55.0" text="Nome" />
+            <Label layoutX="13.0" layoutY="115.0" text="Preço" />
+            <Label layoutX="15.0" layoutY="223.0" text="Fornecedor" />
+            <Label layoutX="13.0" layoutY="170.0" text="Validade" />
+            <ComboBox fx:id="providerComboBox" layoutX="15.0" layoutY="247.0" prefHeight="25.0" prefWidth="185.0" />
+            <Button fx:id="buttonCreate" layoutX="74.0" layoutY="306.0" mnemonicParsing="false" onAction="#createProd" text="Confirmar" />
+            <TextField fx:id="nameTxtFld" layoutX="14.0" layoutY="72.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField fx:id="priceTxtFld" layoutX="12.0" layoutY="136.0" prefHeight="25.0" prefWidth="70.0" />
+            <DatePicker fx:id="validityDatePicker" editable="false" layoutX="12.0" layoutY="187.0" prefHeight="25.0" prefWidth="184.0" />
+            <Label layoutX="132.0" layoutY="115.0" text="Quantidade" />
+            <TextField fx:id="qntdTxtFld" layoutX="131.0" layoutY="136.0" prefHeight="25.0" prefWidth="64.0" />
+            <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="289.0" prefHeight="17.0" prefWidth="184.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+   </content>
+</TitledPane>

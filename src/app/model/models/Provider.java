@@ -104,5 +104,9 @@ public class Provider extends Entity {
 	public void setProductsProvided(ArrayList<Product> productsProvided) {
 		this.productsProvided = productsProvided;
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.getId() + " - " + this.getName();
+	}
 }
