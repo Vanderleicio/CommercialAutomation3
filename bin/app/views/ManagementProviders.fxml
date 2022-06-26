@@ -1,65 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.providerControllers.ManagementProvidersController">
-   <children>
-      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
-         <children>
-            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#add" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/adicionar-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#edit" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/editar-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="buttonRemove" mnemonicParsing="false" onAction="#remove" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/excluir-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </HBox>
-      <ListView layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
-      <TableView id="usersTable" fx:id="provsTable" layoutX="17.0" layoutY="65.0" onMouseClicked="#provSelected" prefHeight="340.0" prefWidth="650.0">
-         <columns>
-            <TableColumn id="idUCol" fx:id="idCol" text="ID" />
-            <TableColumn id="nameUCol" fx:id="nameCol" prefWidth="190.0" text="Nome" />
-            <TableColumn id="nickCol" fx:id="cnpjCol" prefWidth="190.0" text="CNPJ" />
-            <TableColumn id="categoryCol" fx:id="addressCol" prefWidth="190.0" text="Endereço" />
-         </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+
+<TableColumn id="namePrCol" fx:id="nameCol" prefWidth="190.0" text="Nome" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.providerControllers.ManagementProvidersController" />

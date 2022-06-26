@@ -8,5 +8,6 @@ module CommercialAutomation3 {
 	opens app.controllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.providerControllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.userControllers to javafx.graphics, javafx.fxml;
+    opens app.controllers.reportControllers to javafx.fxml;
 	exports app;
 }

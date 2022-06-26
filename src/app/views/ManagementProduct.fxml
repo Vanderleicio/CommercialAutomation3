@@ -56,9 +56,10 @@
       <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
          <columns>
             <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
-            <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
-            <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
-            <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
+            <TableColumn id="nameUCol" fx:id="namePCol" prefWidth="139.20001220703125" text="Nome" />
+            <TableColumn id="nickCol" fx:id="nickPCol" prefWidth="121.60005187988281" text="Preço" />
+            <TableColumn id="categoryCol" fx:id="validityPCol" prefWidth="164.0" text="Validade" />
+            <TableColumn fx:id="providerPCol" prefWidth="142.4000244140625" text="Fornecedor" />
          </columns>
       </TableView>
       <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
