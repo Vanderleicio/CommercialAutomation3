@@ -1,4 +1,4 @@
-package app.controllers.report;
+package app.controllers.reportControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
