@@ -54,12 +54,12 @@
          </children>
       </HBox>
       <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
-        <columns>
+         <columns>
             <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
-          <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
-          <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
+            <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
+            <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
             <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
-        </columns>
+         </columns>
       </TableView>
       <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
    </children>

@@ -57,6 +57,31 @@ public class mainController {
     }
     
     @FXML
+    private void openManagementProduct() {
+        open("/app/views/ManagementProduct.fxml");
+    }
+    
+    @FXML
+    private void openManagementMenu() {
+        open("/app/views/ManagementMenu.fxml");
+    }
+    
+    @FXML
+    private void openManagementClient() {
+        open("/app/views/ManagementClient.fxml");
+    }
+    
+    @FXML
+    private void openManagementSales() {
+        open("/app/views/ManagementSales.fxml");
+    }
+    
+    @FXML
+    private void openManagementReport() {
+        open("/app/views/ManagementReport.fxml");
+    }
+    
+    @FXML
     private void open(String url) {
     	Parent root = null;
         try {
@@ -77,6 +102,36 @@ public class mainController {
     void openProviders(MouseEvent event) {
     	titlePage.setText("Gerenciamento de Fornecedores");
     	openManagementProviders();
+    }
+    
+    @FXML
+    void openClient(MouseEvent event) {
+    	titlePage.setText("Gerenciamento de Clientes");
+    	openManagementClient();
+    }
+
+    @FXML
+    void openMenu(MouseEvent event) {
+    	titlePage.setText("Gerenciamento do Menu");
+    	openManagementMenu();
+    }
+
+    @FXML
+    void openProduct(MouseEvent event) {
+    	titlePage.setText("Gerenciamento dos Produtos");
+    	openManagementProduct();
+    }
+
+    @FXML
+    void openReport(MouseEvent event) {
+    	titlePage.setText("Relatórios");
+    	openManagementReport();
+    }
+
+    @FXML
+    void openSale(MouseEvent event) {
+    	titlePage.setText("Gerenciamento de Vendas");
+    	openManagementSales();
     }
 
 }

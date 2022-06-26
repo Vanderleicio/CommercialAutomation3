@@ -35,7 +35,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="titleProduct" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Produtos" textFill="#cb6ce6">
+                  <Button fx:id="titleProduct" mnemonicParsing="false" onMouseClicked="#openProduct" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Produtos" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -43,7 +43,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Menu" textFill="#cb6ce6">
+                  <Button fx:id="titleMenu" mnemonicParsing="false" onMouseClicked="#openMenu" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Menu" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -51,7 +51,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="titleClient" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Clientes" textFill="#cb6ce6">
+                  <Button fx:id="titleClient" mnemonicParsing="false" onMouseClicked="#openClient" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Clientes" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,7 +59,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="titleMenu" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Vendas" textFill="#cb6ce6">
+                  <Button fx:id="titleMenu" mnemonicParsing="false" onMouseClicked="#openSale" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Vendas" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -67,7 +67,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="titleReport" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Relatórios" textFill="#cb6ce6">
+                  <Button fx:id="titleReport" mnemonicParsing="false" onMouseClicked="#openReport" prefHeight="60.0" prefWidth="250.0" styleClass="buttonsOptions" text="Relatórios" textFill="#cb6ce6">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
