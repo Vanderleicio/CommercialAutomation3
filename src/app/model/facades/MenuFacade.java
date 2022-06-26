@@ -43,4 +43,12 @@ public class MenuFacade {
 			itemData.delete(idPEdit);
 		}
 	}
+	
+	public static void chooseAItem(String id){
+		itemData.setChosenEntityId(id);
+	}
+	
+	public static String chosenItem() {
+		return itemData.getChosenEntityId();
+	}
 }

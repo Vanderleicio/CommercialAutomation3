@@ -64,4 +64,12 @@ public class ProductFacade {
 	public static ArrayList<Product> listProduct(){
 		return prodData.getProductsList();
 	}
+	
+	public static void chooseAProduct(String id){
+		prodData.setChosenEntityId(id);
+	}
+	
+	public static String chosenProduct() {
+		return prodData.getChosenEntityId();
+	}
 }

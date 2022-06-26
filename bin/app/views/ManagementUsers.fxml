@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ManagementUsersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.ManagementUsersController">
    <children>
-      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
+      <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
          <children>
-            <Button fx:id="buttonAddUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+            <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -29,7 +29,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonEditUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+            <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -41,7 +41,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
+            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" onAction="#removeUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -53,6 +53,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Label />
             <Button fx:id="buttonListUser" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Listar">
                <HBox.margin>
                   <Insets right="20.0" />
@@ -67,6 +68,14 @@
             </Button>
          </children>
       </HBox>
-      <ListView fx:id="listUsers" layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
+      <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
+        <columns>
+            <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
+          <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
+          <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
+            <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
+        </columns>
+      </TableView>
+      <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
    </children>
 </AnchorPane>

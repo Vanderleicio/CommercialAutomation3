@@ -19,7 +19,7 @@ public class ProviderFacade {
 		provData.delete(id);
 	}
 	
-	public static void editProvider(String id, String newName, String newCNPJ, String newAddres, ArrayList<Product> newProdList) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException {
+	public static void editProvider(String id, String newName, String newCNPJ, String newAddres, ArrayList<Product> newProdList) throws IdDoesntExist, EntitiesNotRegistred {
 		Provider providerEdit = provData.getOneProvider(id);
 		
 		providerEdit.setName(newName);
@@ -30,5 +30,20 @@ public class ProviderFacade {
 	
 	public static ArrayList<Provider> listProvider(){
 		return provData.getProvidersList();
+	}
+	
+	public static void chooseAProvider(String id){
+		provData.setChosenEntityId(id);
+	}
+	
+	public static Provider chosenProvider() {
+		try {
+			String id = provData.getChosenEntityId();
+			return provData.getOneProvider(id);
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

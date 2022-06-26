@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="276.0" text="FORNECEDOR" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.providerControllers.manageProviderController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="274.0">
+         <children>
+            <TextField fx:id="nameTextField" layoutX="15.0" layoutY="57.0" prefHeight="25.0" prefWidth="230.0" promptText="Nome" />
+            <TextField fx:id="cnpjTextField" layoutX="15.0" layoutY="115.0" prefHeight="25.0" prefWidth="230.0" promptText="CNPJ" />
+            <Label layoutX="16.0" layoutY="40.0" text="Digite o nome do fornecedor:" />
+            <Label layoutX="16.0" layoutY="98.0" text="Digite o CNPJ do fornecedor:" />
+            <Label layoutX="16.0" layoutY="158.0" text="Digite o endereço:" />
+            <Button fx:id="buttonCreate" layoutX="100.0" layoutY="255.0" mnemonicParsing="false" onAction="#createProv" text="Concluir" />
+            <TextField fx:id="addressTextField" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="230.0" promptText="Endereço" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>

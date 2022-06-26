@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="276.0" text="ADICIONAR NOVO CLIENTE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.createUserController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="263.0">
+         <children>
+            <TextField fx:id="userNameTextField" layoutX="15.0" layoutY="57.0" prefHeight="25.0" prefWidth="230.0" promptText="Nome" />
+            <TextField fx:id="userNickTextField" layoutX="15.0" layoutY="115.0" prefHeight="25.0" prefWidth="230.0" promptText="NickName" />
+            <PasswordField fx:id="userPassField" layoutX="17.0" layoutY="175.0" prefHeight="25.0" prefWidth="230.0" promptText="Senha" />
+            <Label layoutX="16.0" layoutY="40.0" text="Digite o nome do Usuário:" />
+            <Label layoutX="16.0" layoutY="98.0" text="Digite o nick do Usuário:" />
+            <Label layoutX="16.0" layoutY="158.0" text="Digite a senha:" />
+            <Label layoutX="16.0" layoutY="219.0" text="Qual o cargo do Usuário:" />
+            <ComboBox fx:id="userCategory" layoutX="19.0" layoutY="236.0" prefHeight="25.0" prefWidth="230.0" />
+            <Button fx:id="buttonCreate" layoutX="104.0" layoutY="294.0" mnemonicParsing="false" onAction="#createUser" text="Concluir" />
+            <Label fx:id="alertNick" layoutX="68.0" layoutY="271.0" prefHeight="17.0" prefWidth="135.0" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>

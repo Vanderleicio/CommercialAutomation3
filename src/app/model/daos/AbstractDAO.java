@@ -10,6 +10,7 @@ public abstract class AbstractDAO {
 
 	private ArrayList<Entity> listEntity = new ArrayList<>();
 	
+	private String chosenEntityId;
 	/**
 	 * Metodo geral para adicionar a entidade cadastrada na ArrayList.
 	 *@param element: Entidade a ser cadastrada
@@ -32,6 +33,8 @@ public abstract class AbstractDAO {
 		
 		if (listEntity.size() == 0) {
 			throw new EntitiesNotRegistred();
+		} else if (id == null) {
+			return null;
 		}
 		
 		for (int i = 0; i < listEntity.size(); i++) {
@@ -71,9 +74,7 @@ public abstract class AbstractDAO {
 			newCod = codSeparate[0] + "-" + String.valueOf(cont) + codSeparate[1];
 			newCod = validateCode(newCod);
 			return newCod;
-		} catch (IdDoesntExist e) {
-			return newCod;
-		} catch (EntitiesNotRegistred e) {
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
 			return newCod;
 		}
 	};
@@ -116,5 +117,19 @@ public abstract class AbstractDAO {
 		} catch(IdDoesntExist eId) {
 			throw new IdDoesntExist();
 		}
+	}
+
+	/**
+	 * @return the chosenEntityId
+	 */
+	public String getChosenEntityId() {
+		return chosenEntityId;
+	}
+
+	/**
+	 * @param chosenEntityId the chosenEntityId to set
+	 */
+	public void setChosenEntityId(String chosenEntityId) {
+		this.chosenEntityId = chosenEntityId;
 	}
 }
