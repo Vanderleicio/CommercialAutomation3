@@ -1,34 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<TitledPane alignment="CENTER" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="599.0" text="CRIAR NOVO ITEM" textAlignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.menuControllers.manageItemController">
+<TitledPane alignment="CENTER" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="629.0" text="CRIAR NOVO ITEM" textAlignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.menuControllers.manageItemController">
    <content>
-      <Pane prefHeight="374.0" prefWidth="503.0">
+      <Pane prefHeight="451.0" prefWidth="655.0">
          <children>
             <Label layoutX="13.0" layoutY="22.0" text="Nome" />
             <Label layoutX="14.0" layoutY="107.0" text="Preço" />
-            <Label layoutX="236.0" layoutY="22.0" text="Composição" />
+            <Label layoutX="216.0" layoutY="31.0" text="Produtos disponíveis" />
             <Label layoutX="18.0" layoutY="179.0" text="Descrição" />
-            <Button fx:id="buttonCreate" layoutX="373.0" layoutY="306.0" mnemonicParsing="false" onAction="#createItem" text="Confirmar" />
+            <Button fx:id="buttonCreate" layoutX="75.0" layoutY="336.0" mnemonicParsing="false" onAction="#createItem" text="Confirmar" />
             <TextField fx:id="nameTxtFld" layoutX="15.0" layoutY="46.0" prefHeight="25.0" prefWidth="183.0" />
             <TextField fx:id="priceTxtFld" layoutX="11.0" layoutY="124.0" prefHeight="25.0" prefWidth="70.0" />
             <Label layoutX="97.0" layoutY="107.0" text="Categoria" />
             <TextField fx:id="categoryTxtFld" layoutX="97.0" layoutY="124.0" prefHeight="25.0" prefWidth="98.0" />
             <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="289.0" prefHeight="17.0" prefWidth="184.0" textAlignment="CENTER" />
-            <TextArea fx:id="descTxtArea" layoutX="15.0" layoutY="201.0" prefHeight="97.0" prefWidth="184.0" />
-            <Separator layoutX="212.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="379.0" prefWidth="24.0" />
-            <TableView fx:id="prodsTable" editable="true" layoutX="236.0" layoutY="49.0" prefHeight="248.0" prefWidth="343.0">
+            <TextArea fx:id="descTxtArea" layoutX="15.0" layoutY="201.0" prefHeight="109.0" prefWidth="184.0" />
+            <Separator layoutX="195.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="452.0" prefWidth="24.0" />
+            <TableView fx:id="prodsTable" editable="true" layoutX="216.0" layoutY="49.0" onMouseClicked="#prodSelected" prefHeight="117.0" prefWidth="400.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="43.0" text="Id" />
-                <TableColumn fx:id="nameCol" prefWidth="96.0" text="Nome" />
-                  <TableColumn fx:id="compCol" onEditStart="#compoe" prefWidth="61.0" text="Compõe" />
-                  <TableColumn fx:id="qnttCol" prefWidth="141.0" text="Quantidade necessária" />
+                <TableColumn fx:id="nameCol" prefWidth="123.0" text="Nome" />
+                  <TableColumn fx:id="valProdCol" prefWidth="95.0" text="Validade" />
+                  <TableColumn fx:id="qnttDisCol" prefWidth="137.0" text="Quantidade disponível" />
               </columns>
             </TableView>
+            <Button fx:id="buttonAdd" layoutX="313.0" layoutY="184.0" mnemonicParsing="false" onAction="#addProd" prefHeight="25.0" prefWidth="67.0" text="Adicionar" />
+            <Button fx:id="buttonRemove" layoutX="469.0" layoutY="184.0" mnemonicParsing="false" onAction="#removeProd" prefHeight="25.0" prefWidth="67.0" text="Remover" />
+            <TableView fx:id="prodsCompTable" layoutX="216.0" layoutY="236.0" onMouseClicked="#prodCompSelected" prefHeight="132.0" prefWidth="245.0">
+              <columns>
+                <TableColumn fx:id="idCompCol" prefWidth="75.0" sortable="false" text="Id" />
+                <TableColumn fx:id="nameCompCol" prefWidth="75.0" sortable="false" text="Nome" />
+                  <TableColumn fx:id="valCompCol" prefWidth="94.0" sortable="false" text="Validade" />
+              </columns>
+            </TableView>
+            <Label layoutX="216.0" layoutY="219.0" text="Composição do item" />
+            <Label fx:id="alertLabel" layoutX="230.0" layoutY="378.0" />
+            <ListView fx:id="qnttListView" editable="true" layoutX="470.0" layoutY="261.0" onEditCancel="#newQnt" prefHeight="108.0" prefWidth="143.0" />
+            <Button layoutX="470.0" layoutY="236.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Quantidade necessaria">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </content>

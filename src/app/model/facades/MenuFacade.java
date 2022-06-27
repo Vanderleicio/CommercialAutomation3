@@ -26,15 +26,28 @@ public class MenuFacade {
 		itemEdit.setPrice(newPrice);
 		itemEdit.setComposition(newComposition);
 	}
-
-	public void addProductsItems(String idPEdit, Product productPAdd, int quantity) throws IdDoesntExist, EntitiesNotRegistred{
+	
+	public static HashMap<String, Integer> doNewComposition(ArrayList<Product> prods, ArrayList<Integer> qntt) throws InvalidQuantityException{
+		HashMap<String, Integer> newComp = new HashMap<String, Integer>();
 		
+		for (int i = 0; i < prods.size(); i++) {
+			if (qntt.get(i) > 0) {
+				newComp.put(prods.get(i).getId(), qntt.get(i));
+			} else {
+				throw new InvalidQuantityException();
+			}
+		}
+		
+		return newComp;
+	}
+
+	public static void addProductsItems(String idPEdit, Product productPAdd, int quantity) throws IdDoesntExist, EntitiesNotRegistred{
 		Item itemPEdit;
 		itemPEdit = (Item) itemData.searchEntities(idPEdit);
 		itemPEdit.addProduct(quantity, productPAdd.getId());
 	}
 	
-	public void removeProductFromItem(String idPEdit, Product produtoPRemover) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void removeProductFromItem(String idPEdit, Product produtoPRemover) throws IdDoesntExist, EntitiesNotRegistred {
 
 		Item itemPEdit = (Item) itemData.searchEntities(idPEdit);
 		itemPEdit.deleteProduct(produtoPRemover.getId());
@@ -42,6 +55,50 @@ public class MenuFacade {
 		if (size == 0) {
 			itemData.delete(idPEdit);
 		}
+	}
+	
+	public static void editProdQnt(String idItem, String idProd, int newQnt) throws InvalidQuantityException, IdDoesntExist, EntitiesNotRegistred {
+		if (newQnt > 0) {
+			Item item = (Item) itemData.searchEntities(idItem);
+			item.getComposition().replace(idProd, newQnt);
+		} else {
+			throw new InvalidQuantityException();
+		}
+	}
+	
+	public static ArrayList<Product> getItemProds(String itemId){
+		Item item;
+		ArrayList<Product> comp = new ArrayList<Product>();
+		try {
+			item = (Item) itemData.searchEntities(itemId);
+			for (HashMap.Entry<String,Integer> idQuant : item.getComposition().entrySet()) {
+				ProductFacade.chooseAProduct(idQuant.getKey());
+				Product product = ProductFacade.chosenProduct();
+				comp.add(product);
+			};
+			
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return comp;
+	}
+	
+	
+	public static ArrayList<Integer> getItemQntt(String itemId){
+		Item item;
+		ArrayList<Integer> compQntt = new ArrayList<Integer>();
+		
+		try {
+			item = (Item) itemData.searchEntities(itemId);
+			for (HashMap.Entry<String,Integer> idQuant : item.getComposition().entrySet()) {
+				compQntt.add(idQuant.getValue());
+			};
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return compQntt;
 	}
 	
 	public static ArrayList<Item> listItem(){

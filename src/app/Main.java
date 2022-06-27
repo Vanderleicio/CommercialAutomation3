@@ -68,7 +68,7 @@ public class Main extends Application {
 		ProviderFacade.createProvider("Nome", "11.222.333/4444-55", "Praça");
 		ProductFacade.createProduct("Maçã", new BigDecimal("1.25"), validity, 10, ProviderFacade.listProvider().get(0));
 		HashMap<String, Integer> ingredientes = new HashMap<String, Integer>();
-		ingredientes.put("Maçã", 5);
+		ingredientes.put(ProductFacade.listProduct().get(0).getId(), 5);
 		MenuFacade.createItem("Torta de maçã", "Torta feita de maçã", new BigDecimal("10"), "Sobremesa", ingredientes);
 		
 		ArrayList<Item> items = new ArrayList<Item>();

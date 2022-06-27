@@ -1,10 +1,11 @@
 package app.controllers.menuControllers;
 
-import java.math.BigDecimal;
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import java.math.BigDecimal;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
@@ -18,20 +19,27 @@ import app.model.models.Provider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.converter.IntegerStringConverter;
 
 public class manageItemController implements Initializable{
 
@@ -48,7 +56,19 @@ public class manageItemController implements Initializable{
     private TextField qntdTxtFld;
     
     @FXML
-    private Label alert;
+    private TextField categoryTxtFld;
+    
+    @FXML
+    private TextArea descTxtArea;
+    
+    @FXML
+    private Button buttonAdd;
+    
+    @FXML
+    private Button buttonRemove;
+    
+    @FXML
+    private Label alertLabel;
     
     @FXML
     private TableView<Product> prodsTable;
@@ -60,77 +80,172 @@ public class manageItemController implements Initializable{
     private TableColumn<Product, String> nameCol;
     
     @FXML
-    private TableColumn<Product, Boolean> compCol;
+    private TableColumn<Product, Integer> qnttDisCol;
     
     @FXML
-    private TableColumn<Product, String> qnttCol;
+    private TableColumn<Product, String> valProdCol;
+    
+    @FXML
+    private TableView<Product> prodsCompTable;
+    
+    @FXML
+    private TableColumn<Product, String> idCompCol;
+    
+    @FXML
+    private TableColumn<Product, String> nameCompCol;
+    
+    
+    @FXML
+    private TableColumn<Product, String> valCompCol;
+    
+    @FXML
+    private ListView<Integer> qnttListView;
     
     private Item selected = MenuFacade.chosenItem();
     
+    ArrayList<Product> prodsList = new ArrayList<Product>();
+    
+    ArrayList<Integer> qnttList = new ArrayList<Integer>();
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setTable();
 		if (selected != null) {
 			setProdData();
+			prodsList = MenuFacade.getItemProds(selected.getId());
+			qnttList = MenuFacade.getItemQntt(selected.getId());
 		}
+		setTables();
+		buttonAdd.setDisable(true);
+		buttonRemove.setDisable(true);
 	}
 	
-	public void setTable() {
+	public void refreshTables() {
+		setTables();
+		qnttListView.refresh();
+		prodsCompTable.refresh();
+		prodsTable.refresh();
+	}
+	
+	public void setTables() {
+		// Tabela de produtos disponíveis.
 	    ObservableList<Product> productsList = FXCollections.observableArrayList(ProductFacade.listProduct());
 	    	
 	    prodsTable.setItems(productsList);
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-		compCol.setCellFactory(CheckBoxTableCell.forTableColumn(compCol));
-		qnttCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		qnttDisCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+		valProdCol.setCellValueFactory(new PropertyValueFactory<>("validity"));
+		
+		
+		// Tabela de produtos usados nesse item.
+		
+
+		
+		ObservableList<Product> productsCompList = FXCollections.observableArrayList(prodsList);
+		
+	    prodsCompTable.setItems(productsCompList);
+		idCompCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameCompCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+		valCompCol.setCellValueFactory(new PropertyValueFactory<>("validity"));
+		
+		// Lista da quantidade necessária
+		
+		ObservableList<Integer> qnttCompList = FXCollections.observableArrayList(qnttList);
+		
+		qnttListView.setItems(qnttCompList);
+		
+		qnttListView.setCellFactory(TextFieldListCell.forListView(new IntegerStringConverter()));
+		
 	}
 	
 	
 	public void setProdData() {
 		nameTxtFld.setText(selected.getName());
 		priceTxtFld.setText(selected.getPrice().toString());
-		//qntdTxtFld.setText(String.valueOf(selected.getQuantity()));
-		//validityDatePicker.setValue(selected.getValidity());
-		//providerComboBox.setValue(selected.getProvider());
+		descTxtArea.setText(selected.getDescription());
+		categoryTxtFld.setText(selected.getCategoryItems());
 	}
 	
 	@FXML
-	public void compoe(TableColumn.CellEditEvent<Product, String> event) {
-		System.out.println("Ok");
+	public void addProd(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
+		Product selecProd = prodsTable.getSelectionModel().getSelectedItem();
+		Integer pos = prodsTable.getSelectionModel().getSelectedIndex();
+		
+		if (!prodsList.contains(selecProd)) {
+			prodsList.add(selecProd);
+			qnttList.add(0);
+		} else {
+			alertLabel.setText("ESSE PRODUTO JÁ FOI ADICIONADO!");
+		}
+		refreshTables();
 	}
 	
+	@FXML
+	public void newQnt(Event event) {
+		Integer selectQnt = qnttListView.getSelectionModel().getSelectedItem();
+		Integer pos = qnttListView.getSelectionModel().getSelectedIndex();
+		qnttList.set(pos, selectQnt);
+	}
+	
+	
+	@FXML
+	public void removeProd(ListView.EditEvent<Integer> event) {
+		Product selecProd = prodsCompTable.getSelectionModel().getSelectedItem();
+		int pos = prodsTable.getSelectionModel().getSelectedIndex();
+		
+		prodsList.remove(selecProd);
+		qnttList.remove(pos);
+		
+		refreshTables();
+	}
+	
+    @FXML
+    public void prodSelected(MouseEvent event) {
+    	Product selecProd = prodsTable.getSelectionModel().getSelectedItem();
+    	if (selecProd != null) {
+    		buttonAdd.setDisable(false);
+    		buttonRemove.setDisable(true);
+    	}
+    }
+    
+    @FXML
+    public void prodCompSelected(MouseEvent event) {
+    	Product selecProd = prodsCompTable.getSelectionModel().getSelectedItem();
+    	if (selecProd != null) {
+    		buttonAdd.setDisable(true);
+    		buttonRemove.setDisable(false);
+    	}
+    }
+    
 	@FXML
 	void createItem(ActionEvent event){
-		/*try {
-			
+		try {
 			String name = nameTxtFld.getText();
 			String price = priceTxtFld.getText();
-			Provider provider = providerComboBox.getValue();
-			LocalDate validity = validityDatePicker.getValue();
-			int quantity = Integer.parseInt(qntdTxtFld.getText());
+			String description = descTxtArea.getText();
+			String category = categoryTxtFld.getText();
+			HashMap<String, Integer> composition = MenuFacade.doNewComposition(prodsList, qnttList);
+			System.out.println(composition.get("P3"));
 			
 			if (selected == null) {
-				ProductFacade.createProduct(name, new BigDecimal(price), validity, quantity, provider);
+				MenuFacade.createItem(name, description, new BigDecimal(price), category, composition);
 			} else {
-				ProductFacade.editProduct(selected.getId(), name, new BigDecimal(price), validity, quantity, provider);
+				MenuFacade.editItem(selected.getId(), name, description, new BigDecimal(price), category, composition);
 			}
     		
     	    Stage stage = (Stage) buttonCreate.getScene().getWindow();
     	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     	    stage.close();
-    	    
 		} catch (IdDoesntExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (EntitiesNotRegistred e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidDateException e) {
-			alert.setText("A data digitada é inválida!");
 		} catch (NumberFormatException e) {
-			alert.setText("Valores digitados são inválidos");
+			alertLabel.setText("Valores digitados são inválidos");
 		} catch (InvalidQuantityException e) {
-			alert.setText("A quantidade digitada é inválida");
-		}*/
+			alertLabel.setText("A quantidade digitada é inválida");
+		}
 	}
 }
