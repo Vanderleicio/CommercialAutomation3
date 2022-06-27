@@ -21,7 +21,7 @@
             <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="289.0" prefHeight="17.0" prefWidth="184.0" textAlignment="CENTER" />
             <TextArea fx:id="descTxtArea" layoutX="15.0" layoutY="201.0" prefHeight="97.0" prefWidth="184.0" />
             <Separator layoutX="212.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="379.0" prefWidth="24.0" />
-            <TableView fx:id="prodsTable" layoutX="236.0" layoutY="49.0" prefHeight="248.0" prefWidth="343.0">
+            <TableView fx:id="prodsTable" editable="true" layoutX="236.0" layoutY="49.0" prefHeight="248.0" prefWidth="343.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="43.0" text="Id" />
                 <TableColumn fx:id="nameCol" prefWidth="96.0" text="Nome" />
