@@ -38,8 +38,8 @@ public class Item extends Entity {
 	 */
 	private String categoryItems;
 	/**
-	 * Hash Map com o nome do grupo que comp�e o item e a quantidade de 
-	 * produtos necessarias para fazer um item 
+	 * Hash Map com o id do produto que compõe o item e a quantidade dele.
+	 *  
 	 */
 	private HashMap<String, Integer> composition = new HashMap<String, Integer>();
 
@@ -54,7 +54,7 @@ public class Item extends Entity {
 	public Item(String name, String description, BigDecimal price, String categoryItems,
 			HashMap<String, Integer> composition) {
 
-		super("i");
+		super("I");
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -67,16 +67,16 @@ public class Item extends Entity {
 	 * @param quantity: Quantidade do produto para fazer um item.
 	 * @param product: Nome do grupo ao qual o produto pertence.
 	 */
-	public void addProduct(int quantity, String product) {
-		this.composition.put(product, quantity);
+	public void addProduct(int quantity, String idProd) {
+		this.composition.put(idProd, quantity);
 	}
 	
 	/**
 	 * Remove um produto da composicao do item.
 	 * @param prod: Nome do grupo que ser� removido.
 	 */
-	public void deleteProduct(String prod) {
-		this.composition.remove(prod);
+	public void deleteProduct(String idProd) {
+		this.composition.remove(idProd);
 	}
 	
 	/**

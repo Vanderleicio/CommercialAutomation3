@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.ManagementUsersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.menuControllers.ManagementItemController">
    <children>
-      <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
+      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
          <children>
-            <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#add" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -26,7 +29,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+            <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#edit" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -38,7 +41,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" onAction="#removeUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
+            <Button fx:id="buttonRemove" mnemonicParsing="false" onAction="#remove" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -50,17 +53,25 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label />
+            <Button fx:id="buttonComp" mnemonicParsing="false" onAction="#listComp" prefHeight="38.0" prefWidth="118.0" styleClass="buttonGreen" text="Composição">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </HBox>
-      <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
+      <TableView id="usersTable" fx:id="itemsTable" layoutX="17.0" layoutY="65.0" onMouseClicked="#itemSelected" prefHeight="340.0" prefWidth="650.0">
          <columns>
-            <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
-            <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
-            <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
-            <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
+            <TableColumn id="idUCol" fx:id="idCol" prefWidth="50.0" text="ID" />
+            <TableColumn id="nameUCol" fx:id="nameCol" prefWidth="111.0" text="Nome" />
+            <TableColumn id="categoryCol" fx:id="priceCol" prefWidth="104.0" text="Preço" />
+            <TableColumn id="nickCol" fx:id="descCol" minWidth="0.0" prefWidth="263.0" text="Descrição" />
+            <TableColumn fx:id="categoryCol" prefWidth="121.0" text="Categoria" />
          </columns>
       </TableView>
-      <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
    </children>
 </AnchorPane>

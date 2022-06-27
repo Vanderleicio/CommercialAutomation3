@@ -17,7 +17,6 @@ public class ProductFacade {
 	public static void createProduct(String name, BigDecimal price, LocalDate validity, int quantity, Provider provider) throws InvalidDateException, InvalidQuantityException {
 		if (validity.isAfter(LocalDate.now()) && (quantity > 0)) {
 			Product newProduct = new Product(name, price, validity, quantity, provider);
-			prodData.addProductStock(newProduct);
 			prodData.add(newProduct);
 		} else if (quantity <= 0){
 			throw new InvalidQuantityException();
@@ -27,7 +26,6 @@ public class ProductFacade {
 	}
 	
 	public static void delProduct(String id) throws IdDoesntExist, EntitiesNotRegistred{
-		prodData.deleteProductStock(prodData.getOneProduct(id));
 		prodData.delete(id);
 	}
 	
@@ -51,12 +49,12 @@ public class ProductFacade {
 	 * @throws IdDoesntExist: para quando id nao existe
 	 * @throws EntitiesNotRegistred: para quando a entidade nao foi registrada
 	 */
-	public static void updateStock(HashMap<String, Integer> groupsUsed) throws NotEnoughStock, IdDoesntExist, EntitiesNotRegistred{
+	public static void updateStock(HashMap<String, Integer> prodsUsed) throws NotEnoughStock, IdDoesntExist, EntitiesNotRegistred{
 		try {
-			prodData.checkAllProductsEnough(groupsUsed);
+			prodData.checkAllProductsEnough(prodsUsed);
 		
-			for (HashMap.Entry<String,Integer> nameQuant : groupsUsed.entrySet()) {
-				prodData.removeQuantGroup(nameQuant.getKey(), nameQuant.getValue());
+			for (HashMap.Entry<String,Integer> idQuant : prodsUsed.entrySet()) {
+				prodData.removeQuantProd(idQuant.getKey(), idQuant.getValue());
 			};
 		} catch(NotEnoughStock e){
 				throw new NotEnoughStock();

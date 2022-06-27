@@ -17,38 +17,49 @@ public class MenuFacade {
 		itemData.add(newItem);
 	}
 	
-	public static void editItem(String id, String newName, String newDescription, BigDecimal newPrice, String newCategory, HashMap<String, Integer> composition) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void editItem(String id, String newName, String newDescription, BigDecimal newPrice, String newCategory, HashMap<String, Integer> newComposition) throws IdDoesntExist, EntitiesNotRegistred {
 		Item itemEdit = itemData.getOneItem(id);
 		
 		itemEdit.setName(newName);
 		itemEdit.setDescription(newDescription);
 		itemEdit.setCategoryItems(newCategory);
 		itemEdit.setPrice(newPrice);
-		itemEdit.setComposition(composition);
+		itemEdit.setComposition(newComposition);
 	}
 
 	public void addProductsItems(String idPEdit, Product productPAdd, int quantity) throws IdDoesntExist, EntitiesNotRegistred{
 		
 		Item itemPEdit;
 		itemPEdit = (Item) itemData.searchEntities(idPEdit);
-		itemPEdit.addProduct(quantity, productPAdd.getName());
+		itemPEdit.addProduct(quantity, productPAdd.getId());
 	}
 	
 	public void removeProductFromItem(String idPEdit, Product produtoPRemover) throws IdDoesntExist, EntitiesNotRegistred {
 
 		Item itemPEdit = (Item) itemData.searchEntities(idPEdit);
-		itemPEdit.deleteProduct(produtoPRemover.getName());
+		itemPEdit.deleteProduct(produtoPRemover.getId());
 		int size = itemPEdit.getCompositionSize();
 		if (size == 0) {
 			itemData.delete(idPEdit);
 		}
 	}
 	
+	public static ArrayList<Item> listItem(){
+		return itemData.getItemList();
+	}
+	
 	public static void chooseAItem(String id){
 		itemData.setChosenEntityId(id);
 	}
 	
-	public static String chosenItem() {
-		return itemData.getChosenEntityId();
+	public static Item chosenItem() {
+		try {
+			String id = itemData.getChosenEntityId();
+			return itemData.getOneItem(id);
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
