@@ -1,4 +1,4 @@
-package app.controllers.menuControllers;
+package app.controllers.saleControllers;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 
 import app.model.facades.MenuFacade;
 import app.model.facades.ProductFacade;
+import app.model.facades.SaleFacade;
 import app.model.models.Item;
 import app.model.models.Product;
+import app.model.models.Sale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +32,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class ManagementItemController implements Initializable{
+public class ManagementSaleController implements Initializable{
 	
     @FXML
     private ResourceBundle resources;
@@ -51,22 +53,25 @@ public class ManagementItemController implements Initializable{
     private Button buttonRemove;
     
     @FXML
-    private TableView<Item> itemsTable;
+    private TableView<Sale> salesTable;
     
     @FXML
-    private TableColumn<Item, String> idCol;
+    private TableColumn<Sale, String> idCol;
     
     @FXML
-    private TableColumn<Item, String> nameCol;
+    private TableColumn<Sale, String> dayCol;
     
     @FXML
-    private TableColumn<Item, BigDecimal> priceCol;
+    private TableColumn<Sale, String> hourCol;
     
     @FXML
-    private TableColumn<Item, Integer> categoryCol;
+    private TableColumn<Sale, String> clientCol;
     
     @FXML
-    private TableColumn<Item, String> descCol;
+    private TableColumn<Sale, BigDecimal> priceCol;
+    
+    @FXML
+    private TableColumn<Sale, String> payMethCol;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -79,29 +84,29 @@ public class ManagementItemController implements Initializable{
     
     @FXML
     public void add(ActionEvent event) {
-    	MenuFacade.chooseAItem(null);
-    	createScreens("ManageItem.fxml");
+    	SaleFacade.chooseASale(null);
+    	createScreens("ManageSale.fxml");
     }
     
     @FXML
     public void edit(ActionEvent event) {
-    	Item selected = itemsTable.getSelectionModel().getSelectedItem();
-    	MenuFacade.chooseAItem(selected.getId());
-    	createScreens("ManageItem.fxml");
+    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
+    	SaleFacade.chooseASale(selected.getId());
+    	createScreens("ManageSale.fxml");
     }
     
     @FXML
     public void remove(ActionEvent event) {
-    	Item selected = itemsTable.getSelectionModel().getSelectedItem();
-    	MenuFacade.chooseAItem(selected.getId());
-    	createScreens("DeleteItem.fxml");
+    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
+    	SaleFacade.chooseASale(selected.getId());
+    	createScreens("DeleteSale.fxml");
     }
     
     @FXML
     public void listComp(ActionEvent event) {
-    	Item selected = itemsTable.getSelectionModel().getSelectedItem();
-    	MenuFacade.chooseAItem(selected.getId());
-    	createScreens("CompItem.fxml");
+    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
+    	SaleFacade.chooseASale(selected.getId());
+    	createScreens("CompSale.fxml");
     }
     
     public void createScreens(String viewName) {
@@ -116,7 +121,7 @@ public class ManagementItemController implements Initializable{
 	        
 	        addStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent close) {
-                	itemsTable.refresh();
+                	salesTable.refresh();
                 	initTableView();
                 }
             });
@@ -128,8 +133,8 @@ public class ManagementItemController implements Initializable{
     }
     
     @FXML
-    public void itemSelected(MouseEvent event) {
-    	Item selected = itemsTable.getSelectionModel().getSelectedItem();
+    public void saleSelected(MouseEvent event) {
+    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
     	if (selected != null) {
     		buttonRemove.setDisable(false);
     		buttonEdit.setDisable(false);
@@ -138,14 +143,15 @@ public class ManagementItemController implements Initializable{
     }
     
     public void initTableView() {
-    	ObservableList<Item> itemsList = FXCollections.observableArrayList(MenuFacade.listItem());
+    	ObservableList<Sale> SalesList = FXCollections.observableArrayList(SaleFacade.listSale());
     	
-    	itemsTable.setItems(itemsList);
+    	salesTable.setItems(SalesList);
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-		categoryCol.setCellValueFactory(new PropertyValueFactory<>("categoryItems"));
-		descCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+		dayCol.setCellValueFactory(new PropertyValueFactory<>("day"));
+		hourCol.setCellValueFactory(new PropertyValueFactory<>("hour"));
+		clientCol.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("priceTotal"));
+		payMethCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
     
     }
 }

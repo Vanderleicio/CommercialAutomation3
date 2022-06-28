@@ -12,5 +12,6 @@ module CommercialAutomation3 {
 	opens app.controllers.menuControllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.reportControllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.clientControllers to javafx.graphics, javafx.fxml;
+	opens app.controllers.saleControllers to javafx.graphics, javafx.fxml;
 	exports app;
 }

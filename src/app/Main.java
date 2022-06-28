@@ -10,7 +10,9 @@ import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
+import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
 import app.model.exceptions.InvalidQuantityException;
 import app.model.facades.*;
@@ -53,7 +55,7 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void testSituation() throws ExistentNicknameException, InvalidDateException, InvalidQuantityException {
+	public static void testSituation() throws ExistentNicknameException, InvalidDateException, InvalidQuantityException, IdDoesntExist, EntitiesNotRegistred {
 	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
 	    		.withResolverStyle(ResolverStyle.STRICT);
 	    
@@ -72,7 +74,9 @@ public class Main extends Application {
 		MenuFacade.createItem("Torta de maçã", "Torta feita de maçã", new BigDecimal("10"), "Sobremesa", ingredientes);
 		
 		ArrayList<Item> items = new ArrayList<Item>();
-		SaleFacade.createSale(data, hora, "Pix", items, "C1");
+		SaleFacade.createSale(data, hora, "Pix", items, "C6");
+		MenuFacade.chooseAItem("I4");
+		SaleFacade.addItem("V5", MenuFacade.chosenItem());
 		ClientFacade.createClient("Nome2", "11122233345", "nome2@yahoo.com.br", "(11)23344-5566");
 		
 	}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Lista de produtos do Item" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="app.controllers.menuControllers.compItemController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <TableView fx:id="compTable" prefHeight="375.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="idCol" prefWidth="36.0" text="ID" />
+                <TableColumn fx:id="nameCol" prefWidth="135.0" text="Nome" />
+                  <TableColumn fx:id="provCol" prefWidth="182.0" text="Fornecedor" />
+                  <TableColumn fx:id="valCol" prefWidth="108.0" text="Validade" />
+                  <TableColumn fx:id="qnttCol" prefWidth="138.0" text="Quantidade disponível" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+  </content>
+</TitledPane>

@@ -169,7 +169,6 @@ public class manageItemController implements Initializable{
 	@FXML
 	public void addProd(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
 		Product selecProd = prodsTable.getSelectionModel().getSelectedItem();
-		Integer pos = prodsTable.getSelectionModel().getSelectedIndex();
 		
 		if (!prodsList.contains(selecProd)) {
 			prodsList.add(selecProd);
@@ -181,14 +180,6 @@ public class manageItemController implements Initializable{
 	}
 	
 	@FXML
-	public void newQnt(Event event) {
-		Integer selectQnt = qnttListView.getSelectionModel().getSelectedItem();
-		Integer pos = qnttListView.getSelectionModel().getSelectedIndex();
-		qnttList.set(pos, selectQnt);
-	}
-	
-	
-	@FXML
 	public void removeProd(ListView.EditEvent<Integer> event) {
 		Product selecProd = prodsCompTable.getSelectionModel().getSelectedItem();
 		int pos = prodsTable.getSelectionModel().getSelectedIndex();
@@ -198,6 +189,14 @@ public class manageItemController implements Initializable{
 		
 		refreshTables();
 	}
+	
+	@FXML
+	public void newQnt(Event event) {
+		Integer selectQnt = qnttListView.getSelectionModel().getSelectedItem();
+		Integer pos = qnttListView.getSelectionModel().getSelectedIndex();
+		qnttList.set(pos, selectQnt);
+	}
+	
 	
     @FXML
     public void prodSelected(MouseEvent event) {

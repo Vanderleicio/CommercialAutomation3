@@ -75,9 +75,8 @@ public class ProductFacade {
 			String id = prodData.getChosenEntityId();
 			return prodData.getOneProduct(id);
 		} catch (IdDoesntExist | EntitiesNotRegistred e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 }

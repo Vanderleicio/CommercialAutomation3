@@ -114,9 +114,8 @@ public class MenuFacade {
 			String id = itemData.getChosenEntityId();
 			return itemData.getOneItem(id);
 		} catch (IdDoesntExist | EntitiesNotRegistred e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 }

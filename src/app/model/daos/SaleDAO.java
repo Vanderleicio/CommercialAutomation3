@@ -12,7 +12,7 @@ public class SaleDAO extends AbstractDAO {
 		return (Sale) this.searchEntities(id);
 	}
 	
-	public ArrayList <Sale> getItemList(){
+	public ArrayList <Sale> getSaleList(){
 		ArrayList<Sale> saleList = castList(this.getList());
 		return saleList;
 	}

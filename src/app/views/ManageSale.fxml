@@ -23,7 +23,7 @@
             <TextField fx:id="hourTxtFld" layoutX="118.0" layoutY="46.0" prefHeight="25.0" prefWidth="75.0" promptText="HH:MM" />
             <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="289.0" prefHeight="17.0" prefWidth="184.0" textAlignment="CENTER" />
             <Separator layoutX="195.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="452.0" prefWidth="24.0" />
-            <TableView fx:id="itemsTable" editable="true" layoutX="216.0" layoutY="49.0" onMouseClicked="#prodSelected" prefHeight="117.0" prefWidth="400.0">
+            <TableView fx:id="itemsTable" editable="true" layoutX="216.0" layoutY="49.0" onMouseClicked="#itemSelected" prefHeight="117.0" prefWidth="400.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="43.0" text="Id" />
                 <TableColumn fx:id="nameCol" prefWidth="123.0" text="Nome" />
@@ -33,7 +33,7 @@
             </TableView>
             <Button fx:id="buttonAdd" layoutX="313.0" layoutY="184.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="67.0" text="Adicionar" />
             <Button fx:id="buttonRemove" layoutX="469.0" layoutY="184.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="67.0" text="Remover" />
-            <TableView fx:id="itemsCompTable" layoutX="297.0" layoutY="236.0" onMouseClicked="#prodCompSelected" prefHeight="132.0" prefWidth="245.0">
+            <TableView fx:id="itemsCompTable" layoutX="297.0" layoutY="236.0" onMouseClicked="#itemCompSelected" prefHeight="132.0" prefWidth="245.0">
               <columns>
                 <TableColumn fx:id="idCompCol" prefWidth="75.0" sortable="false" text="Id" />
                 <TableColumn fx:id="nameCompCol" prefWidth="75.0" sortable="false" text="Nome" />
