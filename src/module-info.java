@@ -4,6 +4,8 @@ module CommercialAutomation3 {
 	requires javafx.graphics;
 	requires javafx.fxml;
 	requires javafx.base;
+	requires itextpdf;
+	requires java.desktop;
 	
 	opens app.controllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.providerControllers to javafx.graphics, javafx.fxml;

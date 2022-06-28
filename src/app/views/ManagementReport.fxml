@@ -11,7 +11,7 @@
    <children>
       <HBox alignment="CENTER" layoutX="15.0" layoutY="138.0" prefHeight="78.0" prefWidth="650.0">
          <children>
-            <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Estoque">
+            <Button fx:id="stock" mnemonicParsing="false" onMouseClicked="#generateReportStock" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Estoque">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -23,7 +23,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Vendas">
+            <Button fx:id="sales" mnemonicParsing="false" onMouseClicked="#generateReportSales" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Vendas">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -35,7 +35,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonRemoveUser" mnemonicParsing="false" onAction="#removeUser" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Fornecedores">
+            <Button fx:id="providers" mnemonicParsing="false" onMouseClicked="#generateReportProvider" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Fornecedores">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
