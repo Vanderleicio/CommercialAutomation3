@@ -2,13 +2,8 @@ package app.controllers.userControllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.model.exceptions.CurrentUserException;
-import app.model.exceptions.EntitiesNotRegistred;
-import app.model.exceptions.ExistentNicknameException;
-import app.model.exceptions.IdDoesntExist;
 import app.model.facades.UserFacade;
 import app.model.models.User;
 import javafx.collections.FXCollections;
@@ -27,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;

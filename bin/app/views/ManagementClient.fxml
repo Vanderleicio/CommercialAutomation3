@@ -10,62 +10,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.userControllers.ManagementUsersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.clientControllers.ManagementClientController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css">
+      <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
          <children>
-            <HBox alignment="CENTER" layoutX="15.0" prefHeight="58.0" prefWidth="650.0">
-               <children>
-                  <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#addUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/adicionar-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="buttonEditUser" mnemonicParsing="false" onAction="#editUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/editar-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="buttonRemoveUser" mnemonicParsing="false" onAction="#removeUser" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/excluir-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Label />
-               </children>
-            </HBox>
-            <TableView id="usersTable" fx:id="usersTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#userSelected" prefHeight="340.0" prefWidth="650.0">
-               <columns>
-                  <TableColumn id="idUCol" fx:id="idUCol" text="ID" />
-                  <TableColumn id="nameUCol" fx:id="nameUCol" prefWidth="190.0" text="Nome" />
-                  <TableColumn id="nickCol" fx:id="nickCol" prefWidth="190.0" text="NickName" />
-                  <TableColumn id="categoryCol" fx:id="categoryCol" prefWidth="190.0" text="Cargo" />
-               </columns>
-            </TableView>
-            <Label fx:id="currentUserLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
+            <Button fx:id="buttonAddClient" mnemonicParsing="false" onAction="#addClient" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Adicionar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/adicionar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonEditClient" mnemonicParsing="false" onAction="#editClient" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Editar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editar-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttonRemoveClient" mnemonicParsing="false" onAction="#removeClient" prefHeight="38.0" prefWidth="100.0" styleClass="buttonGreen" text="Excluir">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/excluir-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label />
          </children>
-      </AnchorPane>
+      </HBox>
+      <TableView id="usersTable" fx:id="clientsTable" layoutX="15.0" layoutY="73.0" onMouseClicked="#clientSelected" prefHeight="340.0" prefWidth="650.0">
+         <columns>
+            <TableColumn id="idUCol" fx:id="idCol" text="ID" />
+            <TableColumn id="nameUCol" fx:id="nameCol" prefWidth="130.39996337890625" text="Nome" />
+            <TableColumn id="nickCol" fx:id="cpfCol" prefWidth="139.99998474121094" text="CPF" />
+            <TableColumn id="categoryCol" fx:id="emailCol" prefWidth="156.79998779296875" text="E-mail" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="142.39999999999998" text="Telefone" />
+         </columns>
+      </TableView>
+      <Label fx:id="currentClientLabel" layoutX="210.0" layoutY="58.0" text="Usuário logado, portanto não pode ser deletado!" visible="false" />
    </children>
 </AnchorPane>

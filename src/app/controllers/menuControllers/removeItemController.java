@@ -1,4 +1,4 @@
-package app.controllers.productControllers;
+package app.controllers.menuControllers;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class removeProductController implements Initializable{
+public class removeItemController implements Initializable{
 
     @FXML
     private Button buttonConfirm;

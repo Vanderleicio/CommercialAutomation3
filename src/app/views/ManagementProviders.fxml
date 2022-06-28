@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.providerControllers.ManagementProvidersController">
+<AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.providerControllers.ManagementProvidersController">
    <children>
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="684.0">
          <children>
@@ -55,7 +51,6 @@
             </Button>
          </children>
       </HBox>
-      <ListView layoutY="54.0" prefHeight="361.0" prefWidth="684.0" />
       <TableView id="usersTable" fx:id="provsTable" layoutX="17.0" layoutY="65.0" onMouseClicked="#provSelected" prefHeight="340.0" prefWidth="650.0">
          <columns>
             <TableColumn id="idUCol" fx:id="idCol" text="ID" />
