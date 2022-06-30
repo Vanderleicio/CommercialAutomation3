@@ -1,8 +1,8 @@
 package app.controllers.reportControllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class ManagementReportController {
 
@@ -14,19 +14,19 @@ public class ManagementReportController {
 
     @FXML
     private Button buttonRemoveUser;
+    
+    @FXML
+    void generateReportProvider(MouseEvent event) {
+    	
+    }
 
     @FXML
-    void addUser(ActionEvent event) {
+    void generateReportSales(MouseEvent event) {
 
     }
 
     @FXML
-    void editUser(ActionEvent event) {
-
-    }
-
-    @FXML
-    void removeUser(ActionEvent event) {
+    void generateReportStock(MouseEvent event) {
 
     }
 
