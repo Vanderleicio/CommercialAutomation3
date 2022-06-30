@@ -6,10 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -19,7 +17,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import app.model.facades.ProductFacade;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
-import app.model.facades.*;
 import app.model.models.*;
 
 /**
@@ -80,7 +77,20 @@ public class ManagementReportStock {
 	}
 	
 	public void totalAmountOfStock(ProductFacade products, Paragraph p, Document document) throws DocumentException {
-		String groupName;
+		Product prod = ProductFacade.chosenProduct();
+		
+		p = new Paragraph(" ");
+        document.add(p);
+    		
+		for (Product prods : products.listProduct()) {
+			p = new Paragraph("\nID: " + prod.getId() + "\n" + 
+					   "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
+					   "Preco: R$" + prod.getPrice()+ "\n" +
+					   "Quantidade: " + prod.getQuantity() + " unidades\n" +
+					   "Validade: " + prod.getValidity() + "\n");
+			document.add(p);
+		
+		/*String groupName;
 		ArrayList<Product> group;
 		
 		p = new Paragraph(" ");
@@ -106,13 +116,19 @@ public class ManagementReportStock {
     		}
         	
         	p = new Paragraph(" ");
-            document.add(p);
+            document.add(p);*/
     	}
+		
+		p = new Paragraph(" ");
+        document.add(p);
+		
 	}
 	
 	
 	public void byProduct(ProductFacade products, String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
-		Product prod = (Product) products.searchEntities(idProd);
+		
+		ProductFacade.chooseAProduct(idProd);
+		Product prod = ProductFacade.chosenProduct();
 		
 		p = new Paragraph(" ");
         document.add(p);
