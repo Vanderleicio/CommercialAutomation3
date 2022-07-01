@@ -53,6 +53,9 @@ public class ManagementSaleController implements Initializable{
     private Button buttonRemove;
     
     @FXML
+    private Button buttonReceipt;
+    
+    @FXML
     private TableView<Sale> salesTable;
     
     @FXML
@@ -73,12 +76,15 @@ public class ManagementSaleController implements Initializable{
     @FXML
     private TableColumn<Sale, String> payMethCol;
     
+    Sale selected;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initTableView();
 		buttonEdit.setDisable(true);
 		buttonRemove.setDisable(true);
 		buttonComp.setDisable(true);
+		buttonReceipt.setDisable(true);
 	}
 	
     
@@ -90,23 +96,22 @@ public class ManagementSaleController implements Initializable{
     
     @FXML
     public void edit(ActionEvent event) {
-    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
-    	SaleFacade.chooseASale(selected.getId());
     	createScreens("ManageSale.fxml");
     }
     
     @FXML
     public void remove(ActionEvent event) {
-    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
-    	SaleFacade.chooseASale(selected.getId());
     	createScreens("DeleteSale.fxml");
     }
     
     @FXML
     public void listComp(ActionEvent event) {
-    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
-    	SaleFacade.chooseASale(selected.getId());
     	createScreens("CompSale.fxml");
+    }
+    
+    @FXML
+    public void receipt(ActionEvent event) {
+    	
     }
     
     public void createScreens(String viewName) {
@@ -134,11 +139,13 @@ public class ManagementSaleController implements Initializable{
     
     @FXML
     public void saleSelected(MouseEvent event) {
-    	Sale selected = salesTable.getSelectionModel().getSelectedItem();
+    	selected = salesTable.getSelectionModel().getSelectedItem();
     	if (selected != null) {
     		buttonRemove.setDisable(false);
     		buttonEdit.setDisable(false);
     		buttonComp.setDisable(false);
+    		buttonReceipt.setDisable(false);
+    		SaleFacade.chooseASale(selected.getId());
     	}
     }
     
