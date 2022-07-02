@@ -7,12 +7,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 
+import app.model.exceptions.EntitiesNotRegistred;
+import app.model.exceptions.IdDoesntExist;
 import app.model.facades.MenuFacade;
 import app.model.facades.ProductFacade;
 import app.model.facades.SaleFacade;
 import app.model.models.Item;
 import app.model.models.Product;
 import app.model.models.Sale;
+import app.model.reports.Receipt;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -111,7 +114,16 @@ public class ManagementSaleController implements Initializable{
     
     @FXML
     public void receipt(ActionEvent event) {
-    	
+    	Receipt recep = new Receipt();
+    	try {
+			recep.generatePDF(selected);
+		} catch (IdDoesntExist e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public void createScreens(String viewName) {
@@ -156,7 +168,7 @@ public class ManagementSaleController implements Initializable{
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		dayCol.setCellValueFactory(new PropertyValueFactory<>("day"));
 		hourCol.setCellValueFactory(new PropertyValueFactory<>("hour"));
-		clientCol.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+		clientCol.setCellValueFactory(new PropertyValueFactory<>("client"));
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("priceTotal"));
 		payMethCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
     

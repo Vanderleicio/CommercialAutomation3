@@ -2,7 +2,9 @@ package app.controllers.reportControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -12,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -25,77 +28,115 @@ import app.model.models.Item;
 import app.model.models.Product;
 import app.model.models.Sale;
 import app.model.reports.ManagementReportProvider;
+import app.model.reports.ManagementReportStock;
 
-public class ManagementReportController {
+public class ManagementReportController implements Initializable{
+	
+	@FXML
+	private DatePicker dateInitial;
 	
 	@FXML
 	private DatePicker dateEnd;
-
+	
 	@FXML
-	private DatePicker dateInitial;
+	private TableView<Item> tableSale;
 
 	@FXML
     private TableColumn<Item, String> idSaleCol;
+	
+	@FXML
+    private TableColumn<Item, String> nameSaleCol;
+	
+	@FXML
+	private TableView<Product> tableStock;
 
     @FXML
     private TableColumn<Product, String> idStockCol;
 
     @FXML
-    private TableColumn<Item, String> nameSaleCol;
-
-    @FXML
     private TableColumn<Product, String> nameStockCol;
 
     @FXML
-    private TableView<Item> tableSale;
+    private Button stock;
 
     @FXML
-    private TableView<Product> tableStock;
+    private Button providers;
 
     @FXML
-    private Button buttonAddUser;
-
-    @FXML
-    private Button buttonEditUser;
-
-    @FXML
-    private Button buttonRemoveUser;
+    private Button sales;
     
-    private Sale selectedSale = SaleFacade.chosenSale();
-    private Item selectedMenu = MenuFacade.chosenItem();
-    private Product selectedProd = ProductFacade.chosenProduct();
+    private Product prodSelected;
     
-    static ProviderFacade pf;
-    static ProductFacade prf;
+    private Item itemSelected;
     
+    @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	initTableView();
+    	stock.setDisable(true);
+    	sales.setDisable(true);
 	}
     
     @FXML
-    void generateReportProvider(MouseEvent event) throws IdDoesntExist, EntitiesNotRegistred {
-    	ManagementReportProvider managP = new ManagementReportProvider();
-    	managP.generatePDF(pf, prf);
-    }
-
-    @FXML
-    void generateReportSales(MouseEvent event) {
-
-    }
-
-    @FXML
-    void generateReportStock(MouseEvent event) {
-
+    public void generateReportProvider(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
+    	ManagementReportProvider newReport = new ManagementReportProvider();
+    	newReport.generatePDF();
     }
     
     @FXML
-	public void setSaleData() {
-		dateInitial.setValue(selectedSale.getDay());
-		dateEnd.setValue(selectedSale.getDay());
-		
-	}
+    public void selectProd(MouseEvent event) {
+    	System.out.println("OKOK");
+    	prodSelected = tableStock.getSelectionModel().getSelectedItem();
+    	if (prodSelected != null) {
+    		stock.setDisable(false);
+    	}
+    }
+    
+    @FXML
+    public void selectItem(MouseEvent event) {
+    	itemSelected = tableSale.getSelectionModel().getSelectedItem();
+    	LocalDate after = dateEnd.getValue();
+    	LocalDate before = dateInitial.getValue();
+    	if((after != null) && (before != null)) {
+    		sales.setDisable(false);
+    	}
+    }
+    
+    @FXML
+    public void beforeSelected(ActionEvent event) {
+    	LocalDate after = dateEnd.getValue();
+    	if((after != null) && (itemSelected != null)) {
+    		sales.setDisable(false);
+    	}
+    }
+    
+    @FXML
+    public void afterSelected(ActionEvent event) {
+    	LocalDate before = dateInitial.getValue();
+    	if((before != null) && (itemSelected != null)) {
+    		sales.setDisable(false);
+    	}
+    }
+    
+    @FXML
+    public void generateReportSales(ActionEvent event) {
+    	System.out.println("OKOK");
+    }
+
+    @FXML
+    public void generateReportStock(ActionEvent event) {
+    	ManagementReportStock newReport = new ManagementReportStock();
+    	try {
+			newReport.generatePDF(prodSelected.getId());
+		} catch (IdDoesntExist e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 	
-    @FXML
+    
 	public void initTableView() {
     	//Vendas
     	ObservableList<Item> itemsList = FXCollections.observableArrayList(MenuFacade.listItem());

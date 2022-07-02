@@ -165,7 +165,7 @@ public class Sale extends Entity {
 	/**
 	 * @return the clientId
 	 */
-	public Client getClientId() {
+	public Client getClient() {
 		return client;
 	}
 

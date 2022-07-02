@@ -42,9 +42,9 @@ public class ManagementReportProvider {
 	 * @throws IdDoesntExist
 	 * @throws EntitiesNotRegistred
 	 */
-	public void generatePDF(ProviderFacade provider, ProductFacade products) throws IdDoesntExist, EntitiesNotRegistred {
+	public void generatePDF() throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
-		String name = "provider_" + dateHour() + ".pdf";
+		String name = "fornecedor_" + dateHour() + ".pdf";
         
 		try {
             PdfWriter.getInstance(document, new FileOutputStream(name));
@@ -63,7 +63,7 @@ public class ManagementReportProvider {
             p = new Paragraph(" ");
             document.add(p);
             
-            providerRelationship(provider , p, document);
+            providerRelationship(p, document);
             
             p = new Paragraph(" ");
             document.add(p);
@@ -74,7 +74,7 @@ public class ManagementReportProvider {
             p = new Paragraph(" ");
             document.add(p);
             
-            providerProduct(products, p, document);
+            providerProduct(p, document);
             
             document.close();
             Desktop.getDesktop().open(new File(name));
@@ -94,13 +94,13 @@ public class ManagementReportProvider {
 	 * @param document
 	 * @throws DocumentException
 	 */
-	public void providerRelationship(ProviderFacade provider, Paragraph p, Document document) throws DocumentException {
+	public void providerRelationship(Paragraph p, Document document) throws DocumentException {
 		p = new Paragraph(" ");
         document.add(p);
         
+        ProviderFacade.updateAllProducstProvided();
         int cont = 1;
-        for (Entity provider1 : provider.listProvider()) {
-        	Provider prov = (Provider) provider1;
+        for (Provider prov : ProviderFacade.listProvider()) {
         	p = new Paragraph(cont++ + " - ID: " + prov.getId() + "\n" + 
 					   "Nome: " + prov.getName()+ "\n" + 
 					   "CNPJ: " + prov.getCnpj()+ "\n" +
@@ -127,13 +127,12 @@ public class ManagementReportProvider {
 	 * @param document
 	 * @throws DocumentException
 	 */
-	public void providerProduct(ProductFacade products, Paragraph p, Document document) throws DocumentException {
+	public void providerProduct(Paragraph p, Document document) throws DocumentException {
 		p = new Paragraph(" ");
         document.add(p);
         
         int cont = 1;
-        for (Entity prod1 : products.listProduct()) {
-        	Product prod = (Product) prod1;
+        for (Product prod : ProductFacade.listProduct()) {
         	p = new Paragraph(cont++ + " - ID: " + prod.getId() + "\n" + 
 							   "Nome: " + prod.getName() + "\n" + 
 							   "Preco: R$ " + prod.getPrice() + "\n" +
@@ -157,7 +156,6 @@ public class ManagementReportProvider {
 		String formattedDate = simpleDateFormat.format(d) ;
 		
 		return formattedDate;
-		
 	}
 
 

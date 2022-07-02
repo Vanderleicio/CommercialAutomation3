@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,42 +29,50 @@ public class Receipt {
 	
 	public void generatePDF(Sale sale) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
-		String name = "sale_" + dateHour() + ".pdf";
+		String name = "venda_" + dateHour() + ".pdf";
 		
         try {
             PdfWriter.getInstance(document, new FileOutputStream(name));
             document.open();
-
             Paragraph p = new Paragraph("Nota da compra:");
             p.setAlignment(1);
             document.add(p);
             
+            p = new Paragraph("Informações do cliente: ");
+            document.add(p);
+            
+            Client client = sale.getClient();
+            p = new Paragraph("ID: " + client.getId() + "\n" +
+            				  "CPF: " + client.getCpf() + "\n" +
+            				  "Nome: " + client.getName() + "\n" +
+            				  "Nº de telefone: " + client.getPhoneNumber() + "\n" +
+            				  "Email: " + client.getEmail());
+            document.add(p);
+            
             p = new Paragraph(" ");
             document.add(p);
             
-            p = new Paragraph("Todos os produtos no estoque: ");
+            p = new Paragraph("Itens comprados: ");
             document.add(p);
             
-            totalAmountOfStock(products, p, document);
+            ArrayList<Item> itemsPurchased = sale.getItemsPurchased();
             
-            p = new Paragraph(" ");
-            document.add(p);
+            int cont = 1;
+            Item item;
+            for (int i = 0; i < itemsPurchased.size(); i++) {
+            	item = itemsPurchased.get(i);
+            	p = new Paragraph("N." + cont++ + "- ID: " + item.getId() + "  Prato: " + item.getName() + "  Tipo: " + item.getCategoryItems() + "  Preço: R$" + item.getPrice());
+                document.add(p);
+            }
    
-            p = new Paragraph("Informacoes do produto selecionado: ");
-            document.add(p);
-            
-            byProduct(products, idProd, p, document);
-            
             p = new Paragraph(" ");
             document.add(p);
             
-            p = new Paragraph("Produtos que vencem no proximo mes: ");
+            p = new Paragraph("Preço total da compra: R$" + sale.getPriceTotal());
             document.add(p);
             
-            p = new Paragraph(" ");
+            p = new Paragraph("Modo de pagamento: " + sale.getPaymentMethod());
             document.add(p);
-            
-            productsToExpire(products, p, document);
             
             document.close();
             Desktop.getDesktop().open(new File(name));
@@ -76,119 +85,12 @@ public class Receipt {
         }
 	}
 	
-	public void totalAmountOfStock(ProductFacade products, Paragraph p, Document document) throws DocumentException {
-		Product prod = ProductFacade.chosenProduct();
-		
-		p = new Paragraph(" ");
-        document.add(p);
-    		
-		for (Product prods : products.listProduct()) {
-			p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-					   "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-					   "Preco: R$" + prod.getPrice()+ "\n" +
-					   "Quantidade: " + prod.getQuantity() + " unidades\n" +
-					   "Validade: " + prod.getValidity() + "\n");
-			document.add(p);
-		
-		/*String groupName;
-		ArrayList<Product> group;
-		
-		p = new Paragraph(" ");
-        document.add(p);
-        
-    	HashMap<String, ArrayList<Product>> groupProducts = products.getStock();
-    	int cont = 1;
-    	for (HashMap.Entry<String, ArrayList<Product>> groupProds : groupProducts.entrySet()){
-    		groupName = groupProds.getKey();
-    		group = groupProds.getValue();
-   
-    		p = new Paragraph(cont++ + "- " + "Produtos de nome: " + groupName +
-    				   "   |   Total no estoque: " + products.getGroupQuantity(groupName) + "\n");
-    		document.add(p);
-    		p = new Paragraph(" ");
-    		for (Product prod : group) {
-    			p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-					   "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-					   "Preco: R$" + prod.getPrice()+ "\n" +
-					   "Quantidade: " + prod.getQuantity() + " unidades\n" +
-					   "Validade: " + prod.getValidity() + "\n");
-    			document.add(p);
-    		}
-        	
-        	p = new Paragraph(" ");
-            document.add(p);*/
-    	}
-		
-		p = new Paragraph(" ");
-        document.add(p);
-		
-	}
-	
-	
-	public void byProduct(ProductFacade products, String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
-		
-		ProductFacade.chooseAProduct(idProd);
-		Product prod = ProductFacade.chosenProduct();
-		
-		p = new Paragraph(" ");
-        document.add(p);
-    		
-    	p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-    					  "Nome: " + prod.getName() + "\n" +
-					   	  "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-					      "Preco: R$" + prod.getPrice()+ "\n" +
-					      "Quantidade: " + prod.getQuantity() + " unidades\n" +
-					      "Validade: " + prod.getValidity() + "\n");
-    	document.add(p);   
-    	
-        p = new Paragraph(" ");
-        document.add(p);
-	}
-	
-	
-	public void productsToExpire(ProductFacade products, Paragraph p, Document document) throws DocumentException {
-		LocalDate currentDay = LocalDate.now();
-		LocalDate nextMonth = currentDay.plusMonths(1);
-		
-		p = new Paragraph(" ");
-        document.add(p);
-        
-		for (Entity enti : products.listProduct()) {
-			Product prod = (Product) enti;
-			if (nextMonth.isAfter(prod.getValidity()) && currentDay.isBefore(prod.getValidity())) {		    		
-		    	p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-		    					  "Validade: " + prod.getValidity() + "\n" +
-		    					  "Nome: " + prod.getName() + "\n" +
-							   	  "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-							      "Preco: R$" + prod.getPrice()+ "\n" +
-							      "Quantidade: " + prod.getQuantity() + " unidades\n");
-		    	document.add(p);   
-			}
-		}
-		
-		p = new Paragraph("\nProdutos ja vencidos:\n");
-		document.add(p);  
-		
-		for (Product enti : products.listProduct()) {
-			Product prod = (Product) enti;
-			if (currentDay.isAfter(prod.getValidity())) {		    		
-		    	p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-		    					  "Validade: " + prod.getValidity() + "\n" +
-		    					  "Nome: " + prod.getName() + "\n" +
-							   	  "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-							      "Preco: R$" + prod.getPrice()+ "\n" +
-							      "Quantidade: " + prod.getQuantity() + " unidades\n");
-		    	document.add(p);   
-			}
-		}		
-	}
-	
 	/**
 	 * @return Retorna a data e o dia atual formatados para o nome do arquivo
 	 */
 	public String dateHour() {
 		Date d = Calendar.getInstance().getTime();
-		String formatString = "dd.MM.yyyy" ;
+		String formatString = "dd.MM.yyyy_hh.mm.ss" ;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat (formatString);
 		String formattedDate = simpleDateFormat.format(d) ;
 		

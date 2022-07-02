@@ -26,9 +26,9 @@ import app.model.models.*;
  */
 public class ManagementReportStock {
 	
-	public void generatePDF(ProductFacade products, String idProd) throws IdDoesntExist, EntitiesNotRegistred {
+	public void generatePDF(String idProd) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
-		String name = "product_" + dateHour() + ".pdf";
+		String name = "produto_" + dateHour() + ".pdf";
 		
         try {
             PdfWriter.getInstance(document, new FileOutputStream(name));
@@ -44,7 +44,7 @@ public class ManagementReportStock {
             p = new Paragraph("Todos os produtos no estoque: ");
             document.add(p);
             
-            totalAmountOfStock(products, p, document);
+            totalAmountOfStock(p, document);
             
             p = new Paragraph(" ");
             document.add(p);
@@ -52,7 +52,7 @@ public class ManagementReportStock {
             p = new Paragraph("Informacoes do produto selecionado: ");
             document.add(p);
             
-            byProduct(products, idProd, p, document);
+            byProduct(idProd, p, document);
             
             p = new Paragraph(" ");
             document.add(p);
@@ -63,7 +63,7 @@ public class ManagementReportStock {
             p = new Paragraph(" ");
             document.add(p);
             
-            productsToExpire(products, p, document);
+            productsToExpire(p, document);
             
             document.close();
             Desktop.getDesktop().open(new File(name));
@@ -76,47 +76,18 @@ public class ManagementReportStock {
         }
 	}
 	
-	public void totalAmountOfStock(ProductFacade products, Paragraph p, Document document) throws DocumentException {
-		Product prod = ProductFacade.chosenProduct();
-		
+	public void totalAmountOfStock(Paragraph p, Document document) throws DocumentException {
 		p = new Paragraph(" ");
         document.add(p);
     		
-		for (Product prods : products.listProduct()) {
+		for (Product prod : ProductFacade.listProduct()) {
 			p = new Paragraph("\nID: " + prod.getId() + "\n" + 
 					   "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-					   "Preco: R$" + prod.getPrice()+ "\n" +
+					   "Nome: " + prod.getName()+ "\n" +
 					   "Quantidade: " + prod.getQuantity() + " unidades\n" +
 					   "Validade: " + prod.getValidity() + "\n");
 			document.add(p);
 		
-		/*String groupName;
-		ArrayList<Product> group;
-		
-		p = new Paragraph(" ");
-        document.add(p);
-        
-    	HashMap<String, ArrayList<Product>> groupProducts = products.getStock();
-    	int cont = 1;
-    	for (HashMap.Entry<String, ArrayList<Product>> groupProds : groupProducts.entrySet()){
-    		groupName = groupProds.getKey();
-    		group = groupProds.getValue();
-   
-    		p = new Paragraph(cont++ + "- " + "Produtos de nome: " + groupName +
-    				   "   |   Total no estoque: " + products.getGroupQuantity(groupName) + "\n");
-    		document.add(p);
-    		p = new Paragraph(" ");
-    		for (Product prod : group) {
-    			p = new Paragraph("\nID: " + prod.getId() + "\n" + 
-					   "Fornecedor: " + prod.getProvider().getName()+ "\n" + 
-					   "Preco: R$" + prod.getPrice()+ "\n" +
-					   "Quantidade: " + prod.getQuantity() + " unidades\n" +
-					   "Validade: " + prod.getValidity() + "\n");
-    			document.add(p);
-    		}
-        	
-        	p = new Paragraph(" ");
-            document.add(p);*/
     	}
 		
 		p = new Paragraph(" ");
@@ -125,7 +96,7 @@ public class ManagementReportStock {
 	}
 	
 	
-	public void byProduct(ProductFacade products, String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
+	public void byProduct(String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
 		
 		ProductFacade.chooseAProduct(idProd);
 		Product prod = ProductFacade.chosenProduct();
@@ -146,15 +117,14 @@ public class ManagementReportStock {
 	}
 	
 	
-	public void productsToExpire(ProductFacade products, Paragraph p, Document document) throws DocumentException {
+	public void productsToExpire(Paragraph p, Document document) throws DocumentException {
 		LocalDate currentDay = LocalDate.now();
 		LocalDate nextMonth = currentDay.plusMonths(1);
 		
 		p = new Paragraph(" ");
         document.add(p);
         
-		for (Entity enti : products.listProduct()) {
-			Product prod = (Product) enti;
+		for (Product prod  : ProductFacade.listProduct()) {
 			if (nextMonth.isAfter(prod.getValidity()) && currentDay.isBefore(prod.getValidity())) {		    		
 		    	p = new Paragraph("\nID: " + prod.getId() + "\n" + 
 		    					  "Validade: " + prod.getValidity() + "\n" +
@@ -169,8 +139,7 @@ public class ManagementReportStock {
 		p = new Paragraph("\nProdutos ja vencidos:\n");
 		document.add(p);  
 		
-		for (Product enti : products.listProduct()) {
-			Product prod = (Product) enti;
+		for (Product prod : ProductFacade.listProduct()) {
 			if (currentDay.isAfter(prod.getValidity())) {		    		
 		    	p = new Paragraph("\nID: " + prod.getId() + "\n" + 
 		    					  "Validade: " + prod.getValidity() + "\n" +
@@ -188,7 +157,7 @@ public class ManagementReportStock {
 	 */
 	public String dateHour() {
 		Date d = Calendar.getInstance().getTime();
-		String formatString = "dd.MM.yyyy" ;
+		String formatString = "dd.MM.yyyy_hh.mm.ss" ;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat (formatString);
 		String formattedDate = simpleDateFormat.format(d) ;
 		

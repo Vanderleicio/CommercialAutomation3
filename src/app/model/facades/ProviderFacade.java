@@ -2,6 +2,8 @@ package app.model.facades;
 
 import java.util.ArrayList;
 
+import com.itextpdf.text.Paragraph;
+
 import app.model.daos.ProviderDAO;
 import app.model.exceptions.*;
 import app.model.models.*;
@@ -32,6 +34,21 @@ public class ProviderFacade {
 		providerEdit.setCnpj(newCNPJ);
 		providerEdit.setAddress(newAddres);
 		providerEdit.setProductsProvided(newProdList);
+	}
+	
+	public static void updateProductsProvided(Provider prov) {
+		ArrayList<Product> prods = new ArrayList<Product>();
+		for (Product prod : ProductFacade.listProduct()) {
+			if (prod.getProvider().equals(prov)) {
+				prods.add(prod);
+			}
+    	}
+	}
+	
+	public static void updateAllProducstProvided() {
+		for (Provider prov: listProvider()) {
+			updateProductsProvided(prov);
+		}
 	}
 	
 	public static ArrayList<Provider> listProvider(){
