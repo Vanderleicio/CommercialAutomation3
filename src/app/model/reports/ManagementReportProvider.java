@@ -37,8 +37,6 @@ public class ManagementReportProvider {
 	
 	/**
 	 * Gera o pdf com o relatorio
-	 * @param provider: Gerenciamento de fornecedores
-	 * @param products: Gerenciamento de produtos
 	 * @throws IdDoesntExist
 	 * @throws EntitiesNotRegistred
 	 */
@@ -89,7 +87,6 @@ public class ManagementReportProvider {
 	
 	/**
 	 * Adiciona no pdf as informações do fornecedor
-	 * @param provider
 	 * @param p
 	 * @param document
 	 * @throws DocumentException
@@ -122,7 +119,6 @@ public class ManagementReportProvider {
 	
 	/**
 	 * Adiciona as informacoes dos produtos no pdf
-	 * @param products
 	 * @param p
 	 * @param document
 	 * @throws DocumentException

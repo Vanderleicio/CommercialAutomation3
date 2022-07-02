@@ -1,5 +1,16 @@
 package app.model.reports;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programação II
+Concluido em: 09/05/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************/
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,12 +32,18 @@ import app.model.exceptions.IdDoesntExist;
 import app.model.models.*;
 
 /**
- * Classe que gera os relatorios relacionados ao estoque
+ * Classe que gera o recibo das compras
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  */
 public class Receipt {
 	
+	/**
+	 * Metodo responsavel por gerar o recibo em pdf
+	 * @param sale
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	public void generatePDF(Sale sale) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
 		String name = "venda_" + dateHour() + ".pdf";

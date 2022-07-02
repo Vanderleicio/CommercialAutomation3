@@ -1,5 +1,16 @@
 package app.model.reports;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programação II
+Concluido em: 09/05/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************/
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,8 +38,6 @@ public class ManagementReportSale {
 	
 	/**
 	 * Gera o pdf com o relatorio
-	 * @param sales: Gerenciamento das vendas
-	 * @param itemsMenu: Gerenciamento do cardapio
 	 * @param dateBefore: Primeira data do periodo
 	 * @param dateAfter: Segunda data do periodo
 	 * @param idPlate: Id do prato a ser exibido
@@ -87,7 +96,6 @@ public class ManagementReportSale {
 	
 	/**
 	 * Adiciona as informacoes de todas as vendas
-	 * @param sales
 	 * @param p
 	 * @param document
 	 * @throws DocumentException
@@ -114,11 +122,8 @@ public class ManagementReportSale {
 	 
 	/**
 	 * Adiciona as informacoes das vendas dentro do periodo pedido
-	 * @param sales
 	 * @param p
 	 * @param document
-	 * @param dateBefore
-	 * @param dateAfter
 	 * @throws DocumentException
 	 */
 	public void saleByPeriod(Paragraph p, Document document, LocalDate dateBefore, LocalDate dateAfter) throws DocumentException {
@@ -160,8 +165,6 @@ public class ManagementReportSale {
 	
 	/**
 	 * Adiciona as informacoes das vendas do prato pedido
-	 * @param sales
-	 * @param itemsMenu
 	 * @param p
 	 * @param document
 	 * @param idPlate

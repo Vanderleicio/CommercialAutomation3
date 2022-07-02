@@ -1,5 +1,16 @@
 package app.model.reports;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programação II
+Concluido em: 09/05/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************/
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +37,12 @@ import app.model.models.*;
  */
 public class ManagementReportStock {
 	
+	/**
+	 * Metodo responsavel por gerar o relatorio em pdf
+	 * @param idProd = id de um produto escolhido pelo usuario
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	public void generatePDF(String idProd) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
 		String name = "produto_" + dateHour() + ".pdf";
@@ -76,6 +93,10 @@ public class ManagementReportStock {
         }
 	}
 	
+	/**
+	 * Metodo responsavel por informar os dados de quantidade total de estoque
+	 * @throws DocumentException
+	 */
 	public void totalAmountOfStock(Paragraph p, Document document) throws DocumentException {
 		p = new Paragraph(" ");
         document.add(p);
@@ -95,7 +116,10 @@ public class ManagementReportStock {
 		
 	}
 	
-	
+	/**
+	 * Metodo responsavel por gerar os dados do produto selecionado anteriormente pelo usuario
+	 * @param idProd = id escolhido anteriormente
+	 */
 	public void byProduct(String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
 		
 		Product prod = ProductFacade.chosenProduct();
@@ -115,7 +139,9 @@ public class ManagementReportStock {
         document.add(p);
 	}
 	
-	
+	/**
+	 * Metodo responsavel por gerar as informacoes de vencimento do relatorio em pdf
+	 */
 	public void productsToExpire(Paragraph p, Document document) throws DocumentException {
 		LocalDate currentDay = LocalDate.now();
 		LocalDate nextMonth = currentDay.plusMonths(1);
