@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<TitledPane alignment="CENTER" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="276.0" text="ADICIONAR NOVO CLIENTE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.clientControllers.manageClientController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="263.0">
+         <children>
+            <TextField fx:id="nameTxtFld" layoutX="15.0" layoutY="57.0" prefHeight="25.0" prefWidth="230.0" promptText="Nome" />
+            <TextField fx:id="cpfTxtFld" layoutX="15.0" layoutY="115.0" prefHeight="25.0" prefWidth="230.0" promptText="CPF" />
+            <Label layoutX="16.0" layoutY="40.0" text="Digite o nome do cliente:" />
+            <Label layoutX="16.0" layoutY="98.0" text="Digite o cpf do cliente:" />
+            <Label layoutX="16.0" layoutY="158.0" text="Digite o email do cliente:" />
+            <Label layoutX="16.0" layoutY="219.0" text="Qual o telefone do cliente:" />
+            <Button fx:id="buttonCreate" layoutX="104.0" layoutY="294.0" mnemonicParsing="false" onAction="#create" text="Concluir" />
+            <Label fx:id="alertNick" layoutX="68.0" layoutY="271.0" prefHeight="17.0" prefWidth="135.0" />
+            <TextField fx:id="phoneTxtFld" layoutX="19.0" layoutY="236.0" prefHeight="25.0" prefWidth="230.0" promptText="Telefone" />
+            <TextField fx:id="emailTxtFld" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="230.0" promptText="Email" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>

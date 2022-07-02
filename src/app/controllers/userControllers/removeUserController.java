@@ -29,15 +29,11 @@ public class removeUserController implements Initializable{
     
     @FXML
     private Button buttonCancel;
-    
-    @FXML
-    private Label msgRemove;
 
     private User selected = UserFacade.chosenUser();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		msgRemove.setText(selected.getName());
 	}
 	
 	@FXML

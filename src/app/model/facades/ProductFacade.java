@@ -14,7 +14,10 @@ public class ProductFacade {
 
 	private static ProductDAO prodData = new ProductDAO();
 	
-	public static void createProduct(String name, BigDecimal price, LocalDate validity, int quantity, Provider provider) throws InvalidDateException, InvalidQuantityException {
+	public static void createProduct(String name, BigDecimal price, LocalDate validity, int quantity, Provider provider) throws InvalidDateException, InvalidQuantityException, EmptyStringException {
+		if (name.equals("")){
+			throw new EmptyStringException();
+		}
 		if (validity.isAfter(LocalDate.now()) && (quantity > 0)) {
 			Product newProduct = new Product(name, price, validity, quantity, provider);
 			prodData.add(newProduct);
@@ -29,7 +32,10 @@ public class ProductFacade {
 		prodData.delete(id);
 	}
 	
-	public static void editProduct(String id, String newName, BigDecimal newPrice, LocalDate newValidity, int newQuantity, Provider newProvider) throws IdDoesntExist, EntitiesNotRegistred{
+	public static void editProduct(String id, String newName, BigDecimal newPrice, LocalDate newValidity, int newQuantity, Provider newProvider) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException{
+		if (newName.equals("")){
+			throw new EmptyStringException();
+		}
 		Product productEdit = prodData.getOneProduct(id);
 		
 		productEdit.setName(newName);

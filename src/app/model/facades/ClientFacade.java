@@ -10,7 +10,10 @@ public class ClientFacade {
 	
 	private static ClientDAO clientData = new ClientDAO();
 	
-	public static void createClient(String name, String cpf, String email, String phoneNumber) {
+	public static void createClient(String name, String cpf, String email, String phoneNumber) throws EmptyStringException {
+		if (name.equals("") | cpf.equals("") | email.equals("") | phoneNumber.equals("")){
+			throw new EmptyStringException();
+		}
 		Client newClient = new Client(name, cpf, email, phoneNumber);
 		clientData.add(newClient);
 	}
@@ -19,7 +22,10 @@ public class ClientFacade {
 		clientData.delete(id);
 	}
 	
-	public static void editClient(String id, String newName, String newCPF, String newEmail, String newPhoneNumber) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException {
+	public static void editClient(String id, String newName, String newCPF, String newEmail, String newPhoneNumber) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException, EmptyStringException {
+		if (newName.equals("") | newCPF.equals("") | newEmail.equals("") | newPhoneNumber.equals("")){
+			throw new EmptyStringException();
+		}
 		Client ClientEdit = clientData.getOneClient(id);
 		
 		ClientEdit.setName(newName);
@@ -36,7 +42,14 @@ public class ClientFacade {
 		clientData.setChosenEntityId(id);
 	}
 	
-	public static String chosenClient() {
-		return clientData.getChosenEntityId();
+	public static Client chosenClient() {
+		try {
+			String id = clientData.getChosenEntityId();
+			return clientData.getOneClient(id);
+		} catch (IdDoesntExist | EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -17,7 +17,7 @@
             <Label layoutX="12.0" layoutY="176.0" text="Cliente" />
             <Label layoutX="216.0" layoutY="31.0" text="Itens disponíveis" />
             <Label layoutX="12.0" layoutY="104.0" text="Método de Pagamento" />
-            <Button fx:id="buttonCreate" layoutX="380.0" layoutY="383.0" mnemonicParsing="false" onAction="#createSale" text="Confirmar" />
+            <Button fx:id="buttonCreate" layoutX="382.0" layoutY="397.0" mnemonicParsing="false" onAction="#createSale" text="Confirmar" />
             <TextField fx:id="payMethTxtFld" layoutX="11.0" layoutY="124.0" prefHeight="25.0" prefWidth="185.0" promptText="Ex.: Pix, débito, dinheiro" />
             <Label layoutX="118.0" layoutY="29.0" text="Hora" />
             <TextField fx:id="hourTxtFld" layoutX="118.0" layoutY="46.0" prefHeight="25.0" prefWidth="75.0" promptText="HH:MM" />
@@ -49,6 +49,11 @@
                 <TableColumn fx:id="clientNameCol" prefWidth="140.0" text="Nome" />
               </columns>
             </TableView>
+            <Label fx:id="editAlert" layoutX="27.0" layoutY="6.0" text="EDITAR OS ITENS DE UMA VENDA FAZ COM QUE OS PRODUTOS SEJAM CONSUMIDOS NOVAMENTE!" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </content>

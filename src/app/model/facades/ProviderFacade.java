@@ -10,7 +10,10 @@ public class ProviderFacade {
 	
 	private static ProviderDAO provData = new ProviderDAO();
 	
-	public static void createProvider(String name, String cnpj, String address) {
+	public static void createProvider(String name, String cnpj, String address) throws EmptyStringException {
+		if (name.equals("") | cnpj.equals("") | address.equals("")){
+			throw new EmptyStringException();
+		}
 		Provider newProvider = new Provider(name, cnpj, address);
 		provData.add(newProvider);
 	}
@@ -19,7 +22,10 @@ public class ProviderFacade {
 		provData.delete(id);
 	}
 	
-	public static void editProvider(String id, String newName, String newCNPJ, String newAddres, ArrayList<Product> newProdList) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void editProvider(String id, String newName, String newCNPJ, String newAddres, ArrayList<Product> newProdList) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
+		if (newName.equals("") | newCNPJ.equals("") | newAddres.equals("")){
+			throw new EmptyStringException();
+		}
 		Provider providerEdit = provData.getOneProvider(id);
 		
 		providerEdit.setName(newName);

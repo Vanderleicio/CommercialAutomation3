@@ -12,12 +12,19 @@ public class MenuFacade {
 	
 	private static ItemDAO itemData = new ItemDAO();
 	
-	public static void createItem(String name, String description, BigDecimal price, String category, HashMap<String, Integer> composition) {
+	public static void createItem(String name, String description, BigDecimal price, String category, HashMap<String, Integer> composition) throws EmptyStringException {
+		if (name.equals("") | description.equals("") | category.equals("")){
+			throw new EmptyStringException();
+		}
 		Item newItem = new Item(name, description, price, category, composition);
 		itemData.add(newItem);
 	}
 	
-	public static void editItem(String id, String newName, String newDescription, BigDecimal newPrice, String newCategory, HashMap<String, Integer> newComposition) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void editItem(String id, String newName, String newDescription, BigDecimal newPrice, String newCategory, HashMap<String, Integer> newComposition) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
+		if (newName.equals("") | newDescription.equals("") | newCategory.equals("")){
+			throw new EmptyStringException();
+		}
+		
 		Item itemEdit = itemData.getOneItem(id);
 		
 		itemEdit.setName(newName);
@@ -25,6 +32,10 @@ public class MenuFacade {
 		itemEdit.setCategoryItems(newCategory);
 		itemEdit.setPrice(newPrice);
 		itemEdit.setComposition(newComposition);
+	}
+	
+	public static void delItem(String id) throws IdDoesntExist, EntitiesNotRegistred{
+		itemData.delete(id);
 	}
 	
 	public static HashMap<String, Integer> doNewComposition(ArrayList<Product> prods, ArrayList<Integer> qntt) throws InvalidQuantityException{

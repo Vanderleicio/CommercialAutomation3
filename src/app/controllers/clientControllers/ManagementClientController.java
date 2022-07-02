@@ -47,10 +47,7 @@ public class ManagementClientController implements Initializable {
     private Button buttonRemoveClient;
 
     @FXML
-    private Label currentClientLabel;
-    
-    @FXML
-    private TableColumn<Client, Integer> cpfCol;
+    private TableColumn<Client, String> cpfCol;
     
     @FXML
     private TableColumn<Client, String> emailCol;
@@ -62,13 +59,11 @@ public class ManagementClientController implements Initializable {
     private TableColumn<Client, String> nameCol;
 
     @FXML
-    private TableColumn<Client, Integer> phoneNumberCol;
+    private TableColumn<Client, String> phoneNumberCol;
 
     @FXML
     private TableView<Client> clientsTable;
     
-    @FXML
-    private ListView<String> listClients;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,7 +92,6 @@ public class ManagementClientController implements Initializable {
     	createScreens("DeleteClient.fxml");
     }
     
-    @FXML
     public void createScreens(String viewName) {
     	Stage addStage = new Stage();
         Parent root;
@@ -125,8 +119,8 @@ public class ManagementClientController implements Initializable {
     public void clientSelected(MouseEvent event) {
     	Client selected = clientsTable.getSelectionModel().getSelectedItem();
     	if (selected != null) {
-    		buttonEditClient.setDisable(true);
-    		buttonRemoveClient.setDisable(true);
+    		buttonEditClient.setDisable(false);
+    		buttonRemoveClient.setDisable(false);
     	}
     }	
     

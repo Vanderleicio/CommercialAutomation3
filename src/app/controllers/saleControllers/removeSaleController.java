@@ -36,14 +36,10 @@ public class removeSaleController implements Initializable{
     @FXML
     private Button buttonCancel;
     
-    @FXML
-    private Label msgRemove;
-
     private Sale selected = SaleFacade.chosenSale();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		msgRemove.setText("venda");
 	}
 	
 	@FXML

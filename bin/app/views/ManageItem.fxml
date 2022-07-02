@@ -33,8 +33,8 @@
                   <TableColumn fx:id="qnttDisCol" prefWidth="137.0" text="Quantidade disponível" />
               </columns>
             </TableView>
-            <Button fx:id="buttonAdd" layoutX="313.0" layoutY="184.0" mnemonicParsing="false" onAction="#addProd" prefHeight="25.0" prefWidth="67.0" text="Adicionar" />
-            <Button fx:id="buttonRemove" layoutX="469.0" layoutY="184.0" mnemonicParsing="false" onAction="#removeProd" prefHeight="25.0" prefWidth="67.0" text="Remover" />
+            <Button fx:id="buttonAdd" layoutX="293.0" layoutY="184.0" mnemonicParsing="false" onAction="#addProd" prefHeight="25.0" prefWidth="67.0" text="Adicionar" />
+            <Button fx:id="buttonRemove" layoutX="508.0" layoutY="184.0" mnemonicParsing="false" onAction="#removeProd" prefHeight="25.0" prefWidth="67.0" text="Remover" />
             <TableView fx:id="prodsCompTable" layoutX="216.0" layoutY="236.0" onMouseClicked="#prodCompSelected" prefHeight="132.0" prefWidth="245.0">
               <columns>
                 <TableColumn fx:id="idCompCol" prefWidth="75.0" sortable="false" text="Id" />
@@ -44,12 +44,14 @@
             </TableView>
             <Label layoutX="216.0" layoutY="219.0" text="Composição do item" />
             <Label fx:id="alertLabel" layoutX="230.0" layoutY="378.0" />
-            <ListView fx:id="qnttListView" editable="true" layoutX="470.0" layoutY="261.0" onEditCancel="#newQnt" prefHeight="108.0" prefWidth="143.0" />
+            <ListView fx:id="qnttListView" layoutX="470.0" layoutY="261.0" onEditCancel="#newQnt" prefHeight="108.0" prefWidth="143.0" />
             <Button layoutX="470.0" layoutY="236.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Quantidade necessaria">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <TextField fx:id="qnttTxtFld" disable="true" layoutX="383.0" layoutY="184.0" onAction="#newQnt" onMouseClicked="#startEdit" prefHeight="25.0" prefWidth="98.0" promptText="Qntd p/ item" />
+            <Label fx:id="qnttLabel" layoutX="319.0" layoutY="167.0" prefHeight="17.0" prefWidth="226.0" text="Aperte ENTER para confirmar a mudança" visible="false" />
          </children>
       </Pane>
    </content>

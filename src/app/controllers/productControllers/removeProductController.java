@@ -33,19 +33,15 @@ public class removeProductController implements Initializable{
     
     @FXML
     private Button buttonCancel;
-    
-    @FXML
-    private Label msgRemove;
 
     private Product selected = ProductFacade.chosenProduct();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		msgRemove.setText(selected.getName());
 	}
 	
 	@FXML
-	void deleteUser(ActionEvent event){
+	void delete(ActionEvent event){
 		try {
 			ProductFacade.delProduct(selected.getId());
     	    Stage stage = (Stage) buttonConfirm.getScene().getWindow();

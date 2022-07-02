@@ -36,7 +36,7 @@ public class ProductDAO extends AbstractDAO{
 	}
 	
 	/**
-	 * Metodo responsavel por verificar se todos os produtos sao o suficiente
+	 * Metodo responsavel por verificar se há produtos suficientes para efetuar a venda.
 	 * 
 	 * @param groupsNeed: lista contendo os produtos
 	 * @throws NotEnoughStock: para quando a quantidade de produtos não forem suficientes

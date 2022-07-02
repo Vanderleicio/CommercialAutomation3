@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import java.math.BigDecimal;
+
+import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
@@ -59,6 +61,9 @@ public class manageItemController implements Initializable{
     private TextField categoryTxtFld;
     
     @FXML
+    private TextField qnttTxtFld;
+    
+    @FXML
     private TextArea descTxtArea;
     
     @FXML
@@ -69,6 +74,9 @@ public class manageItemController implements Initializable{
     
     @FXML
     private Label alertLabel;
+    
+    @FXML
+    private Label qnttLabel;
     
     @FXML
     private TableView<Product> prodsTable;
@@ -119,6 +127,11 @@ public class manageItemController implements Initializable{
 		buttonRemove.setDisable(true);
 	}
 	
+	public void setLabels(){
+		alertLabel.setText("");
+		qnttLabel.setVisible(false);
+	}
+	
 	public void refreshTables() {
 		setTables();
 		qnttListView.refresh();
@@ -160,6 +173,7 @@ public class manageItemController implements Initializable{
 	
 	
 	public void setProdData() {
+		setLabels();
 		nameTxtFld.setText(selected.getName());
 		priceTxtFld.setText(selected.getPrice().toString());
 		descTxtArea.setText(selected.getDescription());
@@ -168,6 +182,7 @@ public class manageItemController implements Initializable{
 	
 	@FXML
 	public void addProd(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
+		setLabels();
 		Product selecProd = prodsTable.getSelectionModel().getSelectedItem();
 		
 		if (!prodsList.contains(selecProd)) {
@@ -180,9 +195,10 @@ public class manageItemController implements Initializable{
 	}
 	
 	@FXML
-	public void removeProd(ListView.EditEvent<Integer> event) {
+	public void removeProd(ActionEvent event) {
+		setLabels();
 		Product selecProd = prodsCompTable.getSelectionModel().getSelectedItem();
-		int pos = prodsTable.getSelectionModel().getSelectedIndex();
+		int pos = prodsCompTable.getSelectionModel().getSelectedIndex();
 		
 		prodsList.remove(selecProd);
 		qnttList.remove(pos);
@@ -191,28 +207,40 @@ public class manageItemController implements Initializable{
 	}
 	
 	@FXML
-	public void newQnt(Event event) {
-		Integer selectQnt = qnttListView.getSelectionModel().getSelectedItem();
-		Integer pos = qnttListView.getSelectionModel().getSelectedIndex();
+	public void startEdit(MouseEvent event) {
+		qnttLabel.setVisible(true);
+	}
+	
+	
+	@FXML
+	public void newQnt(ActionEvent event) {
+		setLabels();
+		Integer selectQnt = Integer.valueOf(qnttTxtFld.getText());
+		Integer pos = prodsCompTable.getSelectionModel().getSelectedIndex();
 		qnttList.set(pos, selectQnt);
+		refreshTables();
 	}
 	
 	
     @FXML
     public void prodSelected(MouseEvent event) {
+    	setLabels();
     	Product selecProd = prodsTable.getSelectionModel().getSelectedItem();
     	if (selecProd != null) {
     		buttonAdd.setDisable(false);
     		buttonRemove.setDisable(true);
+    		qnttTxtFld.setDisable(true);
     	}
     }
     
     @FXML
     public void prodCompSelected(MouseEvent event) {
+    	setLabels();
     	Product selecProd = prodsCompTable.getSelectionModel().getSelectedItem();
     	if (selecProd != null) {
     		buttonAdd.setDisable(true);
     		buttonRemove.setDisable(false);
+    		qnttTxtFld.setDisable(false);
     	}
     }
     
@@ -245,6 +273,8 @@ public class manageItemController implements Initializable{
 			alertLabel.setText("Valores digitados são inválidos");
 		} catch (InvalidQuantityException e) {
 			alertLabel.setText("A quantidade digitada é inválida");
+		} catch (EmptyStringException e) {
+			alertLabel.setText("Campos vazios!");
 		}
 	}
 }

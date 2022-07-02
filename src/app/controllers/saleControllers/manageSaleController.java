@@ -6,12 +6,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
+import app.model.exceptions.NotEnoughStock;
 import app.model.facades.ClientFacade;
 import app.model.facades.MenuFacade;
+import app.model.facades.ProductFacade;
 import app.model.facades.SaleFacade;
 import app.model.models.Client;
 import app.model.models.Item;
@@ -56,6 +60,9 @@ public class manageSaleController implements Initializable{
     private Label alertLabel;
     
     @FXML
+    private Label editAlert;
+    
+    @FXML
     private TableView<Item> itemsTable;
     
     @FXML
@@ -97,11 +104,15 @@ public class manageSaleController implements Initializable{
     
     private ArrayList<Item> itemsList = new ArrayList<Item>();
     
+    private boolean editUpdateProds = true;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (selected != null) {
 			setSaleData();
 			itemsList = SaleFacade.getSaleItems(selected.getId());
+			editAlert.setVisible(true);
+			editUpdateProds = false;
 		}
 		setTables();
 		buttonAdd.setDisable(true);
@@ -152,6 +163,7 @@ public class manageSaleController implements Initializable{
 	
 	@FXML
 	public void addItem(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
+		editUpdateProds = true;
 		Item selecItem = itemsTable.getSelectionModel().getSelectedItem();
 		
 		itemsList.add(selecItem);
@@ -161,6 +173,7 @@ public class manageSaleController implements Initializable{
 	
 	@FXML
 	public void removeItem(ActionEvent event) {
+		editUpdateProds = true;
 		Item selecItem = itemsCompTable.getSelectionModel().getSelectedItem();
 		
 		itemsList.remove(selecItem);
@@ -199,16 +212,19 @@ public class manageSaleController implements Initializable{
 			String hour = hourTxtFld.getText();
 			LocalTime hourForm = LocalTime.parse(hour, timeFormatter);
 			
-			String clientId;
-			
 			if(clientTable.getSelectionModel().getSelectedItem() != null) {
-				clientId = clientTable.getSelectionModel().getSelectedItem().getId();
+				Client client = clientTable.getSelectionModel().getSelectedItem();
 				ArrayList<Item> composition = itemsList;
 				
+				if (editUpdateProds) {
+					HashMap<String, Integer> allProductsUsed = SaleFacade.getAllProductsUsed(composition);
+					ProductFacade.updateStock(allProductsUsed);
+				}
+				
 				if (selected == null) {
-					SaleFacade.createSale(day, hourForm, payMeth, composition, clientId);
+					SaleFacade.createSale(day, hourForm, payMeth, composition, client);
 				} else {
-					SaleFacade.editSale(selected.getId(), day, hourForm, payMeth, composition, clientId);
+					SaleFacade.editSale(selected.getId(), day, hourForm, payMeth, composition, client);
 				}
 	    		
 	    	    Stage stage = (Stage) buttonCreate.getScene().getWindow();
@@ -225,6 +241,10 @@ public class manageSaleController implements Initializable{
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			alertLabel.setText("Valores digitados são inválidos");
+		} catch (EmptyStringException e) {
+			alertLabel.setText("Campos vazios!");
+		} catch (NotEnoughStock e) {
+			alertLabel.setText("Produtos insuficientes para realizar a venda!");
 		} 
 	}
 }

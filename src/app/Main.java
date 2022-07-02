@@ -10,6 +10,7 @@ import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
@@ -55,7 +56,7 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void testSituation() throws ExistentNicknameException, InvalidDateException, InvalidQuantityException, IdDoesntExist, EntitiesNotRegistred {
+	public static void testSituation() throws ExistentNicknameException, InvalidDateException, InvalidQuantityException, IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
 	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
 	    		.withResolverStyle(ResolverStyle.STRICT);
 	    
@@ -74,10 +75,11 @@ public class Main extends Application {
 		MenuFacade.createItem("Torta de maçã", "Torta feita de maçã", new BigDecimal("10"), "Sobremesa", ingredientes);
 		
 		ArrayList<Item> items = new ArrayList<Item>();
-		SaleFacade.createSale(data, hora, "Pix", items, "C6");
-		MenuFacade.chooseAItem("I4");
-		SaleFacade.addItem("V5", MenuFacade.chosenItem());
 		ClientFacade.createClient("Nome2", "11122233345", "nome2@yahoo.com.br", "(11)23344-5566");
+		SaleFacade.createSale(data, hora, "Pix", items, ClientFacade.listClient().get(0));
+		MenuFacade.chooseAItem("I4");
+		SaleFacade.addItem("V6", MenuFacade.chosenItem());
+		
 		
 	}
 	public static void changeScene(String src) {

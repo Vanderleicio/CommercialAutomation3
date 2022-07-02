@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
@@ -102,6 +103,8 @@ public class manageProductController implements Initializable{
 			alert.setText("Valores digitados são inválidos");
 		} catch (InvalidQuantityException e) {
 			alert.setText("A quantidade digitada é inválida");
+		} catch (EmptyStringException e) {
+			alert.setText("Campos vazios!");
 		}
 	}
 }

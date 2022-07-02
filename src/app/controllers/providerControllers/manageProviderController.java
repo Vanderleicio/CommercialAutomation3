@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
@@ -30,6 +31,9 @@ public class manageProviderController implements Initializable{
 
     @FXML
     private TextField nameTextField;
+    
+    @FXML
+    private Label alert;
     
     @FXML
     private TextField cnpjTextField;
@@ -76,6 +80,8 @@ public class manageProviderController implements Initializable{
 		} catch (EntitiesNotRegistred e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (EmptyStringException e) {
+			alert.setText("Campos vazios!");
 		} 
 	}
 }

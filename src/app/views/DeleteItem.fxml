@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="319.0" text="Remover Fornecedor" textAlignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="app.controllers.itemControllers.removeItemController">
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="319.0" text="Remover Item" textAlignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="app.controllers.menuControllers.removeItemController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <Button fx:id="buttonConfirm" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="28.0" prefWidth="82.0" text="Confirmar" />
-            <Label layoutX="46.0" layoutY="24.0" prefHeight="17.0" prefWidth="198.0" text="Confirmar a remoção do cadastro de" />
+            <Button fx:id="buttonConfirm" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#delete" prefHeight="28.0" prefWidth="82.0" text="Confirmar" />
+            <Label layoutX="46.0" layoutY="24.0" prefHeight="17.0" prefWidth="198.0" text="Confirmar a remoção do cadastro do" />
             <Button fx:id="buttonCancel" layoutX="176.0" layoutY="85.0" mnemonicParsing="false" onAction="#cancel" prefHeight="28.0" prefWidth="82.0" text="Cancelar" />
-            <Label fx:id="msgRemove" layoutX="131.0" layoutY="41.0" text="Label" />
+            <Label layoutX="131.0" layoutY="41.0" text="item?" />
          </children></AnchorPane>
   </content>
 </TitledPane>

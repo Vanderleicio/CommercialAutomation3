@@ -1,4 +1,4 @@
-package app.controllers.userControllers;
+package app.controllers.clientControllers;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -8,7 +8,9 @@ import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
+import app.model.facades.ClientFacade;
 import app.model.facades.UserFacade;
+import app.model.models.Client;
 import app.model.models.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,66 +24,55 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class createUserController implements Initializable{
+public class manageClientController implements Initializable{
 
     @FXML
     private Button buttonCreate;
-
-    @FXML
-    private ComboBox<String> userCategory;
     
     @FXML
     private Label alertNick;
     
     @FXML
-    private Label nickname;
-
-    @FXML
-    private PasswordField userPassField;
-
-    @FXML
-    private TextField userNameTextField;
+    private TextField nameTxtFld;
     
     @FXML
-    private TextField userNickTextField;
+    private TextField cpfTxtFld;
     
-    private User selected = UserFacade.chosenUser();
+    @FXML
+    private TextField emailTxtFld;
+    
+    @FXML
+    private TextField phoneTxtFld;
+    
+    private Client selected = ClientFacade.chosenClient();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		setComboBox();
 		if (selected != null) {
-			setUserData();
+			setClientData();
 		}
 	}
 	
-	public void setUserData() {
-		userNickTextField.setText(selected.getNickname());
-		userPassField.setText(selected.getPassword());
-		userNameTextField.setText(selected.getName());
-		userCategory.setValue(selected.getCategory());
-	}
-	
-	public void setComboBox() {
-		ArrayList<String> categories = new ArrayList<String>();
-		categories.add("Funcionário");
-		categories.add("Gerente");
-		userCategory.setItems(FXCollections.observableArrayList(categories));
+	public void setClientData() {
+		nameTxtFld.setText(selected.getName());
+		cpfTxtFld.setText(selected.getCpf());
+		emailTxtFld.setText(selected.getEmail());
+		phoneTxtFld.setText(selected.getPhoneNumber());
 	}
 	
 	@FXML
-	void createUser(ActionEvent event){
-		String userNick = userNickTextField.getText();
-		String userPass = new String(userPassField.getText());
-		String userName = userNameTextField.getText();
-		String userCateg = (String) userCategory.getValue();
+	void create(ActionEvent event){
+		String name = nameTxtFld.getText();
+		String cpf = cpfTxtFld.getText();
+		String email = emailTxtFld.getText();
+		String phone = phoneTxtFld.getText();
 		
 		try {
 			
 			if (selected == null) {
-				UserFacade.create(userNick, userPass, userName, userCateg);
+				ClientFacade.createClient(name, cpf, email, phone);
 			} else {
-				UserFacade.editUser(selected.getId(), userNick, userPass, userName, userCateg);
+				ClientFacade.editClient(selected.getId(), name, cpf, email, phone);
 			}
     		
     	    Stage stage = (Stage) buttonCreate.getScene().getWindow();

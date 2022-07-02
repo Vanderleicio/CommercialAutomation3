@@ -13,19 +13,25 @@ public class SaleFacade {
 
 	private static SaleDAO saleData = new SaleDAO();
 	
-	public static void createSale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemPurchased, String clientId) {
-		Sale newSale = new Sale(day, hour, paymentMethod, itemPurchased, clientId);
+	public static void createSale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemPurchased, Client client) throws EmptyStringException {
+		if (paymentMethod.equals("")){
+			throw new EmptyStringException();
+		}
+		Sale newSale = new Sale(day, hour, paymentMethod, itemPurchased, client);
 		saleData.add(newSale);
 	}
 
-	public static void editSale(String id, LocalDate newDay, LocalTime newHour, String newPaymentMethod, ArrayList<Item> newItems, String newClientId) throws IdDoesntExist, EntitiesNotRegistred {
+	public static void editSale(String id, LocalDate newDay, LocalTime newHour, String newPaymentMethod, ArrayList<Item> newItems, Client newClient) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
+		if (newPaymentMethod.equals("")){
+			throw new EmptyStringException();
+		}
 		Sale saleEdit = saleData.getOneSale(id);
 		
 		saleEdit.setDay(newDay);
 		saleEdit.setHour(newHour);
 		saleEdit.setPaymentMethod(newPaymentMethod);
 		saleEdit.setItemsPurchased(newItems);
-		saleEdit.setClientId(newClientId);
+		saleEdit.setClient(newClient);
 	}
 	
 	public static void delSale(String id) throws IdDoesntExist, EntitiesNotRegistred{
@@ -57,6 +63,29 @@ public class SaleFacade {
 		}
 		return comp;
 	}
+	
+	public static HashMap<String, Integer> getAllProductsUsed(ArrayList<Item> itemsPurchased){
+		HashMap<String, Integer> allProducts = new HashMap<String, Integer>();
+		Item item;
+		
+		for (int i = 0; i < itemsPurchased.size(); i++) {
+			item = itemsPurchased.get(i);
+			HashMap<String, Integer> composition = item.getComposition();
+			
+			for (HashMap.Entry<String,Integer> idQuant : composition.entrySet()) {
+				String prodId = idQuant.getKey();
+				int qnt = idQuant.getValue();
+				if (allProducts.containsKey(prodId)) {
+					int currentQnt = allProducts.get(prodId);
+					allProducts.replace(prodId, currentQnt + qnt);
+				} else {
+					allProducts.put(prodId, qnt);
+				}
+			}
+		}
+		return allProducts;
+	}
+	
 	
 	public static void chooseASale(String id){
 		saleData.setChosenEntityId(id);

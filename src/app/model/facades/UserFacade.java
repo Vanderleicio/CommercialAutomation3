@@ -13,7 +13,10 @@ public class UserFacade {
 	private static String idCurrentUser = "0";
 	
 	
-	public static void create(String nickName, String password, String name, String category) throws ExistentNicknameException{
+	public static void create(String nickName, String password, String name, String category) throws ExistentNicknameException, EmptyStringException{
+		if (nickName.equals("") | name.equals("") | password.equals("")){
+			throw new EmptyStringException();
+		}
 		try {
 			userData.searchNick(nickName);
 			throw new ExistentNicknameException();
@@ -45,7 +48,10 @@ public class UserFacade {
 		}
 	}
 	
-	public static void editUser(String id, String newNick, String newPass, String newName, String newCategory) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException {
+	public static void editUser(String id, String newNick, String newPass, String newName, String newCategory) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException, EmptyStringException {
+		if (newNick.equals("") | newName.equals("") | newPass.equals("")){
+			throw new EmptyStringException();
+		}
 		User userEdit = userData.getOneUser(id);
 		
 		try {

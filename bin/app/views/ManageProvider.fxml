@@ -15,6 +15,7 @@
             <Label layoutX="16.0" layoutY="158.0" text="Digite o endereço:" />
             <Button fx:id="buttonCreate" layoutX="100.0" layoutY="255.0" mnemonicParsing="false" onAction="#createProv" text="Concluir" />
             <TextField fx:id="addressTextField" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="230.0" promptText="Endereço" />
+            <Label fx:id="alert" layoutX="50.0" layoutY="238.0" prefHeight="17.0" prefWidth="160.0" />
          </children></AnchorPane>
   </content>
 </TitledPane>

@@ -8,9 +8,11 @@ import app.model.exceptions.CurrentUserException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
+import app.model.facades.MenuFacade;
 import app.model.facades.ProductFacade;
 import app.model.facades.ProviderFacade;
 import app.model.facades.UserFacade;
+import app.model.models.Item;
 import app.model.models.Product;
 import app.model.models.Provider;
 import app.model.models.User;
@@ -33,21 +35,17 @@ public class removeItemController implements Initializable{
     
     @FXML
     private Button buttonCancel;
-    
-    @FXML
-    private Label msgRemove;
 
-    private Product selected = ProductFacade.chosenProduct();
+    private Item selected = MenuFacade.chosenItem();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		msgRemove.setText(selected.getName());
 	}
 	
 	@FXML
-	void deleteUser(ActionEvent event){
+	void delete(ActionEvent event){
 		try {
-			ProductFacade.delProduct(selected.getId());
+			MenuFacade.delItem(selected.getId());
     	    Stage stage = (Stage) buttonConfirm.getScene().getWindow();
     	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     	    stage.close();

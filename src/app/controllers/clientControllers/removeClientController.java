@@ -1,4 +1,4 @@
-package app.controllers.providerControllers;
+package app.controllers.clientControllers;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import app.model.exceptions.CurrentUserException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
-import app.model.facades.ProviderFacade;
+import app.model.facades.ClientFacade;
 import app.model.facades.UserFacade;
-import app.model.models.Provider;
+import app.model.models.Client;
 import app.model.models.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class removeProviderController implements Initializable{
+public class removeClientController implements Initializable{
 
     @FXML
     private Button buttonConfirm;
@@ -32,7 +32,7 @@ public class removeProviderController implements Initializable{
     @FXML
     private Button buttonCancel;
 
-    private Provider selected = ProviderFacade.chosenProvider();
+    private Client selected = ClientFacade.chosenClient();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
@@ -41,7 +41,7 @@ public class removeProviderController implements Initializable{
 	@FXML
 	void delete(ActionEvent event){
 		try {
-			ProviderFacade.delProvider(selected.getId());
+			ClientFacade.delClient(selected.getId());
     	    Stage stage = (Stage) buttonConfirm.getScene().getWindow();
     	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     	    stage.close();
