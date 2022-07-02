@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,7 @@
 
 <AnchorPane prefHeight="416.0" prefWidth="679.0" stylesheets="@../styles/applicationContainer.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.reportControllers.ManagementReportController">
    <children>
-      <Button fx:id="stock" layoutX="60.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#generateReportStock" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Estoque">
+      <Button fx:id="stock" layoutX="59.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#generateReportStock" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Estoque">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -20,7 +21,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="sales" layoutX="502.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#generateReportSales" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Vendas">
+      <Button fx:id="sales" layoutX="502.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#generateReportSales" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Vendas">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -29,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="providers" layoutX="281.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#generateReportProvider" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Fornecedores">
+      <Button fx:id="providers" layoutX="281.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#generateReportProvider" prefHeight="38.0" prefWidth="117.0" styleClass="buttonGreen" text="Fornecedores">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,13 +41,23 @@
       </Button>
       <Separator layoutX="232.0" orientation="VERTICAL" prefHeight="416.0" prefWidth="0.0" />
       <Separator layoutX="440.0" layoutY="5.0" orientation="VERTICAL" prefHeight="416.0" prefWidth="0.0" />
-      <ComboBox fx:id="prodStock" layoutX="43.0" layoutY="92.0" prefWidth="150.0" />
-      <ComboBox fx:id="prodSales" layoutX="485.0" layoutY="213.0" prefWidth="150.0" />
-      <DatePicker fx:id="dateInitial" layoutX="473.0" layoutY="66.0" />
-      <DatePicker fx:id="dateEnd" layoutX="472.0" layoutY="131.0" />
-      <Text layoutX="21.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qual produto deseja ver a quantidade?" textAlignment="CENTER" wrappingWidth="194.93865966796875" />
-      <Text layoutX="530.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Período de:" />
-      <Text layoutX="550.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Até:" />
-      <Text layoutX="480.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qual tipo de prato deseja ver?" />
+      <DatePicker fx:id="dateInitial" layoutX="472.0" layoutY="41.0" />
+      <DatePicker fx:id="dateEnd" layoutX="472.0" layoutY="92.0" />
+      <Text layoutX="20.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qual produto deseja ver a quantidade?" textAlignment="CENTER" wrappingWidth="194.93865966796875" />
+      <Text layoutX="528.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Período de:" wrappingWidth="65.2335205078125" />
+      <Text layoutX="550.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Até:" />
+      <Text layoutX="479.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qual tipo de prato deseja ver?" />
+      <TableView fx:id="tableStock" layoutX="43.0" layoutY="92.0" prefHeight="186.0" prefWidth="150.0">
+        <columns>
+          <TableColumn fx:id="idStockCol" prefWidth="44.799983978271484" text="Id" />
+          <TableColumn fx:id="nameStockCol" prefWidth="104.80000915527344" text="Nome" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableSale" layoutX="483.0" layoutY="157.0" prefHeight="186.0" prefWidth="150.0">
+         <columns>
+            <TableColumn fx:id="idSaleCol" prefWidth="44.799983978271484" text="Id" />
+            <TableColumn fx:id="nameSaleCol" prefWidth="104.80000915527344" text="Nome" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
