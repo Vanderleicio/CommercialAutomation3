@@ -28,6 +28,7 @@ import app.model.models.Item;
 import app.model.models.Product;
 import app.model.models.Sale;
 import app.model.reports.ManagementReportProvider;
+import app.model.reports.ManagementReportSale;
 import app.model.reports.ManagementReportStock;
 
 public class ManagementReportController implements Initializable{
@@ -84,7 +85,6 @@ public class ManagementReportController implements Initializable{
     
     @FXML
     public void selectProd(MouseEvent event) {
-    	System.out.println("OKOK");
     	prodSelected = tableStock.getSelectionModel().getSelectedItem();
     	if (prodSelected != null) {
     		stock.setDisable(false);
@@ -102,7 +102,7 @@ public class ManagementReportController implements Initializable{
     }
     
     @FXML
-    public void beforeSelected(ActionEvent event) {
+    public void afterSelected(ActionEvent event) {
     	LocalDate after = dateEnd.getValue();
     	if((after != null) && (itemSelected != null)) {
     		sales.setDisable(false);
@@ -110,7 +110,7 @@ public class ManagementReportController implements Initializable{
     }
     
     @FXML
-    public void afterSelected(ActionEvent event) {
+    public void beforeSelected(ActionEvent event) {
     	LocalDate before = dateInitial.getValue();
     	if((before != null) && (itemSelected != null)) {
     		sales.setDisable(false);
@@ -120,6 +120,18 @@ public class ManagementReportController implements Initializable{
     @FXML
     public void generateReportSales(ActionEvent event) {
     	System.out.println("OKOK");
+    	System.out.println(dateInitial.getValue() + "---" + dateEnd.getValue());
+    	ManagementReportSale newSale = new ManagementReportSale();
+    	try {
+    		newSale.generatePDF(dateInitial.getValue(), dateEnd.getValue(), itemSelected.getId());
+    	} catch (IdDoesntExist e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EntitiesNotRegistred e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML

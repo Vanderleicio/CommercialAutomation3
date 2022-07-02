@@ -98,7 +98,6 @@ public class ManagementReportStock {
 	
 	public void byProduct(String idProd, Paragraph p, Document document) throws DocumentException, IdDoesntExist, EntitiesNotRegistred {
 		
-		ProductFacade.chooseAProduct(idProd);
 		Product prod = ProductFacade.chosenProduct();
 		
 		p = new Paragraph(" ");
