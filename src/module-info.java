@@ -6,6 +6,7 @@ module CommercialAutomation3 {
 	requires javafx.base;
 	requires itextpdf;
 	requires java.desktop;
+	requires org.junit.jupiter.api;
 	
 	opens app.controllers to javafx.graphics, javafx.fxml;
 	opens app.controllers.providerControllers to javafx.graphics, javafx.fxml;

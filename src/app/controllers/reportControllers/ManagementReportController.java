@@ -119,8 +119,6 @@ public class ManagementReportController implements Initializable{
     
     @FXML
     public void generateReportSales(ActionEvent event) {
-    	System.out.println("OKOK");
-    	System.out.println(dateInitial.getValue() + "---" + dateEnd.getValue());
     	ManagementReportSale newSale = new ManagementReportSale();
     	try {
     		newSale.generatePDF(dateInitial.getValue(), dateEnd.getValue(), itemSelected.getId());
