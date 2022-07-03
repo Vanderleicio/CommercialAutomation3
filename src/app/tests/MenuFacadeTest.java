@@ -8,14 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.HashMap;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import app.model.exceptions.EmptyStringException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
-import app.model.exceptions.NotEnoughStock;
+import app.model.exceptions.InvalidQuantityException;
 import app.model.facades.MenuFacade;
 import app.model.facades.ProductFacade;
 import app.model.models.Item;
@@ -30,25 +29,30 @@ class MenuFacadeTest{
     private static LocalDate date2 = LocalDate.parse("13/01/2023", dateTimeFormatter);
 	private static Provider provider1 = new Provider("Frutas ltda", "23456789", "Praça");
 	private static Provider provider2 = new Provider("Empresa ltda", "12345678", "Centro");
-	private static Product item1 = new Product("maçã", new BigDecimal("3.99"), date1, 10, provider1);
-	private static Product item2 = new Product("queijo", new BigDecimal("5.00"), date2, 22, provider2);
+	private static Product product1;
+	private static Product product2;
 	private static HashMap<String, Integer> composition1 = new HashMap<String, Integer>();
 	private static HashMap<String, Integer> composition2 = new HashMap<String, Integer>();
 	
-	@BeforeAll
-	void setComposition() {
-		String id1 = ProductFacade.listProduct().get(0).getId();
-		String id2 = ProductFacade.listProduct().get(1).getId();
-		composition1.put(id1, 5);
-		composition2.put(id2, 10);
-	}
-	
 	@BeforeEach
-	void resetList() throws IdDoesntExist, EntitiesNotRegistred {
+	void resetList() throws IdDoesntExist, EntitiesNotRegistred, InvalidDateException, InvalidQuantityException, EmptyStringException {
 		// Zera os itens na lista para realizar todos os testes.
 		while (MenuFacade.listItem().size() > 0) {
 			MenuFacade.delItem(MenuFacade.listItem().get(0).getId());
 		}
+		
+		ProductFacade.createProduct("maçã", new BigDecimal("3.99"), date1, 10, provider1);
+		String idProd1 = ProductFacade.listProduct().get(0).getId();
+		ProductFacade.chooseAProduct(idProd1);
+		product1 = ProductFacade.chosenProduct();
+		
+		ProductFacade.createProduct("queijo", new BigDecimal("5.00"), date2, 22, provider2);
+		String idProd2 = ProductFacade.listProduct().get(1).getId();
+		ProductFacade.chooseAProduct(idProd2);
+		product2 = ProductFacade.chosenProduct();
+		
+		composition1.put(idProd1, 5);
+		composition2.put(idProd2, 10);
 	}
 	
 	@Test
@@ -56,7 +60,9 @@ class MenuFacadeTest{
 		// Testa se um novo item é cadastrado com as informações corretas.
 		MenuFacade.createItem("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", composition1); 
 		assertEquals(1, MenuFacade.listItem().size(),"Tamanho da lista de itens apos uma adicao." );
-	
+		
+		
+		
 		String idTest1 = MenuFacade.listItem().get(0).getId(); 
 		MenuFacade.chooseAItem(idTest1);
 		Item itemTest1 = MenuFacade.chosenItem();
@@ -78,7 +84,7 @@ class MenuFacadeTest{
 	
 		assertEquals(new BigDecimal("22.2"), itemTest2.getPrice(), "Certificar que o preço foi cadastrado.");
 		assertEquals("Principal", itemTest2.getCategoryItems(), "Certificar que a categoria foi registrada.");
-		assertEquals("queijo", itemTest2.getName(), "Certificar que o nome 'torta de maçã' foi cadastrado certo.");
+		assertEquals("Torta de queijo", itemTest2.getName(), "Certificar que o nome 'torta de maçã' foi cadastrado certo.");
 		assertEquals("Torta feita de queijo", itemTest2.getDescription(), "Certificar que a descrição foi salva corretamente.");
 		assertEquals(composition2, itemTest2.getComposition(), "Certificar que a composiçã foi salva corretamente.");
 	}
@@ -128,47 +134,29 @@ class MenuFacadeTest{
 		assertFalse(MenuFacade.listItem().contains(itemTest1), "Produto foi deletado.");
 	}
 	
-	
 	@Test
-	void testUpdateStock() throws InvalidDateException, EmptyStringException, NotEnoughStock, IdDoesntExist, EntitiesNotRegistred {
-		// Testa se a quantidade de itens é diminuida ao atualizar o estoque.
+	void testAddEditAndDeleteProdFromItem() throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException, InvalidQuantityException {
 		MenuFacade.createItem("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", composition1);
-		MenuFacade.createItem("Torta de queijo", "Torta feita de queijo", new BigDecimal("22.2"), "Principal", composition2);
 		
 		String id1 = MenuFacade.listItem().get(0).getId();
 		MenuFacade.chooseAItem(id1);
 		Item itemTest1 = MenuFacade.chosenItem();
 		
-		String id2 = MenuFacade.listItem().get(1).getId();
-		MenuFacade.chooseAItem(id2);
-		Item itemTest2 = MenuFacade.chosenItem();
+		MenuFacade.addProductsItems(id1, product1, 5);
+		assertTrue(itemTest1.getComposition().containsKey(product1.getId()));
 		
-		HashMap<String, Integer> prodsUsed = new HashMap<String, Integer>();
-		prodsUsed.put(id1, 5);
-		prodsUsed.put(id2, 15);
+		MenuFacade.addProductsItems(id1, product2, 15);
+		assertTrue(itemTest1.getComposition().containsKey(product2.getId()));
 		
-		MenuFacade.updateStock(prodsUsed);
-		assertEquals(6, itemTest1.getCategoryItems(), "Verifica se foram retiradas 5 unidades do item");
-		assertEquals(7, itemTest2.getCategoryItems(), "Verifica se foram retiradas 15 unidades do item");
+		MenuFacade.editProdQnt(id1, product1.getId(), 10);
+		assertEquals(10, itemTest1.getComposition().get(product1.getId()));
+		
+		MenuFacade.removeProductFromItem(id1, product1);
+		assertFalse(itemTest1.getComposition().containsKey(product1.getId()));
+		
+		MenuFacade.removeProductFromItem(id1, product2);
+		assertFalse(itemTest1.getComposition().containsKey(product2.getId()));
 	}
 	
-	
-	@Test
-	void testExceptions() {
-		// Testa se as exceções relacionadas ao item são lançadas.
-		
-		assertThrows(InvalidDateException.class, () -> {
-			LocalDate date3 = LocalDate.parse("12/03/2000", dateTimeFormatter);
-			MenuFacade.createItem("torta de maçã", "Torta feita de maçã", date3, "Sobremesa", composition1); 
-		}, "Lançada quando a validade a ser cadastrada já passou.");
-		
-		assertThrows(InvalidCategoryItemsException.class, () -> {
-			MenuFacade.createItem("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), 0, composition1); 
-		}, "Lançada quando a quantidade a ser cadastrada não é maior que 0.");
-		
-		assertThrows(InvalidCategoryItemsException.class, () -> {
-			MenuFacade.createItem("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), -1, composition1); 
-		}, "Lançada quando a quantidade a ser cadastrada não é maior que 0.");
-	}
 }
 

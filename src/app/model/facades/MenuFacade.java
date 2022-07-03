@@ -44,6 +44,7 @@ public class MenuFacade {
 		Item newItem = new Item(name, description, price, category, composition);
 		itemData.add(newItem);
 	}
+	
 	/** Metodo edita items
 	 * 
 	 * @param id: id do item
@@ -144,10 +145,10 @@ public class MenuFacade {
 			throw new InvalidQuantityException();
 		}
 	}
-	/** Metodo 
+	/** Metodo para pegar somente os produtos de um item.
 	 * 
-	 * @param itemId
-	 * @return
+	 * @param itemId: ID do item
+	 * @return Lista dos produtos do item
 	 */
 	public static ArrayList<Product> getItemProds(String itemId){
 		Item item;
@@ -167,10 +168,10 @@ public class MenuFacade {
 		return comp;
 	}
 	
-	/** Metodo atualiza quantidade de items
+	/** Metodo para pegar somente a quantidade dos produtos de um item.
 	 * 
 	 * @param itemId: id do item
-	 * @return lista de componentes
+	 * @return lista das quantidades
 	 */
 	public static ArrayList<Integer> getItemQntt(String itemId){
 		Item item;
