@@ -1,5 +1,16 @@
 package app.controllers.saleControllers;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e paginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
+******************************/
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -34,53 +45,86 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/**Controller gerenciar vendas
+ * 
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ */
 public class ManagementSaleController implements Initializable{
-	
+	/**
+	 * Pscote de recursos
+	 */
     @FXML
     private ResourceBundle resources;
-
+    /**
+     * url de localicao
+     */
     @FXML
     private URL location;
-    
+    /**
+     * Botao adicionar
     @FXML
     private Button buttonAdd;
-
+    /**
+     * Botao editar
+     */
     @FXML
     private Button buttonEdit;
-
+    /**
+     * Botao composicao
+     */
     @FXML
     private Button buttonComp;
-
+    /**
+     * Botao remover
+     */
     @FXML
     private Button buttonRemove;
-    
+    /**
+     * Botao recibo
+     */
     @FXML
     private Button buttonReceipt;
-    
+    /**
+     * Tabela
+     */
     @FXML
     private TableView<Sale> salesTable;
-    
+    /**
+     * Coluna id
+     */
     @FXML
     private TableColumn<Sale, String> idCol;
-    
+    /**
+     * Coluna dia
+     */
     @FXML
     private TableColumn<Sale, String> dayCol;
-    
+    /**
+     * Coluna hora
+     */
     @FXML
     private TableColumn<Sale, String> hourCol;
-    
+    /**
+     * Coluna cliente
+     */
     @FXML
     private TableColumn<Sale, String> clientCol;
-    
+    /**
+     * Coluna preco
+     */
     @FXML
     private TableColumn<Sale, BigDecimal> priceCol;
-    
+    /**
+     * Coluna metodo de pagamento
+     */
     @FXML
     private TableColumn<Sale, String> payMethCol;
     
     Sale selected;
-    
+    /**
+     * Inicializando
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initTableView();
@@ -90,28 +134,42 @@ public class ManagementSaleController implements Initializable{
 		buttonReceipt.setDisable(true);
 	}
 	
-    
+    /**
+     * Chamando tela de adicionar
+     * @param event
+     */
     @FXML
     public void add(ActionEvent event) {
     	SaleFacade.chooseASale(null);
     	createScreens("ManageSale.fxml");
     }
-    
+    /**
+     * Chamando tela de editar
+     * @param event
+     */
     @FXML
     public void edit(ActionEvent event) {
     	createScreens("ManageSale.fxml");
     }
-    
+    /**
+     * Chamando tela de delete
+     * @param event
+     */
     @FXML
     public void remove(ActionEvent event) {
     	createScreens("DeleteSale.fxml");
     }
-    
+    /**
+     * Chamando tela de composicao
+     * @param event
+     */
     @FXML
     public void listComp(ActionEvent event) {
     	createScreens("CompSale.fxml");
     }
-    
+    /**
+     * Gerando recibo
+     */
     @FXML
     public void receipt(ActionEvent event) {
     	Receipt recep = new Receipt();
@@ -125,7 +183,10 @@ public class ManagementSaleController implements Initializable{
 			e.printStackTrace();
 		}
     }
-    
+    /**
+     * Criando telas
+     * @param viewName
+     */
     public void createScreens(String viewName) {
     	Stage addStage = new Stage();
         Parent root;
@@ -148,7 +209,10 @@ public class ManagementSaleController implements Initializable{
 			e.printStackTrace();
 		}
     }
-    
+    /**
+     * Selecionando venda
+     * @param event
+     */
     @FXML
     public void saleSelected(MouseEvent event) {
     	selected = salesTable.getSelectionModel().getSelectedItem();
@@ -160,7 +224,9 @@ public class ManagementSaleController implements Initializable{
     		SaleFacade.chooseASale(selected.getId());
     	}
     }
-    
+    /**
+     * Inserindo dados na tabela
+     */
     public void initTableView() {
     	ObservableList<Sale> SalesList = FXCollections.observableArrayList(SaleFacade.listSale());
     	

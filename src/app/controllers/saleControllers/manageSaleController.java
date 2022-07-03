@@ -1,5 +1,16 @@
 package app.controllers.saleControllers;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e paginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
+******************************/
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,77 +46,129 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/** Controller criar nova venda
+ * 
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ */
 public class manageSaleController implements Initializable{
-
+	/**
+	 * Botao criat
+	 */
     @FXML
     private Button buttonCreate;
-
+    /**
+     * Data
+     */
     @FXML
     private DatePicker dayDatePicker;
-    
+    /**
+     * Hora
+     */
     @FXML
     private TextField hourTxtFld;
-    
+    /**
+     * Forma de pagamento
+     */
     @FXML
     private TextField payMethTxtFld;
-    
+    /**
+     * Botao adicionar
+     */
     @FXML
     private Button buttonAdd;
-    
+    /**
+     * Botao remover
+     */
     @FXML
     private Button buttonRemove;
-    
+    /**
+     * Texto alerta
+     */
     @FXML
     private Label alertLabel;
-    
+    /**
+     * Texto alerta
+     */
     @FXML
     private Label editAlert;
-    
+    /**
+     * Tabela
+     */
     @FXML
     private TableView<Item> itemsTable;
-    
+    /**
+     * Coluna id tabela
+     */
     @FXML
     private TableColumn<Item, String> idCol;
-    
+    /**
+     * Coluna nome tabela
+     */
     @FXML
     private TableColumn<Item, String> nameCol;
-    
+    /**
+     * Coluna categoria tabela
+     */
     @FXML
     private TableColumn<Item, String> categCol;
-    
+    /**
+     * Coluna descricao da tabela
+     */
     @FXML
     private TableColumn<Item, String> descCol;
-    
+    /**
+     * Coluna composicao da tabela
+     */
     @FXML
     private TableView<Item> itemsCompTable;
-    
+    /**
+     * Coluna id item da tabela
+     */
     @FXML
     private TableColumn<Item, String> idCompCol;
-    
+    /**
+     * Coluna nome item da tabela
+     */
     @FXML
     private TableColumn<Item, String> nameCompCol;
-    
+    /**
+     * Coluna categoria item da tabela
+     */
     @FXML
     private TableColumn<Item, String> categCompCol;
-    
+    /**
+     * Coluna cliente da tabela
+     */
     @FXML
     private TableView<Client> clientTable;
-    
+    /**
+     * Coluna cliente id
+     */
     @FXML
     private TableColumn<Client, String> clientIdCol;
-    
+    /**
+     * Coluna cliente nome
+     */
     @FXML
     private TableColumn<Client, String> clientNameCol;
-    
+    /**
+     * Usuario selecionado
+     */
     private Sale selected = SaleFacade.chosenSale();
-    
+    /**
+     * Lista cliente
+     */
     private ArrayList<Client> clients = ClientFacade.listClient();
-    
+    /**
+     * Lista item
+     */
     private ArrayList<Item> itemsList = new ArrayList<Item>();
     
     private boolean editUpdateProds = true;
-    
+    /**
+     * inicializador
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (selected != null) {
@@ -118,13 +181,17 @@ public class manageSaleController implements Initializable{
 		buttonAdd.setDisable(true);
 		buttonRemove.setDisable(true);
 	}
-	
+	/**
+	 * Atualizar tabelas
+	 */
 	public void refreshTables() {
 		setTables();
 		itemsCompTable.refresh();
 		itemsTable.refresh();
 	}
-	
+	/**
+	 * Inserindo listas nas tabelas
+	 */
 	public void setTables() {
 		// Tabela de items disponíveis.
 	    ObservableList<Item> itemList = FXCollections.observableArrayList(MenuFacade.listItem());
@@ -154,13 +221,20 @@ public class manageSaleController implements Initializable{
 		clientNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 	}
 	
-	
+	/**
+	 * Inserindo dados nas variaveis
+	 */
 	public void setSaleData() {
 		dayDatePicker.setValue(selected.getDay());
 		hourTxtFld.setText(selected.getHour().toString());
 		payMethTxtFld.setText(selected.getPaymentMethod());
 	}
-	
+	/**
+	 * Adicionando item
+	 * @param event
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	@FXML
 	public void addItem(ActionEvent event) throws IdDoesntExist, EntitiesNotRegistred {
 		editUpdateProds = true;
@@ -170,7 +244,10 @@ public class manageSaleController implements Initializable{
 		
 		refreshTables();
 	}
-	
+	/**
+	 * Removendo item
+	 * @param event
+	 */
 	@FXML
 	public void removeItem(ActionEvent event) {
 		editUpdateProds = true;
@@ -180,7 +257,10 @@ public class manageSaleController implements Initializable{
 		
 		refreshTables();
 	}
-	
+	/**
+	 * Celecionando item
+	 * @param event
+	 */
     @FXML
     public void itemSelected(MouseEvent event) {
     	Item selecItem = itemsTable.getSelectionModel().getSelectedItem();
@@ -189,7 +269,10 @@ public class manageSaleController implements Initializable{
     		buttonRemove.setDisable(true);
     	}
     }
-    
+    /** Selecione componente do item
+     * 
+     * @param event
+     */
     @FXML
     public void itemCompSelected(MouseEvent event) {
     	Item selecItem = itemsCompTable.getSelectionModel().getSelectedItem();
@@ -198,7 +281,10 @@ public class manageSaleController implements Initializable{
     		buttonRemove.setDisable(false);
     	}
     }
-    
+    /**
+     * Criando venda
+     * @param event
+     */
 	@FXML
 	void createSale(ActionEvent event){
 		try {

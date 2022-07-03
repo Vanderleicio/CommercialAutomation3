@@ -1,5 +1,14 @@
 package app.controllers.userControllers;
-
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e paginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
+******************************/
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,32 +30,54 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/** Classe criando usuario
+ * 
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ */
 public class createUserController implements Initializable{
-
+	/**
+	 * Botao criar
+	 */
     @FXML
     private Button buttonCreate;
-
+    /**
+     * Caixa combo de categoria de usuario
+     */
     @FXML
     private ComboBox<String> userCategory;
-    
+    /**
+     * Texto de alerta
+     */
     @FXML
     private Label alertNick;
-    
+   /**
+    * Texto apelido
+    */
     @FXML
     private Label nickname;
-
+    /**
+     * Senha
+     */
     @FXML
     private PasswordField userPassField;
-
+    /**
+     * Caixa de texto de nome de usuario
+     */
     @FXML
     private TextField userNameTextField;
-    
+    /**
+     * Caixa de texto de apelido do usuario
+     */
     @FXML
     private TextField userNickTextField;
-    
+    /**
+     * Usuario selecionado
+     */
     private User selected = UserFacade.chosenUser();
-    
+    /**
+     * Inicializador
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
 		setComboBox();
@@ -54,21 +85,28 @@ public class createUserController implements Initializable{
 			setUserData();
 		}
 	}
-	
+	/**
+	 * Adicionar as informações nas variaveis correspondentes
+	 */
 	public void setUserData() {
 		userNickTextField.setText(selected.getNickname());
 		userPassField.setText(selected.getPassword());
 		userNameTextField.setText(selected.getName());
 		userCategory.setValue(selected.getCategory());
 	}
-	
+	/**
+	 * Selecionando dado do combobox
+	 */
 	public void setComboBox() {
 		ArrayList<String> categories = new ArrayList<String>();
 		categories.add("Funcionário");
 		categories.add("Gerente");
 		userCategory.setItems(FXCollections.observableArrayList(categories));
 	}
-	
+	/**
+	 * Criar usuario
+	 * @param event
+	 */
 	@FXML
 	void createUser(ActionEvent event){
 		String userNick = userNickTextField.getText();
