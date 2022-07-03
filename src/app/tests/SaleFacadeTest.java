@@ -45,8 +45,11 @@ class SaleFacadeTest{
 		}
 		HashMap<String, Integer> comp = new HashMap<String, Integer>();
 		
+		itemsPurchased1 = new ArrayList<Item>();
 		item1 = new Item("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", comp);
 		itemsPurchased1.add(item1);
+		
+		itemsPurchased2 = new ArrayList<Item>();
 		item2 = new Item("Torta de queijo", "Torta feita de queijo", new BigDecimal("22.2"), "Principal", comp);
 		itemsPurchased2.add(item2);
 	}
@@ -66,10 +69,10 @@ class SaleFacadeTest{
 		assertEquals(date1, saleTest1.getDay(), "Certificar que a data foi registrada.");
 		assertEquals(time1, saleTest1.getHour(), "Certificar que a hora da venda foi cadastrada certa.");
 		assertEquals("Pix", saleTest1.getPaymentMethod(), "Certificar que o método de pagamento foi salva corretamente.");
-		assertEquals(itemsPurchased1, saleTest1.getItemsPurchased(), "Certificar que a composiçã foi salva corretamente.");
-		assertEquals(client1, saleTest1.getClient(), "Certificar que a composiçã foi salva corretamente.");
+		assertEquals(itemsPurchased1, saleTest1.getItemsPurchased(), "Certificar que os itens comprados foram salvos corretamente.");
+		assertEquals(client1, saleTest1.getClient(), "Certificar que o cliente foi salvo corretamente.");
 		
-		SaleFacade.createSale("Torta de queijo", "Torta feita de queijo", new BigDecimal("22.2"), "Principal", client2);
+		SaleFacade.createSale(date2, time2, "Dinheiro", itemsPurchased2, client2);
 		assertEquals(2, SaleFacade.listSale().size(),"Tamanho da lista de itens apos duas adicoes.");
 		
 		String idTest2 = SaleFacade.listSale().get(1).getId();
@@ -77,81 +80,127 @@ class SaleFacadeTest{
 		Sale saleTest2 = SaleFacade.chosenSale();
 		assertNotNull(saleTest2, "Certifica que o id existe.");
 	
-		assertEquals(new BigDecimal("22.2"), saleTest2.getPrice(), "Certificar que o preço foi cadastrado.");
-		assertEquals("Principal", saleTest2.getCategorySales(), "Certificar que a categoria foi registrada.");
-		assertEquals("Torta de queijo", saleTest2.getName(), "Certificar que o nome 'torta de maçã' foi cadastrado certo.");
-		assertEquals("Torta feita de queijo", saleTest2.getDescription(), "Certificar que a descrição foi salva corretamente.");
-		assertEquals(client2, saleTest2.getComposition(), "Certificar que a composiçã foi salva corretamente.");
+		assertEquals(new BigDecimal("22.2"), saleTest2.getPriceTotal(), "Certificar que o preço foi calculado.");
+		assertEquals(date2, saleTest2.getDay(), "Certificar que a data foi registrada.");
+		assertEquals(time2, saleTest2.getHour(), "Certificar que a hora da venda foi cadastrada certa.");
+		assertEquals("Dinheiro", saleTest2.getPaymentMethod(), "Certificar que o método de pagamento foi salva corretamente.");
+		assertEquals(itemsPurchased2, saleTest2.getItemsPurchased(), "Certificar que os itens comprados foram salvos corretamente.");
+		assertEquals(client2, saleTest2.getClient(), "Certificar que o cliente foi salvo corretamente.");
 	}
 	
 	@Test
 	void testEditingASaleInformation() throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException, InvalidDateException {
 		// Testa se as informações de um item são editadas corretamente
-		SaleFacade.createSale("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", client1); 
+		SaleFacade.createSale(date1, time1, "Pix", itemsPurchased1, client1); 
 		String idTest1 = SaleFacade.listSale().get(0).getId();
-		BigDecimal paymentMethodTest1 = SaleFacade.listSale().get(0).getPrice();
-		String itemsTest1 = SaleFacade.listSale().get(0).getCategorySales();
-		String hourTest1 = SaleFacade.listSale().get(0).getDescription();
-		String dayTest1 = SaleFacade.listSale().get(0).getName();
-
+		String paymentMethodTest1 = SaleFacade.listSale().get(0).getPaymentMethod();
+		ArrayList<Item> itemsTest1 = SaleFacade.listSale().get(0).getItemsPurchased();
+		LocalTime hourTest1 = SaleFacade.listSale().get(0).getHour();
+		LocalDate dayTest1 = SaleFacade.listSale().get(0).getDay();
+		
 		SaleFacade.chooseASale(idTest1);
 		Sale saleTest1 = SaleFacade.chosenSale();
 		
-		SaleFacade.editSale(idTest1, "Doce de maçã", hourTest1, paymentMethodTest1, itemsTest1, client1);
-		assertEquals("Doce de maçã", saleTest1.getName(), "Mudanca de nome do item para 'Doce de maçã'.");
+		SaleFacade.editSale(idTest1, date2, hourTest1, paymentMethodTest1, itemsTest1, client1);
+		assertEquals(date2, saleTest1.getDay(), "Mudanca do dia da venda.");
 		
-		SaleFacade.editSale(idTest1, dayTest1, "Doce feito de maçã", paymentMethodTest1, itemsTest1, client1);
-		assertEquals("Doce feito de maçã", saleTest1.getDescription(), "Mudanca da descrição do item.");
+		SaleFacade.editSale(idTest1, dayTest1, time2, paymentMethodTest1, itemsTest1, client1);
+		assertEquals(time2, saleTest1.getHour(), "Mudanca da hora da venda.");
 		
-		SaleFacade.editSale(idTest1, dayTest1, hourTest1, new BigDecimal("23.45"), itemsTest1, client1);
-		assertEquals(new BigDecimal("23.45"), saleTest1.getPrice(), "Mudanca do preço do item.");
+		SaleFacade.editSale(idTest1, dayTest1, hourTest1, "Cartão", itemsTest1, client1);
+		assertEquals("Cartão", saleTest1.getPaymentMethod(), "Mudanca da forma de pagamento da venda.");
 		
-		SaleFacade.editSale(idTest1, dayTest1, hourTest1, paymentMethodTest1, "Salada", client1);
-		assertEquals("Salada", saleTest1.getCategorySales(), "Mudança da categoria do item.");
+		SaleFacade.editSale(idTest1, dayTest1, hourTest1, paymentMethodTest1, itemsPurchased2, client1);
+		assertEquals(itemsPurchased2, saleTest1.getItemsPurchased(), "Mudança dos itens da venda.");
 		
 		SaleFacade.editSale(idTest1, dayTest1, hourTest1, paymentMethodTest1, itemsTest1, client2);
-		assertEquals(client2, saleTest1.getComposition(), "Mudança da composição do item.");
+		assertEquals(client2, saleTest1.getClient(), "Mudança do cliente da venda.");
 	}
 	
 	@Test
 	void testDeletingAnSale() throws EmptyStringException, IdDoesntExist, EntitiesNotRegistred, InvalidDateException {
 		// Testa deletar um item através do seu ID.
-		SaleFacade.createSale("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", client1); 
-		SaleFacade.createSale("Torta de queijo", "Torta feita de queijo", new BigDecimal("22.2"), "Principal", client2);
+		SaleFacade.createSale(date1, time1, "Pix", itemsPurchased1, client1);  
+		SaleFacade.createSale(date2, time2, "Dinheiro", itemsPurchased2, client2);
 		
 		String idTest1 = SaleFacade.listSale().get(0).getId();
 		SaleFacade.chooseASale(idTest1);
 		Sale saleTest1 = SaleFacade.chosenSale();
 		
-		assertTrue(SaleFacade.listSale().contains(saleTest1), "Produto foi cadastrado");
+		assertTrue(SaleFacade.listSale().contains(saleTest1), "Venda foi cadastrada");
 		
 		SaleFacade.delSale(idTest1);
-		assertFalse(SaleFacade.listSale().contains(saleTest1), "Produto foi deletado.");
+		assertFalse(SaleFacade.listSale().contains(saleTest1), "Venda foi deletada.");
 	}
 	
 	@Test
-	void testAddEditAndDeleteItemFromSale() throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException, InvalidQuantityException {
-		SaleFacade.createSale("torta de maçã", "Torta feita de maçã", new BigDecimal("11.1"), "Sobremesa", client1);
+	void testAddAndDeleteItemFromSale() throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException, InvalidQuantityException {
+		SaleFacade.createSale(date1, time1, "Pix", itemsPurchased1, client1);  
 		
 		String id1 = SaleFacade.listSale().get(0).getId();
 		SaleFacade.chooseASale(id1);
 		Sale saleTest1 = SaleFacade.chosenSale();
 		
-		SaleFacade.addProductsSales(id1, product1, 5);
-		assertTrue(saleTest1.getComposition().containsKey(product1.getId()));
+		HashMap<String, Integer> compTest = new HashMap<String, Integer>();
+		Item itemTest1 = new Item("Doce", "Comida doce", new BigDecimal("33.33"), "Sobremesa", compTest);
+		Item itemTest2 = new Item("Salgado", "Comida salgada", new BigDecimal("44.44"), "Entrada", compTest);
 		
-		SaleFacade.addProductsSales(id1, product2, 15);
-		assertTrue(saleTest1.getComposition().containsKey(product2.getId()));
 		
-		SaleFacade.editProdQnt(id1, product1.getId(), 10);
-		assertEquals(10, saleTest1.getComposition().get(product1.getId()));
+		SaleFacade.addItem(id1, itemTest1);
+		assertTrue(saleTest1.getItemsPurchased().contains(itemTest1));
 		
-		SaleFacade.removeProductFromSale(id1, product1);
-		assertFalse(saleTest1.getComposition().containsKey(product1.getId()));
+		SaleFacade.addItem(id1, itemTest2);
+		assertTrue(saleTest1.getItemsPurchased().contains(itemTest2));
 		
-		SaleFacade.removeProductFromSale(id1, product2);
-		assertFalse(saleTest1.getComposition().containsKey(product2.getId()));
+		SaleFacade.deleteItem(id1, itemTest1);
+		assertFalse(saleTest1.getItemsPurchased().contains(itemTest1));
+		
+		SaleFacade.deleteItem(id1, itemTest2);
+		assertFalse(saleTest1.getItemsPurchased().contains(itemTest2));
 	}
 	
+	@Test
+	void testGettingItemsFromASale() throws EmptyStringException {
+		HashMap<String, Integer> compTest = new HashMap<String, Integer>();
+		Item itemTest1 = new Item("Doce", "Comida doce", new BigDecimal("33.33"), "Sobremesa", compTest);
+		Item itemTest2 = new Item("Salgado", "Comida salgada", new BigDecimal("44.44"), "Entrada", compTest);
+		
+		ArrayList<Item> itemsPurchasedTest = new ArrayList<Item>();
+		itemsPurchasedTest.add(itemTest1);
+		itemsPurchasedTest.add(itemTest2);
+		
+		SaleFacade.createSale(date1, time1, "Pix", itemsPurchasedTest, client1);
+		String id1 = SaleFacade.listSale().get(0).getId();
+		
+		
+		assertTrue(SaleFacade.getSaleItems(id1).contains(itemTest1) && SaleFacade.getSaleItems(id1).contains(itemTest2));
+	}
+	
+	@Test
+	void testGettingAllProductsUsedInASale() throws EmptyStringException {
+		HashMap<String, Integer> compTest1 = new HashMap<String, Integer>();
+		compTest1.put(product1.getId(), 5);
+		compTest1.put(product2.getId(), 15);
+		
+		HashMap<String, Integer> compTest2 = new HashMap<String, Integer>();
+		compTest2.put(product1.getId(), 3);
+		compTest2.put(product2.getId(), 13);
+		
+		Item itemTest1 = new Item("Doce", "Comida doce", new BigDecimal("33.33"), "Sobremesa", compTest1);
+		Item itemTest2 = new Item("Salgado", "Comida salgada", new BigDecimal("44.44"), "Entrada", compTest2);
+		
+		ArrayList<Item> itemsPurchasedTest = new ArrayList<Item>();
+		itemsPurchasedTest.add(itemTest1);
+		itemsPurchasedTest.add(itemTest2);
+		
+		SaleFacade.createSale(date1, time1, "Pix", itemsPurchasedTest, client1);
+		
+		String idProd1 = product1.getId();
+		String idProd2 = product2.getId();
+		
+		assertTrue(SaleFacade.getAllProductsUsed(itemsPurchasedTest).get(idProd1) == 8);
+		assertTrue(SaleFacade.getAllProductsUsed(itemsPurchasedTest).get(idProd2) == 28);
+	}
+
 }
 

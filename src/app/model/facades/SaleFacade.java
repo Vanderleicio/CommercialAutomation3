@@ -27,10 +27,12 @@ import app.model.models.*;
  *
  */
 public class SaleFacade {
+	
 	/**
 	 * Atributo estatico para ter acesso ao SaleDAO
 	 */
 	private static SaleDAO saleData = new SaleDAO();
+	
 	/**Metodo cria nova venda
 	 * 
 	 * @param day: dia da venda
@@ -72,6 +74,7 @@ public class SaleFacade {
 		saleEdit.setItemsPurchased(newItems);
 		saleEdit.setClient(newClient);
 	}
+	
 	/**Metodo deleta venda
 	 * 
 	 * @param id: id da venda
@@ -81,6 +84,7 @@ public class SaleFacade {
 	public static void delSale(String id) throws IdDoesntExist, EntitiesNotRegistred{
 		saleData.delete(id);
 	}
+	
 	/**Metodo adiciona item no carrinho de compras
 	 * 
 	 * @param idPEdit: id da venda
@@ -92,6 +96,7 @@ public class SaleFacade {
 		Sale saleEdit = (Sale) saleData.searchEntities(idPEdit);
 		saleEdit.addItem(itemPAdd);
 	}
+	
 	/**Deleta item do carrinho
 	 * 
 	 * @param idPEditar: id da venda
@@ -106,9 +111,10 @@ public class SaleFacade {
 			saleData.delete(idPEditar);
 		}
 	}
+	
 	/**Metodo mostra itens do carrinho que foram vendidos
 	 * 
-	 * @param saleId>cid da venda
+	 * @param saleId: id da venda
 	 * @return lista
 	 */
 	public static ArrayList<Item> getSaleItems(String saleId){
@@ -123,7 +129,8 @@ public class SaleFacade {
 		}
 		return comp;
 	}
-	/** Metodo mostra itens em estoque
+	
+	/** Retorna todos os produtos que são usados nessa venda.
 	 * 
 	 * @param itemsPurchased: carrinho de compras
 	 * @return hashmap de produtos
