@@ -1,15 +1,34 @@
 package app.model.daos;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e paginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
+******************************/
+
 import java.util.ArrayList;
 
 import app.model.models.Entity;
 import app.model.exceptions.*;
 
-
+/** Classe gerencia a classe abstrata do DAO
+ * 
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ */
 public abstract class AbstractDAO {
-
+	/**
+	 * Atributo de uma lista de entidades
+	 */
 	private ArrayList<Entity> listEntity = new ArrayList<>();
-	
+	/**
+	 * Atributo do id da entidade
+	 */
 	private String chosenEntityId;
 	/**
 	 * Metodo geral para adicionar a entidade cadastrada na ArrayList.
@@ -96,7 +115,12 @@ public abstract class AbstractDAO {
 	public int sizeList() {
 		return listEntity.size();
 	}
-	
+	/**
+	 * 
+	 * @param <T>
+	 * @param list
+	 * @return lista
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> ArrayList<T> castList(ArrayList<?> list){
 		return (ArrayList<T>) list;
@@ -120,14 +144,14 @@ public abstract class AbstractDAO {
 	}
 
 	/**
-	 * @return the chosenEntityId
+	 * @return o ID da entidade escolhida
 	 */
 	public String getChosenEntityId() {
 		return chosenEntityId;
 	}
 
-	/** Metodo define o 
-	 * @param chosenEntityId the chosenEntityId to set
+	/** Metodo define o id escolhido
+	 * @param id escolhido
 	 */
 	public void setChosenEntityId(String chosenEntityId) {
 		this.chosenEntityId = chosenEntityId;
