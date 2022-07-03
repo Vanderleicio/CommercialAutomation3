@@ -26,7 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-/**Controller menu
+/**Controller do menu geral.
  * 
  * @author Alana Sampaio
  * @author Vanderleicio Junior
