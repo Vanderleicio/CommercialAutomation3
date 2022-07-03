@@ -2,13 +2,13 @@ package app.model.reports;
 
 /***************************
 Autores: Alana Sampaio e Vanderleicio Junior
-Componente Curricular: Programação II
-Concluido em: 09/05/2022
-Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
-trecho de código de outro colega ou de outro autor, tais como provindos de livros e
-apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
-de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
-do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e p�ginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
 ******************************/
 
 import java.awt.Desktop;

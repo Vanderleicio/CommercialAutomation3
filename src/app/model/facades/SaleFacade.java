@@ -1,5 +1,16 @@
 package app.model.facades;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programação II
+Concluido em: 02/07/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************/
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -9,10 +20,26 @@ import app.model.daos.SaleDAO;
 import app.model.exceptions.*;
 import app.model.models.*;
 
+/**
+ * Classe responsavel por gerenciar vendas
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ *
+ */
 public class SaleFacade {
-
+	/**
+	 * Atributo estatico para ter acesso ao SaleDAO
+	 */
 	private static SaleDAO saleData = new SaleDAO();
-	
+	/**Metodo cria nova venda
+	 * 
+	 * @param day: dia da venda
+	 * @param hour: hora da venda
+	 * @param paymentMethod: forma de pagamento
+	 * @param itemPurchased: carrinho de compras
+	 * @param client: cliente que fez o pedido
+	 * @throws EmptyStringException
+	 */
 	public static void createSale(LocalDate day, LocalTime hour, String paymentMethod, ArrayList<Item> itemPurchased, Client client) throws EmptyStringException {
 		if (paymentMethod.equals("")){
 			throw new EmptyStringException();
@@ -21,6 +48,18 @@ public class SaleFacade {
 		saleData.add(newSale);
 	}
 
+	/**Metodo edita venda
+	 * 
+	 * @param id: id da venda
+	 * @param newDay: nova data
+	 * @param newHour: novo horario
+	 * @param newPaymentMethod: novo metodo de pagamento
+	 * @param newItems: novos itens 
+	 * @param newClient: novo cliente
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 * @throws EmptyStringException
+	 */
 	public static void editSale(String id, LocalDate newDay, LocalTime newHour, String newPaymentMethod, ArrayList<Item> newItems, Client newClient) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
 		if (newPaymentMethod.equals("")){
 			throw new EmptyStringException();
@@ -33,16 +72,33 @@ public class SaleFacade {
 		saleEdit.setItemsPurchased(newItems);
 		saleEdit.setClient(newClient);
 	}
-	
+	/**Metodo deleta venda
+	 * 
+	 * @param id: id da venda
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	public static void delSale(String id) throws IdDoesntExist, EntitiesNotRegistred{
 		saleData.delete(id);
 	}
-	
+	/**Metodo adiciona item no carrinho de compras
+	 * 
+	 * @param idPEdit: id da venda
+	 * @param itemPAdd: item a ser adicionado
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	public static void addItem(String idPEdit, Item itemPAdd) throws IdDoesntExist, EntitiesNotRegistred {
 		Sale saleEdit = (Sale) saleData.searchEntities(idPEdit);
 		saleEdit.addItem(itemPAdd);
 	}
-	
+	/**Deleta item do carrinho
+	 * 
+	 * @param idPEditar: id da venda
+	 * @param itemPDeletar: item a ser deletado do carrinho
+	 * @throws IdDoesntExist
+	 * @throws EntitiesNotRegistred
+	 */
 	public static void deleteItem(String idPEditar, Item itemPDeletar) throws IdDoesntExist, EntitiesNotRegistred {
 		Sale saleEdit = (Sale) saleData.searchEntities(idPEditar);
 		int size = saleEdit.deleteItem(itemPDeletar);
@@ -50,7 +106,11 @@ public class SaleFacade {
 			saleData.delete(idPEditar);
 		}
 	}
-	
+	/**Metodo mostra itens do carrinho que foram vendidos
+	 * 
+	 * @param saleId>cid da venda
+	 * @return lista
+	 */
 	public static ArrayList<Item> getSaleItems(String saleId){
 		Sale sale;
 		ArrayList<Item> comp = new ArrayList<Item>();
@@ -63,7 +123,11 @@ public class SaleFacade {
 		}
 		return comp;
 	}
-	
+	/** Metodo mostra itens em estoque
+	 * 
+	 * @param itemsPurchased: carrinho de compras
+	 * @return hashmap de produtos
+	 */
 	public static HashMap<String, Integer> getAllProductsUsed(ArrayList<Item> itemsPurchased){
 		HashMap<String, Integer> allProducts = new HashMap<String, Integer>();
 		Item item;
@@ -86,11 +150,16 @@ public class SaleFacade {
 		return allProducts;
 	}
 	
-	
+	/** 
+	 * 
+	 * @param id: id da venda
+	 */
 	public static void chooseASale(String id){
 		saleData.setChosenEntityId(id);
 	}
-	
+	/** Metodo procura id da venda
+	 * 
+	 */
 	public static Sale chosenSale() {
 		try {
 			String id = saleData.getChosenEntityId();
@@ -99,7 +168,10 @@ public class SaleFacade {
 			return null;
 		}
 	}
-	
+	/** Metodo mostra a lista de vendas
+	 * 
+	 * @return lista de vendas
+	 */
 	public static ArrayList<Sale> listSale(){
 		return saleData.getSaleList();
 	}

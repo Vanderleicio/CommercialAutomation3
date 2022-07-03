@@ -1,12 +1,12 @@
 /***************************
 Autores: Alana Sampaio e Vanderleicio Junior
-Componente Curricular: Programa��o II
-Concluido em: 09/05/2022
-Declaro que este c�digo foi elaborado por mim de forma individual e n�o cont�m nenhum
-trecho de c�digo de outro colega ou de outro autor, tais como provindos de livros e
-apostilas, e p�ginas ou documentos eletr�nicos da Internet. Qualquer trecho de c�digo
-de outra autoria que n�o a minha est� destacado com uma cita��o para o autor e a fonte
-do c�digo, e estou ciente que estes trechos n�o ser�o considerados para fins de avalia��o.
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e p�ginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
 ******************************/
 
 package app.model.models;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
- * Representa os itens que ser�o cadastrados.
+ * Representa os itens que serao cadastrados.
  * @author Alana Sampaio
  * @author Vanderleicio Junior
  * 

@@ -126,7 +126,7 @@ public abstract class AbstractDAO {
 		return chosenEntityId;
 	}
 
-	/**
+	/** Metodo define o 
 	 * @param chosenEntityId the chosenEntityId to set
 	 */
 	public void setChosenEntityId(String chosenEntityId) {
