@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 /**Controller menu
  * 
  * @author Alana Sampaio
@@ -42,6 +45,10 @@ public class mainController {
     /**
      * Botao cliente
      */
+    
+    @FXML
+    private Button exitButton;
+    
     @FXML
     private Button titleClient;
     /**
@@ -80,7 +87,6 @@ public class mainController {
      * @param rb
      */
     public void initialize(URL url, ResourceBundle rb) {
-    	
     }
     /**
      * Direcionando a tela 
@@ -135,7 +141,7 @@ public class mainController {
      * Abrir tela
      * @param url
      */
-    @FXML
+  
     private void open(String url) {
     	Parent root = null;
         try {
@@ -208,6 +214,6 @@ public class mainController {
     	titlePage.setText("Gerenciamento de Vendas");
     	openManagementSales();
     }
-
+    
 }
 

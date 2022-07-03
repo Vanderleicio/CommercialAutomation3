@@ -18,8 +18,10 @@ import java.util.HashMap;
 
 import app.model.daos.ProductDAO;
 import app.model.exceptions.*;
+import app.model.models.Item;
 import app.model.models.Product;
 import app.model.models.Provider;
+import app.model.models.Sale;
 
 /**
  * Classe responsavel por gerenciar produtos
@@ -60,8 +62,15 @@ public class ProductFacade {
 	 * @param id: id do produto
 	 * @throws IdDoesntExist
 	 * @throws EntitiesNotRegistred
+	 * @throws LinkedItemException 
 	 */
-	public static void delProduct(String id) throws IdDoesntExist, EntitiesNotRegistred{
+	public static void delProduct(String id) throws IdDoesntExist, EntitiesNotRegistred, LinkedItemException{
+		ArrayList<Item> allItems = MenuFacade.listItem();
+		for (int i = 0; i < allItems.size(); i++) {
+			if(allItems.get(i).getComposition().containsKey(id)) {
+				throw new LinkedItemException();
+			}
+		}
 		prodData.delete(id);
 	}
 	/** Metodo edita produto

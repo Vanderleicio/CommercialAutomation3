@@ -115,9 +115,7 @@ public class manageClientController implements Initializable{
     	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     	    stage.close();
     	    
-		} catch(ExistentNicknameException loginExcept) {
-			alertNick.setText("O nick digitado já existe!");
-    	} catch (IdDoesntExist e) {
+		}  catch (IdDoesntExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (EntitiesNotRegistred e) {

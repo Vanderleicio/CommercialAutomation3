@@ -15,7 +15,9 @@ import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.IdDoesntExist;
 import app.model.exceptions.InvalidDateException;
 import app.model.exceptions.InvalidQuantityException;
+import app.model.exceptions.LinkedItemException;
 import app.model.exceptions.NotEnoughStock;
+import app.model.facades.MenuFacade;
 import app.model.facades.ProductFacade;
 import app.model.models.Product;
 import app.model.models.Provider;
@@ -29,7 +31,7 @@ class ProductFacadeTest{
     private static LocalDate date1 = LocalDate.parse("12/03/2023", dateTimeFormatter);
     private static LocalDate date2 = LocalDate.parse("13/01/2023", dateTimeFormatter);
 	@BeforeEach
-	void resetList() throws IdDoesntExist, EntitiesNotRegistred {
+	void resetList() throws IdDoesntExist, EntitiesNotRegistred, LinkedItemException {
 		// Zera os produtos na lista para realizar todos os testes.
 		while (ProductFacade.listProduct().size() > 0) {
 			ProductFacade.delProduct(ProductFacade.listProduct().get(0).getId());
@@ -95,7 +97,7 @@ class ProductFacadeTest{
 	}
 	
 	@Test
-	void testDeletingAnProduct() throws EmptyStringException, IdDoesntExist, EntitiesNotRegistred, InvalidDateException, InvalidQuantityException {
+	void testDeletingAnProduct() throws EmptyStringException, IdDoesntExist, EntitiesNotRegistred, InvalidDateException, InvalidQuantityException, LinkedItemException {
 		// Testa deletar um produto através do seu ID.
 		ProductFacade.createProduct("maçã", new BigDecimal("1.11"), date1, 11, provider1); 
 		ProductFacade.createProduct("queijo", new BigDecimal("2.22"), date2, 22, provider2);

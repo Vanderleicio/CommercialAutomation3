@@ -30,8 +30,10 @@ import app.model.exceptions.InvalidQuantityException;
 import app.model.facades.*;
 import app.model.models.*;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -53,9 +55,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		try {
-			UserFacade.create("admin", "admin", "admin", "Gerente");
-			testSituation();
 			
+			UserFacade.create("admin", "admin", "admin", "Gerente"); //Criação de usuário padrão para o primeiro login
+			
+			//testSituation() <-- Descomentar se quiser popular o programa para testá-lo
 			stage = primaryStage;
 			AnchorPane root1 = FXMLLoader.load(getClass().getResource("/app/views/login.fxml"));
 			loginScene = new Scene(root1);
@@ -75,7 +78,7 @@ public class Main extends Application {
 		}
 	}
 	/**
-	 * Populando programa
+	 * Função opcional para popular o programa e testá-lo.
 	 * @throws ExistentNicknameException
 	 * @throws InvalidDateException
 	 * @throws InvalidQuantityException
@@ -109,6 +112,7 @@ public class Main extends Application {
 		
 		
 	}
+	
 	/**
 	 * Trocando a cena
 	 * @param src

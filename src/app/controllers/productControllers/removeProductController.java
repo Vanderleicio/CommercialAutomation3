@@ -19,6 +19,7 @@ import app.model.exceptions.CurrentUserException;
 import app.model.exceptions.EntitiesNotRegistred;
 import app.model.exceptions.ExistentNicknameException;
 import app.model.exceptions.IdDoesntExist;
+import app.model.exceptions.LinkedItemException;
 import app.model.facades.ProductFacade;
 import app.model.facades.ProviderFacade;
 import app.model.facades.UserFacade;
@@ -45,23 +46,33 @@ public class removeProductController implements Initializable{
 	/**
 	 * Botao confirmar
 	 */
-    @FXML
+	@FXML
     private Button buttonConfirm;
-    /**
+    
+	/**
      * Botao cancelar
      */
     @FXML
     private Button buttonCancel;
+    
+    @FXML
+    private Label prodLabel;
+    
+    @FXML
+    private Label alertLabel;
+    
     /**
      * Usuario selecionado
      */
     private Product selected = ProductFacade.chosenProduct();
+    
     /**
      * Inicializando
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
 	}
+	
 	/**
 	 * Removendo produto
 	 * @param event
@@ -69,6 +80,7 @@ public class removeProductController implements Initializable{
 	@FXML
 	void delete(ActionEvent event){
 		try {
+			prodLabel.setVisible(true);
 			ProductFacade.delProduct(selected.getId());
     	    Stage stage = (Stage) buttonConfirm.getScene().getWindow();
     	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
@@ -79,6 +91,9 @@ public class removeProductController implements Initializable{
 		} catch (EntitiesNotRegistred e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (LinkedItemException eLinked) {
+			alertLabel.setText("Você não pode deletar um produto que ainda está sendo usado num item.");
+			prodLabel.setVisible(false);
 		}
 	}
 	/**

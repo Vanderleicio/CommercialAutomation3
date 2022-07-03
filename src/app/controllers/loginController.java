@@ -87,14 +87,12 @@ public class loginController {
     @FXML
     void freeAcess(MouseEvent event) {
     	try {
-    		String userNick =  textField.getText();
+    		String userNick = textField.getText();
     		String userPass = new String( passwordField.getText());
     		UserFacade.login(userNick, userPass);
-    		System.out.println("Acesso Liberado");
     		Main.changeScene("Acesso Liberado");
     	} catch(LoginDoesntMatch | NickNonexistent loginExcept) {
     		alertLogin.setText("Dados incorreto, tente novamente!");
-    		System.out.println("Acesso não liberado!");
     	}
     }
 }

@@ -183,9 +183,7 @@ public class manageItemController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (selected != null) {
-			setProdData();
-			prodsList = MenuFacade.getItemProds(selected.getId());
-			qnttList = MenuFacade.getItemQntt(selected.getId());
+			setItemData();
 		}
 		setTables();
 		buttonAdd.setDisable(true);
@@ -245,12 +243,14 @@ public class manageItemController implements Initializable{
 	/**
 	 * Inserindo dados nas variaveis
 	 */
-	public void setProdData() {
+	public void setItemData() {
 		setLabels();
 		nameTxtFld.setText(selected.getName());
 		priceTxtFld.setText(selected.getPrice().toString());
 		descTxtArea.setText(selected.getDescription());
 		categoryTxtFld.setText(selected.getCategoryItems());
+		prodsList = MenuFacade.getItemProds(selected.getId());
+		qnttList = MenuFacade.getItemQntt(selected.getId());
 	}
 	/**
 	 * Adicionando produtos
@@ -344,17 +344,20 @@ public class manageItemController implements Initializable{
 			String description = descTxtArea.getText();
 			String category = categoryTxtFld.getText();
 			HashMap<String, Integer> composition = MenuFacade.doNewComposition(prodsList, qnttList);
-			System.out.println(composition.get("P3"));
 			
-			if (selected == null) {
-				MenuFacade.createItem(name, description, new BigDecimal(price), category, composition);
+			if(composition.size() == 0) {
+				alertLabel.setText("Selecione pelo menos um produto!");
 			} else {
-				MenuFacade.editItem(selected.getId(), name, description, new BigDecimal(price), category, composition);
-			}
+				if (selected == null) {
+					MenuFacade.createItem(name, description, new BigDecimal(price), category, composition);
+				} else {
+					MenuFacade.editItem(selected.getId(), name, description, new BigDecimal(price), category, composition);
+				}
     		
-    	    Stage stage = (Stage) buttonCreate.getScene().getWindow();
-    	    stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-    	    stage.close();
+    	    	Stage stage = (Stage) buttonCreate.getScene().getWindow();
+    	    	stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+    	    	stage.close();
+			}
 		} catch (IdDoesntExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
