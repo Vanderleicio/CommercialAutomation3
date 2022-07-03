@@ -46,6 +46,7 @@ public class ManagementReportStock {
 	public void generatePDF(String idProd) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
 		String name = "produto_" + dateHour() + ".pdf";
+		ProductFacade.chooseAProduct(idProd);
 		
         try {
             PdfWriter.getInstance(document, new FileOutputStream(name));

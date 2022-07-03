@@ -98,9 +98,7 @@ public class ClientFacade {
 			String id = clientData.getChosenEntityId();
 			return clientData.getOneClient(id);
 		} catch (IdDoesntExist | EntitiesNotRegistred e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 }

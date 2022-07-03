@@ -27,6 +27,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import app.model.facades.MenuFacade;
+import app.model.facades.ProductFacade;
 import app.model.facades.SaleFacade;
 import app.model.models.Entity;
 import app.model.models.Item;
@@ -54,7 +55,8 @@ public class ManagementReportSale {
 	public void generatePDF(LocalDate dateBefore, LocalDate dateAfter, String idPlate) throws IdDoesntExist, EntitiesNotRegistred {
 		Document document = new Document();
 		String name = "sale_" + dateHour() + ".pdf";
-        
+		MenuFacade.chooseAItem(idPlate);
+		
 		try {
             PdfWriter.getInstance(document, new FileOutputStream(name));
             document.open();

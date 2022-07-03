@@ -15,6 +15,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -331,6 +332,8 @@ public class manageSaleController implements Initializable{
 			alertLabel.setText("Campos vazios!");
 		} catch (NotEnoughStock e) {
 			alertLabel.setText("Produtos insuficientes para realizar a venda!");
-		} 
+		} catch (DateTimeParseException e) {
+			alertLabel.setText("Horário inválido");
+		}
 	}
 }

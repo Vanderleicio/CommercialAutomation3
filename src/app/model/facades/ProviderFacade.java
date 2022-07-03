@@ -116,9 +116,8 @@ public class ProviderFacade {
 			String id = provData.getChosenEntityId();
 			return provData.getOneProvider(id);
 		} catch (IdDoesntExist | EntitiesNotRegistred e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 }
