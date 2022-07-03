@@ -51,6 +51,7 @@ public class ClientFacade {
 	public static void delClient(String id) throws IdDoesntExist, EntitiesNotRegistred{
 		clientData.delete(id);
 	}
+
 	/** Metodo edita cliente
 	 * 
 	 * @param id: id do cliente
@@ -63,7 +64,7 @@ public class ClientFacade {
 	 * @throws ExistentNicknameException
 	 * @throws EmptyStringException
 	 */
-	public static void editClient(String id, String newName, String newCPF, String newEmail, String newPhoneNumber) throws IdDoesntExist, EntitiesNotRegistred, ExistentNicknameException, EmptyStringException {
+	public static void editClient(String id, String newName, String newCPF, String newEmail, String newPhoneNumber) throws IdDoesntExist, EntitiesNotRegistred, EmptyStringException {
 		if (newName.equals("") | newCPF.equals("") | newEmail.equals("") | newPhoneNumber.equals("")){
 			throw new EmptyStringException();
 		}
