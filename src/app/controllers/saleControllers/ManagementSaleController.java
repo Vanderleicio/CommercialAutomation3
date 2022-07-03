@@ -52,7 +52,7 @@ import javafx.stage.WindowEvent;
  */
 public class ManagementSaleController implements Initializable{
 	/**
-	 * Pscote de recursos
+	 * Pacote de recursos
 	 */
     @FXML
     private ResourceBundle resources;

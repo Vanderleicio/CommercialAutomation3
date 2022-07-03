@@ -1,5 +1,16 @@
 package app.controllers.productControllers;
 
+/***************************
+Autores: Alana Sampaio e Vanderleicio Junior
+Componente Curricular: Programacao II
+Concluido em: 02/07/2022
+Declaro que este codigo foi elaborado por mim de forma individual e nao contem nenhum
+trecho de codigo de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e paginas ou documentos eletronicos da Internet. Qualquer trecho de codigo
+de outra autoria que nao a minha esta destacado com uma citacao para o autor e a fonte
+do codigo, e estou ciente que estes trechos nao serao considerados para fins de avaliacao.
+******************************/
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,32 +36,54 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/**Controller criar produtos
+ * 
+ * @author Alana Sampaio
+ * @author Vanderleicio Junior
+ */
 public class manageProductController implements Initializable{
-
+	/**
+	 * Botao criar
+	 */
     @FXML
     private Button buttonCreate;
-
+    /**
+     * Texto de nome
+     */
     @FXML
     private TextField nameTxtFld;
-    
+    /**
+     * Texto de preco
+     */
     @FXML
     private TextField priceTxtFld;
-    
+    /**
+     * Texto de quantidade
+     */
     @FXML
     private TextField qntdTxtFld;
-    
+    /**
+     * Texto de alerta
+     */
     @FXML
     private Label alert;
-    
+    /**
+     * Caixa combo de fornecedores
+     */
     @FXML
     private ComboBox<Provider> providerComboBox;
-    
+    /**
+     * Data de validade
+     */
     @FXML
     private DatePicker validityDatePicker;
-    
+    /**
+     * Seleciona produto
+     */
     private Product selected = ProductFacade.chosenProduct();
-    
+    /**
+     * Inicializador
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setComboBox();
@@ -58,7 +91,9 @@ public class manageProductController implements Initializable{
 			setProdData();
 		}
 	}
-	
+	/**
+	 * Inserindo dados nas variaveis
+	 */
 	public void setProdData() {
 		nameTxtFld.setText(selected.getName());
 		priceTxtFld.setText(selected.getPrice().toString());
@@ -66,11 +101,16 @@ public class manageProductController implements Initializable{
 		validityDatePicker.setValue(selected.getValidity());
 		providerComboBox.setValue(selected.getProvider());
 	}
-	
+	/**
+	 * Inserindo lista na combobox
+	 */
 	public void setComboBox() {
 		providerComboBox.setItems(FXCollections.observableArrayList(ProviderFacade.listProvider()));
 	}
-	
+	/**
+	 * Criando produto
+	 * @param event
+	 */
 	@FXML
 	void createProd(ActionEvent event){
 		try {
